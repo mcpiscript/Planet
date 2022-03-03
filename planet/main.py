@@ -21,6 +21,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import sys
+import launcher
 
 
 from PyQt5.QtCore import *
@@ -41,13 +42,16 @@ class Planet(QMainWindow):
         tabs.setMovable(True)
 
         tabs.addTab(self.play_tab(), "Play")
+        tabs.addTab(self.features_tab(),  "Features")
 
         self.setCentralWidget(tabs)
+        
+        self.setGeometry(387,  221,  100,  100)
 
     def play_tab(self) -> QWidget:
         layout = QGridLayout()
 
-        namelabel = QLabel("Planet")
+        namelabel = QLabel("Planet Launcher")
         font = namelabel.font()
         font.setPointSize(30)
         namelabel.setFont(font)
@@ -78,7 +82,7 @@ class Planet(QMainWindow):
 
         playbutton = QPushButton("Play")
 
-        layout.addWidget(namelabel, 0, 0, 2, 5)
+        layout.addWidget(namelabel, 0, 0,  2, 6)
 
         layout.addWidget(usernamelabel, 2, 0)
         layout.addWidget(usernameedit, 2, 4, 1, 2)
@@ -96,6 +100,42 @@ class Planet(QMainWindow):
         widget = QWidget()
 
         widget.setLayout(layout)
+
+        return widget
+        
+    
+    def features_tab(self) -> QWidget:
+        
+        layout = QVBoxLayout()
+        
+        for feature in launcher.DEFAULT_FEATURES:
+            checkbox = QCheckBox(feature)
+            if launcher.DEFAULT_FEATURES[feature]:
+                checkbox.setCheckState(Qt.Checked)
+            else:
+                checkbox.setCheckState(Qt.Unchecked)
+            
+            layout.addWidget(checkbox)
+        
+        fakewidget = QWidget()
+        fakewidget.setLayout(layout)
+        
+        scroll = QScrollArea()
+        
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(fakewidget)
+        
+        
+        fakelayout = QGridLayout()
+        fakelayout.addWidget(scroll,  0, 0)
+
+        
+        
+        widget = QWidget()
+
+        widget.setLayout(fakelayout)
 
         return widget
 
