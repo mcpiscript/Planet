@@ -2,6 +2,7 @@
 
 
 Copyright (C) 2022  Alexey Pavlov
+Copyright (C) 2022  Red-Exe-Engineer
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,11 +23,18 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 import sys
 import launcher
+import os
+
 
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+
+USER  = os.getenv("USER")
+
+if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
+    os.makedirs(f"/home/{USER}/.planet-launcher/mods")
 
 
 class Planet(QMainWindow):
@@ -43,10 +51,11 @@ class Planet(QMainWindow):
 
         tabs.addTab(self.play_tab(), "Play")
         tabs.addTab(self.features_tab(),  "Features")
+        tabs.addTab(self.custom_mods_tab(), "Python")
 
         self.setCentralWidget(tabs)
         
-        self.setGeometry(387,  221,  100,  100)
+        self.setGeometry(480, 670,  100,  100)
 
     def play_tab(self) -> QWidget:
         layout = QGridLayout()
@@ -114,6 +123,37 @@ class Planet(QMainWindow):
                 checkbox.setCheckState(Qt.Checked)
             else:
                 checkbox.setCheckState(Qt.Unchecked)
+            
+            layout.addWidget(checkbox)
+        
+        fakewidget = QWidget()
+        fakewidget.setLayout(layout)
+        
+        scroll = QScrollArea()
+        
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        scroll.setWidgetResizable(True)
+        scroll.setWidget(fakewidget)
+        
+        
+        fakelayout = QGridLayout()
+        fakelayout.addWidget(scroll,  0, 0)
+
+        
+        
+        widget = QWidget()
+
+        widget.setLayout(fakelayout)
+
+        return widget
+        
+    def custom_mods_tab(self) -> QWidget:
+        layout = QVBoxLayout()
+        
+        for mod in os.listdir(f"/home/{USER}/.planet-launcher/mods/"):
+            checkbox = QCheckBox(mod)
+            checkbox.setCheckState(Qt.Unchecked)
             
             layout.addWidget(checkbox)
         
