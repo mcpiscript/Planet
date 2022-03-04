@@ -69,24 +69,28 @@ DEFAULT_FEATURES = {
 }
 
 
-def set_username(username: str):
-    os.environ["MCPI_USERNAME"] = username
+def set_username(env,  username: str):
+    env["MCPI_USERNAME"] = username
+    return env
 
 
-def set_render_distance(distance: str):
+def set_render_distance(env,  distance: str):
     if distance.upper() not in ["TINY", "SHORT", "NORMAL", "FAR"]:
         raise Exception("Invalid render distance")
     else:
-        os.environ["MCPI_RENDER_DISTANCE"] = distance.upper()
+        env["MCPI_RENDER_DISTANCE"] = distance.upper()
+        return env
 
 
-def set_hud(options: str):
-    os.environ["GALLIUM_HUD"] = options
+def set_hud(env,  options: str):
+    env["GALLIUM_HUD"] = options
+    return env
 
 
-def set_options(options: dict = DEFAULT_FEATURES):
+def set_options(env, options: dict = DEFAULT_FEATURES):
     output = str()
     for option in options:
         output += f"{str(options[option]).upper()} {option}\n"
 
-    os.environ["MCPI_FEATURE_FLAGS"] = output
+    env["MCPI_FEATURE_FLAGS"] = output
+    return env
