@@ -7,7 +7,7 @@ SPLASHES = [
     "MCPIL-Revival", 
     "Minescripters", 
     "AmogOS is Debian with amogus wallpapers. Nothing sussy.", 
-    "I use Planet btw.", 
+    "I use Planet BTW, 
     "Snowball", 
     "Robo", 
     "If I could, I would. But I can't, so I shan't.", 
