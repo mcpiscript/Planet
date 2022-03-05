@@ -1,3 +1,4 @@
+import subprocess
 import os
 
 FEATURES = [
@@ -69,20 +70,20 @@ DEFAULT_FEATURES = {
 }
 
 
-def set_username(env,  username: str):
+def set_username(env,  username: str = "StevePi"):
     env["MCPI_USERNAME"] = username
     return env
 
 
-def set_render_distance(env,  distance: str):
+def set_render_distance(env,  distance: str = "SHORT"):
     if distance.upper() not in ["TINY", "SHORT", "NORMAL", "FAR"]:
         raise Exception("Invalid render distance")
     else:
-        env["MCPI_RENDER_DISTANCE"] = distance.upper()
+        env["MCPI_RENDER_DISTANCE"] = distance
         return env
 
 
-def set_hud(env,  options: str):
+def set_hud(env,  options: str = "fps,simple"):
     env["GALLIUM_HUD"] = options
     return env
 
@@ -90,7 +91,11 @@ def set_hud(env,  options: str):
 def set_options(env, options: dict = DEFAULT_FEATURES):
     output = str()
     for option in options:
-        output += f"{str(options[option]).upper()} {option}\n"
+        if options[option]:
+            output += f"{option}|"
 
     env["MCPI_FEATURE_FLAGS"] = output
     return env
+    
+def run(env):
+    return subprocess.Popen(['/usr/bin/minecraft-pi-reborn-client'], env=env, preexec_fn=os.setsid)

@@ -28,6 +28,7 @@ import os
 import random
 from datetime import date
 import json
+import subprocess
 
 
 from PyQt5.QtCore import *
@@ -47,6 +48,10 @@ else:
 
 
 class Planet(QMainWindow):
+    
+    launchfeatures = dict()
+    env = os.environ.copy()
+    
     def __init__(self):
         super().__init__()
 
@@ -111,6 +116,9 @@ class Planet(QMainWindow):
         self.showlauncher = QRadioButton("Hide Launcher")
 
         self.playbutton = QPushButton("Play")
+        
+        self.playbutton.setCheckable(True)
+        self.playbutton.clicked.connect(self.launch)
 
         layout.addWidget(namelabel, 0, 0, 2, 6)
         layout.addWidget(splashlabel,  2, 0,  1,  6)
@@ -146,7 +154,9 @@ class Planet(QMainWindow):
                 checkbox.setCheckState(Qt.Checked)
             else:
                 checkbox.setCheckState(Qt.Unchecked)
-                
+            
+            checkbox.clicked.connect(self.set_features)
+            
             self.features[feature] = checkbox
 
             layout.addWidget(checkbox)
@@ -197,10 +207,22 @@ class Planet(QMainWindow):
         widget.setLayout(fakelayout)
 
         return widget
-        
-        
+    
+    def set_features(self):
+        for feature in self.features:
+            if self.features[feature].isChecked():
+                self.launchfeatures[feature] = True
+            else:
+                self.launchfeatures[feature] = False
+    
     def launch(self):
-        pass
+        self.env = launcher.set_username(self.env,  self.usernameedit.text())
+        self.env = launcher.set_options(self.env,  self.launchfeatures)
+        self.env = launcher.set_render_distance(self.env,  self.distancebox.currentText())
+        
+        print(self.env)
+        
+        launcher.run(self.env)
 
 
 if __name__ == "__main__":
