@@ -90,7 +90,7 @@ class Planet(QMainWindow):
         namelabel.setFont(font)
         namelabel.setAlignment(Qt.AlignHCenter)
         
-        splashlabel = QLabel(random.choice(SPLASHES))
+        splashlabel = QLabel(f"<font color=\"gold\">{random.choice(SPLASHES)}</font>")
         splashlabel.adjustSize()
         splashlabel.setAlignment(Qt.AlignHCenter)
 
