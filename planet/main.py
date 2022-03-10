@@ -28,12 +28,16 @@ import os
 import random
 from datetime import date
 import json
-import subprocess
 
-
+ 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+
+import qdarkstyle
+
+
+dark_stylesheet = qdarkstyle.load_stylesheet_pyqt5()
 
 USER = os.getenv("USER")
 
@@ -48,34 +52,47 @@ else:
 
 
 class Planet(QMainWindow):
-    
+
     launchfeatures = dict()
     env = os.environ.copy()
-    
+
     def __init__(self):
         super().__init__()
 
         self.setWindowTitle("Planet")
 
-        self.setWindowIcon(QIcon("assets/logo128.png"))
+        self.setWindowIcon(QIcon("assets/logo512.png"))
 
         tabs = QTabWidget()
         tabs.setTabPosition(QTabWidget.West)
         tabs.setMovable(True)
 
-        tabs.addTab(self.play_tab(), "Play")
-        tabs.addTab(self.features_tab(), "Features")
-        tabs.addTab(self.custom_mods_tab(), "Mods")
+        play_tab = tabs.addTab(self.play_tab(), "Play")
+        tabs.setTabIcon(play_tab, QIcon('assets/logo512.png'))
+        features_tab = tabs.addTab(self.features_tab(), "Features")
+        tabs.setTabIcon(features_tab, QIcon('assets/heart512.png'))
+        mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
+        tabs.setTabIcon(mods_tab, QIcon('assets/portal512.png'))
 
         self.setCentralWidget(tabs)
 
-        self.setGeometry(600, 720, 100, 100)
+        self.setGeometry(600, 800, 200, 200)
+
+        self.set_features()
 
     def play_tab(self) -> QWidget:
         layout = QGridLayout()
         
-        namelabel = QLabel()
+        titlelayout = QGridLayout()
         
+        logopixmap = QPixmap("assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        
+        logolabel = QLabel()
+        logolabel.setPixmap(logopixmap)
+        logolabel.setAlignment(Qt.AlignRight)
+
+        namelabel = QLabel()
+
         if date.today().month == 4 and date.today().day == 1:  
             namelabel.setText("Banana Launcher")
         else:
@@ -83,13 +100,13 @@ class Planet(QMainWindow):
                 namelabel.setText("Pluto Launcher")
             else:
                 namelabel.setText('Planet Launcher')
-        
-        
+
+
         font = namelabel.font()
         font.setPointSize(30)
         namelabel.setFont(font)
-        namelabel.setAlignment(Qt.AlignHCenter)
-        
+        namelabel.setAlignment(Qt.AlignLeft)
+
         splashlabel = QLabel(f"<font color=\"gold\">{random.choice(SPLASHES)}</font>")
         splashlabel.adjustSize()
         splashlabel.setAlignment(Qt.AlignHCenter)
@@ -116,11 +133,18 @@ class Planet(QMainWindow):
         self.showlauncher = QRadioButton("Hide Launcher")
 
         self.playbutton = QPushButton("Play")
-        
+
         self.playbutton.setCheckable(True)
         self.playbutton.clicked.connect(self.launch)
 
-        layout.addWidget(namelabel, 0, 0, 2, 6)
+        titlelayout.addWidget(logolabel, 0, 0)
+        titlelayout.addWidget(namelabel, 0, 1)
+        
+        titlewidget = QWidget()
+        titlewidget.setLayout(titlelayout)
+        
+        layout.addWidget(titlewidget, 0, 0,  2,  5)
+        
         layout.addWidget(splashlabel,  2, 0,  1,  6)
 
         layout.addWidget(usernamelabel, 3, 0)
@@ -145,7 +169,7 @@ class Planet(QMainWindow):
     def features_tab(self) -> QWidget:
 
         layout = QVBoxLayout()
-        
+
         self.features = dict()
 
         for feature in DEFAULT_FEATURES:
@@ -154,9 +178,9 @@ class Planet(QMainWindow):
                 checkbox.setCheckState(Qt.Checked)
             else:
                 checkbox.setCheckState(Qt.Unchecked)
-            
+
             checkbox.clicked.connect(self.set_features)
-            
+
             self.features[feature] = checkbox
 
             layout.addWidget(checkbox)
@@ -207,26 +231,27 @@ class Planet(QMainWindow):
         widget.setLayout(fakelayout)
 
         return widget
-    
+
     def set_features(self):
         for feature in self.features:
             if self.features[feature].isChecked():
                 self.launchfeatures[feature] = True
             else:
                 self.launchfeatures[feature] = False
-    
+
     def launch(self):
         self.env = launcher.set_username(self.env,  self.usernameedit.text())
         self.env = launcher.set_options(self.env,  self.launchfeatures)
         self.env = launcher.set_render_distance(self.env,  self.distancebox.currentText())
-        
+
         print(self.env)
-        
+
         launcher.run(self.env)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    app.setStyleSheet(dark_stylesheet)
 
     window = Planet()
     window.show()
