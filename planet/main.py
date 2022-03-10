@@ -44,11 +44,12 @@ USER = os.getenv("USER")
 if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
     os.makedirs(f"/home/{USER}/.planet-launcher/mods")
 
-if os.path.exists(f"/home/{USER}/.gmcpil.json"):
-    with open(f"/home/{USER}/.gmcpil.json") as f:
-        DEFAULT_FEATURES = json.loads(f.read())["features"]
-else: 
-    DEFAULT_FEATURES = launcher.DEFAULT_FEATURES
+#if os.path.exists(f"/home/{USER}/.gmcpil.json"):
+#    with open(f"/home/{USER}/.gmcpil.json") as f:
+#        DEFAULT_FEATURES = json.loads(f.read())["features"]
+#else: 
+#TODO: Add a tab with a button to import features from gMCPIL
+DEFAULT_FEATURES = launcher.get_features_dict()
 
 
 class Planet(QMainWindow):
