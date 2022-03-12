@@ -30,7 +30,7 @@ from datetime import date
 import json
 import pathlib
 
- 
+
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -47,11 +47,11 @@ USER = os.getenv("USER")
 if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
     os.makedirs(f"/home/{USER}/.planet-launcher/mods")
 
-#if os.path.exists(f"/home/{USER}/.gmcpil.json"):
+# if os.path.exists(f"/home/{USER}/.gmcpil.json"):
 #    with open(f"/home/{USER}/.gmcpil.json") as f:
 #        DEFAULT_FEATURES = json.loads(f.read())["features"]
-#else: 
-#TODO: Add a tab with a button to import features from gMCPIL
+# else:
+# TODO: Add a tab with a button to import features from gMCPIL
 DEFAULT_FEATURES = launcher.get_features_dict()
 
 
@@ -72,13 +72,13 @@ class Planet(QMainWindow):
         tabs.setMovable(True)
 
         play_tab = tabs.addTab(self.play_tab(), "Play")
-        tabs.setTabIcon(play_tab, QIcon('assets/logo512.png'))
+        tabs.setTabIcon(play_tab, QIcon("assets/logo512.png"))
         features_tab = tabs.addTab(self.features_tab(), "Features")
-        tabs.setTabIcon(features_tab, QIcon('assets/heart512.png'))
+        tabs.setTabIcon(features_tab, QIcon("assets/heart512.png"))
         mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
-        tabs.setTabIcon(mods_tab, QIcon('assets/portal512.png'))
+        tabs.setTabIcon(mods_tab, QIcon("assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
-        tabs.setTabIcon(changelog_tab, QIcon('assets/pi512.png'))
+        tabs.setTabIcon(changelog_tab, QIcon("assets/pi512.png"))
 
         self.setCentralWidget(tabs)
 
@@ -88,32 +88,31 @@ class Planet(QMainWindow):
 
     def play_tab(self) -> QWidget:
         layout = QGridLayout()
-        
+
         titlelayout = QGridLayout()
-        
+
         logopixmap = QPixmap("assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
-        
+
         logolabel = QLabel()
         logolabel.setPixmap(logopixmap)
         logolabel.setAlignment(Qt.AlignRight)
 
         namelabel = QLabel()
 
-        if date.today().month == 4 and date.today().day == 1:  
+        if date.today().month == 4 and date.today().day == 1:
             namelabel.setText("Banana Launcher")
         else:
-            if random.randint(1,  100) == 1:
+            if random.randint(1, 100) == 1:
                 namelabel.setText("Pluto Launcher")
             else:
-                namelabel.setText('Planet Launcher')
-
+                namelabel.setText("Planet Launcher")
 
         font = namelabel.font()
         font.setPointSize(30)
         namelabel.setFont(font)
         namelabel.setAlignment(Qt.AlignLeft)
 
-        splashlabel = QLabel(f"<font color=\"gold\">{random.choice(SPLASHES)}</font>")
+        splashlabel = QLabel(f'<font color="gold">{random.choice(SPLASHES)}</font>')
         splashlabel.adjustSize()
         splashlabel.setAlignment(Qt.AlignHCenter)
 
@@ -145,13 +144,13 @@ class Planet(QMainWindow):
 
         titlelayout.addWidget(logolabel, 0, 0)
         titlelayout.addWidget(namelabel, 0, 1)
-        
+
         titlewidget = QWidget()
         titlewidget.setLayout(titlelayout)
-        
-        layout.addWidget(titlewidget, 0, 0,  2,  5)
-        
-        layout.addWidget(splashlabel,  2, 0,  1,  6)
+
+        layout.addWidget(titlewidget, 0, 0, 2, 5)
+
+        layout.addWidget(splashlabel, 2, 0, 1, 6)
 
         layout.addWidget(usernamelabel, 3, 0)
         layout.addWidget(self.usernameedit, 3, 4, 1, 2)
@@ -237,10 +236,14 @@ class Planet(QMainWindow):
         widget.setLayout(fakelayout)
 
         return widget
-        
+
     def changelog_tab(self):
         web = QWebView()
-        web.load(QUrl().fromLocalFile(f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html"))
+        web.load(
+            QUrl().fromLocalFile(
+                f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html"
+            )
+        )
         print(f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html")
         return web
 
@@ -252,9 +255,11 @@ class Planet(QMainWindow):
                 self.launchfeatures[feature] = False
 
     def launch(self):
-        self.env = launcher.set_username(self.env,  self.usernameedit.text())
-        self.env = launcher.set_options(self.env,  self.launchfeatures)
-        self.env = launcher.set_render_distance(self.env,  self.distancebox.currentText())
+        self.env = launcher.set_username(self.env, self.usernameedit.text())
+        self.env = launcher.set_options(self.env, self.launchfeatures)
+        self.env = launcher.set_render_distance(
+            self.env, self.distancebox.currentText()
+        )
 
         print(self.env)
 
