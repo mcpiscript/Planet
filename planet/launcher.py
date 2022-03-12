@@ -67,4 +67,4 @@ def set_options(env, options: dict):
 def run(env,  path_: str):
     return subprocess.Popen(
         [path_], env=env, preexec_fn=os.setsid
-    )
+    ).wait()
