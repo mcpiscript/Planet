@@ -2,9 +2,9 @@ import subprocess
 import os
 
 
-def get_features_list() -> list:
+def get_features_list(path_: str) -> list:
     features = subprocess.run(
-        ["minecraft-pi-reborn-client", "--print-available-feature-flags"],
+        [path_, "--print-available-feature-flags"],
         stdout=subprocess.PIPE,
     ).stdout.decode("utf-8")
     features = features.split("\n")
@@ -19,9 +19,9 @@ def get_features_list() -> list:
     return returnlist
 
 
-def get_features_dict() -> dict:
+def get_features_dict(path_: str) -> dict:
     features = subprocess.run(
-        ["minecraft-pi-reborn-client", "--print-available-feature-flags"],
+        [path_, "--print-available-feature-flags"],
         stdout=subprocess.PIPE,
     ).stdout.decode("utf-8")
     features = features.split("\n")
@@ -64,7 +64,7 @@ def set_options(env, options: dict):
     return env
 
 
-def run(env):
+def run(env,  path_: str):
     return subprocess.Popen(
-        ["/usr/bin/minecraft-pi-reborn-client"], env=env, preexec_fn=os.setsid
+        [path_], env=env, preexec_fn=os.setsid
     )

@@ -52,7 +52,7 @@ if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
 #        DEFAULT_FEATURES = json.loads(f.read())["features"]
 # else:
 # TODO: Add a tab with a button to import features from gMCPIL
-DEFAULT_FEATURES = launcher.get_features_dict()
+DEFAULT_FEATURES = launcher.get_features_dict("/usr/bin/minecraft-pi-reborn-client")
 
 
 class Planet(QMainWindow):
@@ -62,6 +62,23 @@ class Planet(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        
+        if not os.path.exists(f"/home/{USER}/.planet-launcher/config.json"):
+            
+            self.conf = {
+                "username": "StevePi", 
+                "options": DEFAULT_FEATURES, 
+                "hidelauncher": True, 
+                "profile": "Modded MCPi", 
+                "theme": "QDarkTheme Light"
+            }
+            
+            with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
+                file.write(json.dumps(self.conf))
+        else:
+            with open(f"/home/{USER}/.planet-launcher/config.json") as file:
+                self.conf = json.loads(file.read())
+        
 
         self.setWindowTitle("Planet")
 
@@ -83,6 +100,8 @@ class Planet(QMainWindow):
         self.setCentralWidget(tabs)
 
         self.setGeometry(600, 800, 200, 200)
+        
+        self.usernameedit.setText(self.conf["username"])
 
         self.set_features()
 
@@ -268,6 +287,7 @@ class Planet(QMainWindow):
 
 
 if __name__ == "__main__":
+    
     app = QApplication(sys.argv)
     app.setPalette(qdarktheme.load_palette("dark"))
 
