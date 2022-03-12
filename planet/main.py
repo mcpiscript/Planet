@@ -262,9 +262,9 @@ class Planet(QMainWindow):
         )
 
         print(self.env)
-        self.hide()
         if self.showlauncher.isChecked() == True:
-            launcher.run(self.env)
+            self.hide()
+        launcher.run(self.env)
         self.show()
 
 
