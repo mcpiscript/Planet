@@ -67,4 +67,4 @@ def set_options(env, options: dict):
 def run(env):
     return subprocess.Popen(
         ["/usr/bin/minecraft-pi-reborn-client"], env=env, preexec_fn=os.setsid
-    )
+    ).wait()
