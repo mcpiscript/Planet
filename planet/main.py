@@ -40,7 +40,7 @@ from PyQt5.QtWebKitWidgets import *
 import qdarktheme
 
 
-dark_stylesheet =qdarktheme.load_stylesheet()
+dark_stylesheet = qdarktheme.load_stylesheet()
 
 USER = os.getenv("USER")
 
