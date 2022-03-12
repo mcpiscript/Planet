@@ -28,16 +28,19 @@ import os
 import random
 from datetime import date
 import json
+import pathlib
 
  
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
+from PyQt5.QtWebKit import *
+from PyQt5.QtWebKitWidgets import *
 
-import qdarkstyle
+import qdarktheme
 
 
-dark_stylesheet = qdarkstyle.load_stylesheet_pyqt5()
+dark_stylesheet =qdarktheme.load_stylesheet()
 
 USER = os.getenv("USER")
 
@@ -74,6 +77,8 @@ class Planet(QMainWindow):
         tabs.setTabIcon(features_tab, QIcon('assets/heart512.png'))
         mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
         tabs.setTabIcon(mods_tab, QIcon('assets/portal512.png'))
+        changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
+        tabs.setTabIcon(changelog_tab, QIcon('assets/pi512.png'))
 
         self.setCentralWidget(tabs)
 
@@ -232,6 +237,12 @@ class Planet(QMainWindow):
         widget.setLayout(fakelayout)
 
         return widget
+        
+    def changelog_tab(self):
+        web = QWebView()
+        web.load(QUrl().fromLocalFile(f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html"))
+        print(f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html")
+        return web
 
     def set_features(self):
         for feature in self.features:
@@ -252,7 +263,7 @@ class Planet(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    app.setStyleSheet(dark_stylesheet)
+    app.setPalette(qdarktheme.load_palette("dark"))
 
     window = Planet()
     window.show()
