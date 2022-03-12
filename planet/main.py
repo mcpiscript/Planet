@@ -262,8 +262,9 @@ class Planet(QMainWindow):
         )
 
         print(self.env)
-
+        self.hide()
         launcher.run(self.env)
+        self.show()
 
 
 if __name__ == "__main__":
