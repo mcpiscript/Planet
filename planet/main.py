@@ -52,7 +52,6 @@ if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
 #        DEFAULT_FEATURES = json.loads(f.read())["features"]
 # else:
 # TODO: Add a tab with a button to import features from gMCPIL
-DEFAULT_FEATURES = launcher.get_features_dict("/usr/bin/minecraft-pi-reborn-client")
 
 class ConfigPluto(QDialog):
     def __init__(self):
@@ -80,18 +79,14 @@ class ConfigPluto(QDialog):
         titlewidget = QWidget()
         titlewidget.setLayout(titlelayout)
         
-        info_label = QLabel("Please select the executable you downloaded.\nSelect \"Use /usr/bin/\" if you installed a DEB.")
+        info_label = QLabel("Please select the executable you downloaded.")
         
         self.executable_btn = QPushButton("Select executable")
         self.executable_btn.clicked.connect(self.get_appimage)
         
-        self.premade_btn = QPushButton("Use /usr/bin/")
-        self.premade_btn.clicked.connect(self.use_default)
-        
         layout.addWidget(titlewidget)
         layout.addWidget(info_label)
         layout.addWidget(self.executable_btn)
-        layout.addWidget(self.premade_btn)
         
         self.setLayout(layout)
     
@@ -114,10 +109,6 @@ class ConfigPluto(QDialog):
     def get_appimage(self):
         self.hide()
         self.filename =  QFileDialog.getOpenFileName(self, 'Select executable',  '/',"Executable files (*.AppImage *.bin *.sh *)")
-        
-    def use_default(self):
-        self.hide()
-        self.filename = "/usr/bin/minecraft-pi-reborn-client/"
 
 
 class Planet(QMainWindow):
@@ -132,12 +123,11 @@ class Planet(QMainWindow):
             
             self.conf = {
                 "username": "StevePi", 
-                "options": DEFAULT_FEATURES, 
+                "options": launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage"), 
                 "hidelauncher": True, 
                 "profile": "Modded MCPE", 
                 "render_distance": "Short", 
                 "theme": "QDarkTheme Light", 
-                "path" : "?"
             }
             
             with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
@@ -272,10 +262,11 @@ class Planet(QMainWindow):
         layout = QVBoxLayout()
 
         self.features = dict()
+        default_features = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
 
-        for feature in DEFAULT_FEATURES:
+        for feature in default_features:
             checkbox = QCheckBox(feature)
-            if DEFAULT_FEATURES[feature]:
+            if default_features[feature]:
                 checkbox.setCheckState(Qt.Checked)
             else:
                 checkbox.setCheckState(Qt.Unchecked)
@@ -358,10 +349,6 @@ class Planet(QMainWindow):
         
         with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
                 file.write(json.dumps(self.conf))
-                
-    def set_path(self,  path):
-        self.conf["path"] = path[0]
-        self.save_profile()
 
     def launch(self):
         self.save_profile()
@@ -374,7 +361,7 @@ class Planet(QMainWindow):
         print(self.env)
         if self.showlauncher.isChecked() == True:
             self.hide()
-        launcher.run(self.env,  self.conf["path"])
+        launcher.run(self.env,  f"/home/{USER}/.planet-launcher/minecraft.AppImage")
         self.show()
 
 
@@ -387,23 +374,17 @@ if __name__ == "__main__":
     
 
     
-    if not os.path.exists(f"/home/{USER}/.planet-launcher/firstrun"):
+    if not os.path.exists(f"/home/{USER}/.planet-launcher/minecraft.AppImage"):
         pluto = ConfigPluto()
         pluto.show()
         pluto.exec()
-        with open(f"/home/{USER}/.planet-launcher/firstrun",  "w")  as file:
-            file.write("0")
-        filename = pluto.filename
-        plutorun= True
-    else:
-        plutorun = False
+        with open(pluto.filename[0],  "rb") as appimage:
+            with open(f"/home/{USER}/.planet-launcher/minecraft.AppImage",  "wb") as out:
+                out.write(appimage.read())
+        os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage",   0o777)
     
     
     window = Planet()
-    
-    if plutorun:
-        window.set_path(filename)
-    
     window.show()
     
    
