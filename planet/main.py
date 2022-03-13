@@ -158,8 +158,10 @@ class Planet(QMainWindow):
         tabs.setTabIcon(play_tab, QIcon("assets/logo512.png"))
         features_tab = tabs.addTab(self.features_tab(), "Features")
         tabs.setTabIcon(features_tab, QIcon("assets/heart512.png"))
-        mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
-        tabs.setTabIcon(mods_tab, QIcon("assets/portal512.png"))
+        servers_tab = tabs.addTab(self.servers_tab(),  "Servers")
+        tabs.setTabIcon(servers_tab, QIcon("assets/multiplayer512.png"))
+        #mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
+        #tabs.setTabIcon(mods_tab, QIcon("assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
         tabs.setTabIcon(changelog_tab, QIcon("assets/pi512.png"))
 
@@ -271,11 +273,10 @@ class Planet(QMainWindow):
         layout = QVBoxLayout()
 
         self.features = dict()
-        default_features = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
 
-        for feature in default_features:
+        for feature in self.conf["options"]:
             checkbox = QCheckBox(feature)
-            if default_features[feature]:
+            if self.conf["options"][feature]:
                 checkbox.setCheckState(Qt.Checked)
             else:
                 checkbox.setCheckState(Qt.Unchecked)
@@ -303,6 +304,24 @@ class Planet(QMainWindow):
 
         widget.setLayout(fakelayout)
 
+        return widget
+        
+    def servers_tab(self) -> QWidget:
+        widget = QWidget()
+        layout = QGridLayout()
+        
+        self.serversedit = QTextEdit()
+        
+        self.serversedit.textChanged.connect(self.save_profile)
+        with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
+            self.serversedit.setPlainText(servers.read())
+        
+        infolabel = QLabel("Servers are stored in the format of <font color=\"gold\">IP: </font><font color=\"blue\">Port</font>")
+        
+        layout.addWidget(self.serversedit, 0, 0)
+        layout.addWidget(infolabel,  6, 0)
+        
+        widget.setLayout(layout)
         return widget
 
     def custom_mods_tab(self) -> QWidget:
@@ -358,6 +377,8 @@ class Planet(QMainWindow):
         
         with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
                 file.write(json.dumps(self.conf))
+        with open(f"/home/{USER}/.minecraft-pi/servers.txt",  "w") as file:
+            file.write(self.serversedit.toPlainText())
 
     def launch(self):
         self.save_profile()
