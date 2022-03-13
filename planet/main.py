@@ -54,9 +54,74 @@ if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
 # TODO: Add a tab with a button to import features from gMCPIL
 DEFAULT_FEATURES = launcher.get_features_dict("/usr/bin/minecraft-pi-reborn-client")
 
+class ConfigPluto(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.setWindowFlag(Qt.FramelessWindowHint)
+        
+        layout = QVBoxLayout()
+        titlelayout = QGridLayout()
+        
+        logopixmap = QPixmap("assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        namelabel = QLabel("Pluto Wizard")
+        
+        logolabel = QLabel()
+        logolabel.setPixmap(logopixmap)
+        logolabel.setAlignment(Qt.AlignRight)
+        
+        font = namelabel.font()
+        font.setPointSize(30)
+        namelabel.setFont(font)
+        namelabel.setAlignment(Qt.AlignLeft)
+        
+        titlelayout.addWidget(logolabel, 0, 0)
+        titlelayout.addWidget(namelabel, 0, 1)
+
+        titlewidget = QWidget()
+        titlewidget.setLayout(titlelayout)
+        
+        info_label = QLabel("Please select the executable you downloaded.\nSelect \"Use /usr/bin/\" if you installed a DEB.")
+        
+        self.executable_btn = QPushButton("Select executable")
+        self.executable_btn.clicked.connect(self.get_appimage)
+        
+        self.premade_btn = QPushButton("Use /usr/bin/")
+        self.premade_btn.clicked.connect(self.use_default)
+        
+        layout.addWidget(titlewidget)
+        layout.addWidget(info_label)
+        layout.addWidget(self.executable_btn)
+        layout.addWidget(self.premade_btn)
+        
+        self.setLayout(layout)
+    
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.moveFlag = True
+            self.movePosition = event.globalPos() - self.pos()
+            self.setCursor(QCursor(Qt.OpenHandCursor))
+            event.accept()
+    
+    def mouseMoveEvent(self, event):
+        if Qt.LeftButton and self.moveFlag:
+            self.move(event.globalPos() - self.movePosition)
+            event.accept()
+    
+    def mouseReleaseEvent(self, event):
+        self.moveFlag = False
+        self.setCursor(Qt.ArrowCursor)
+        
+    def get_appimage(self):
+        self.hide()
+        self.filename =  QFileDialog.getOpenFileName(self, 'Select executable',  '/',"Executable files (*.AppImage *.bin *.sh *)")
+        
+    def use_default(self):
+        self.hide()
+        self.filename = "/usr/bin/minecraft-pi-reborn-client/"
+
 
 class Planet(QMainWindow):
-
+    
     launchfeatures = dict()
     env = os.environ.copy()
 
@@ -69,8 +134,10 @@ class Planet(QMainWindow):
                 "username": "StevePi", 
                 "options": DEFAULT_FEATURES, 
                 "hidelauncher": True, 
-                "profile": "Modded MCPi", 
-                "theme": "QDarkTheme Light"
+                "profile": "Modded MCPE", 
+                "render_distance": "Short", 
+                "theme": "QDarkTheme Light", 
+                "path" : "?"
             }
             
             with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
@@ -102,6 +169,16 @@ class Planet(QMainWindow):
         self.setGeometry(600, 800, 200, 200)
         
         self.usernameedit.setText(self.conf["username"])
+        self.profilebox.setCurrentText(self.conf["profile"])
+        self.distancebox.setCurrentText(self.conf["render_distance"])
+        
+        for feature in self.features:
+            if self.conf["options"][feature]:
+                self.features[feature].setCheckState(Qt.Checked)
+            else:
+                self.features[feature].setCheckState(Qt.Unchecked)
+        
+        self.showlauncher.setChecked(self.conf["hidelauncher"])
 
         self.set_features()
 
@@ -263,7 +340,7 @@ class Planet(QMainWindow):
                 f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html"
             )
         )
-        print(f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html")
+
         return web
 
     def set_features(self):
@@ -272,8 +349,22 @@ class Planet(QMainWindow):
                 self.launchfeatures[feature] = True
             else:
                 self.launchfeatures[feature] = False
+                
+    def save_profile(self):
+        self.conf["username"] = self.usernameedit.text()
+        self.conf["options"] = self.launchfeatures
+        self.conf["render_distance"] = self.distancebox.currentText()
+        self.conf["hidelauncher"] = self.showlauncher.isChecked()
+        
+        with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
+                file.write(json.dumps(self.conf))
+                
+    def set_path(self,  path):
+        self.conf["path"] = path[0]
+        self.save_profile()
 
     def launch(self):
+        self.save_profile()
         self.env = launcher.set_username(self.env, self.usernameedit.text())
         self.env = launcher.set_options(self.env, self.launchfeatures)
         self.env = launcher.set_render_distance(
@@ -283,16 +374,37 @@ class Planet(QMainWindow):
         print(self.env)
         if self.showlauncher.isChecked() == True:
             self.hide()
-        launcher.run(self.env)
+        launcher.run(self.env,  self.conf["path"])
         self.show()
 
 
 if __name__ == "__main__":
     
+    apppath = str()
+    
     app = QApplication(sys.argv)
     app.setPalette(qdarktheme.load_palette("dark"))
+    
 
+    
+    if not os.path.exists(f"/home/{USER}/.planet-launcher/firstrun"):
+        pluto = ConfigPluto()
+        pluto.show()
+        pluto.exec()
+        with open(f"/home/{USER}/.planet-launcher/firstrun",  "w")  as file:
+            file.write("0")
+        filename = pluto.filename
+        plutorun= True
+    else:
+        plutorun = False
+    
+    
     window = Planet()
+    
+    if plutorun:
+        window.set_path(filename)
+    
     window.show()
-
+    
+   
     app.exec()
