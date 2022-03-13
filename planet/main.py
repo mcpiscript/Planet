@@ -79,14 +79,18 @@ class ConfigPluto(QDialog):
         titlewidget = QWidget()
         titlewidget.setLayout(titlelayout)
         
-        info_label = QLabel("Please select the executable you downloaded.")
+        info_label = QLabel("Please select the executable you downloaded.\nIf you installed a DEB, please select the \"Link\" option")
         
         self.executable_btn = QPushButton("Select executable")
         self.executable_btn.clicked.connect(self.get_appimage)
         
+        self.premade_btn = QPushButton("Link /usr/bin/minecraft-pi-reborn-client")
+        self.premade_btn.clicked.connect(self.link_appimage)
+        
         layout.addWidget(titlewidget)
         layout.addWidget(info_label)
         layout.addWidget(self.executable_btn)
+        layout.addWidget(self.premade_btn)
         
         self.setLayout(layout)
     
@@ -109,6 +113,11 @@ class ConfigPluto(QDialog):
     def get_appimage(self):
         self.hide()
         self.filename =  QFileDialog.getOpenFileName(self, 'Select executable',  '/',"Executable files (*.AppImage *.bin *.sh *)")
+    def link_appimage(self):
+        self.hide()
+        os.symlink("/usr/bin/minecraft-pi-reborn-client", f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+        self.filename = list()
+        self.filename.append(False)
 
 
 class Planet(QMainWindow):
@@ -378,10 +387,15 @@ if __name__ == "__main__":
         pluto = ConfigPluto()
         pluto.show()
         pluto.exec()
-        with open(pluto.filename[0],  "rb") as appimage:
-            with open(f"/home/{USER}/.planet-launcher/minecraft.AppImage",  "wb") as out:
-                out.write(appimage.read())
-        os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage",   0o777)
+        if pluto.filename[0] == '':
+            sys.exit(-1)
+        elif pluto.filename[0] == False:
+            print("Using /usr/bin as an executable.")
+        else:
+            with open(pluto.filename[0],  "rb") as appimage:
+                with open(f"/home/{USER}/.planet-launcher/minecraft.AppImage",  "wb") as out:
+                    out.write(appimage.read())
+                    os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage",   0o777)
     
     
     window = Planet()
