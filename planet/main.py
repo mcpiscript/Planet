@@ -38,6 +38,7 @@ from PyQt5.QtWebKit import *
 from PyQt5.QtWebKitWidgets import *
 
 import qdarktheme
+import pypresence
 
 
 dark_stylesheet = qdarktheme.load_stylesheet()
@@ -128,6 +129,14 @@ class Planet(QMainWindow):
     def __init__(self):
         super().__init__()
         
+        RPC = pypresence.Presence(787496148763541505)
+        try: 
+            RPC = pypresence.Presence(787496148763541505)
+            RPC.connect()
+            RPC.update(state="Launched with Planet Launcher",  details="Minecraft Pi Edition: Reborn",  large_image="logo",  small_image=random.choice(["heart",  "portal",  "multiplayer",  "pi"]))
+        except:
+            print("Unable to initalize Discord RPC. Skipping.")
+        
         if not os.path.exists(f"/home/{USER}/.planet-launcher/config.json"):
             
             self.conf = {
@@ -137,6 +146,7 @@ class Planet(QMainWindow):
                 "profile": "Modded MCPE", 
                 "render_distance": "Short", 
                 "theme": "QDarkTheme Light", 
+                "discord_rpc": True, 
             }
             
             with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
@@ -160,8 +170,8 @@ class Planet(QMainWindow):
         tabs.setTabIcon(features_tab, QIcon("assets/heart512.png"))
         servers_tab = tabs.addTab(self.servers_tab(),  "Servers")
         tabs.setTabIcon(servers_tab, QIcon("assets/multiplayer512.png"))
-        mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
-        tabs.setTabIcon(mods_tab, QIcon("assets/portal512.png"))
+        #mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
+        #tabs.setTabIcon(mods_tab, QIcon("assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
         tabs.setTabIcon(changelog_tab, QIcon("assets/pi512.png"))
 
