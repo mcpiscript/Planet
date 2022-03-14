@@ -4,8 +4,7 @@ import os
 
 def get_features_list(path_: str) -> list:
     features = subprocess.run(
-        [path_, "--print-available-feature-flags"],
-        stdout=subprocess.PIPE,
+        [path_, "--print-available-feature-flags"], stdout=subprocess.PIPE
     ).stdout.decode("utf-8")
     features = features.split("\n")
     returnlist = list()
@@ -21,8 +20,7 @@ def get_features_list(path_: str) -> list:
 
 def get_features_dict(path_: str) -> dict:
     features = subprocess.run(
-        [path_, "--print-available-feature-flags"],
-        stdout=subprocess.PIPE,
+        [path_, "--print-available-feature-flags"], stdout=subprocess.PIPE
     ).stdout.decode("utf-8")
     features = features.split("\n")
     returndict = dict()
@@ -64,7 +62,5 @@ def set_options(env, options: dict):
     return env
 
 
-def run(env,  path_: str):
-    return subprocess.Popen(
-        [path_], env=env, preexec_fn=os.setsid
-    ).wait()
+def run(env, path_: str):
+    return subprocess.Popen([path_], env=env, preexec_fn=os.setsid)

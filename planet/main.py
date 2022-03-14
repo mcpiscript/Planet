@@ -64,107 +64,124 @@ if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
 # else:
 # TODO: Add a tab with a button to import features from gMCPIL
 
+
 class ConfigPluto(QDialog):
     def __init__(self):
         super().__init__()
         self.setWindowFlag(Qt.FramelessWindowHint)
-        
+
         layout = QVBoxLayout()
         titlelayout = QGridLayout()
-        
-        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+
+        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
+            100, 100, Qt.KeepAspectRatio
+        )
         namelabel = QLabel("Pluto Wizard")
-        
+
         logolabel = QLabel()
         logolabel.setPixmap(logopixmap)
         logolabel.setAlignment(Qt.AlignRight)
-        
+
         font = namelabel.font()
         font.setPointSize(30)
         namelabel.setFont(font)
         namelabel.setAlignment(Qt.AlignLeft)
-        
+
         titlelayout.addWidget(logolabel, 0, 0)
         titlelayout.addWidget(namelabel, 0, 1)
 
         titlewidget = QWidget()
         titlewidget.setLayout(titlelayout)
-        
-        info_label = QLabel("Please select the executable you downloaded.\nIf you installed a DEB, please select the \"Link\" option")
-        
+
+        info_label = QLabel(
+            'Please select the executable you downloaded.\nIf you installed a DEB, please select the "Link" option'
+        )
+
         self.executable_btn = QPushButton("Select executable")
         self.executable_btn.clicked.connect(self.get_appimage)
-        
+
         self.premade_btn = QPushButton("Link /usr/bin/minecraft-pi-reborn-client")
         self.premade_btn.clicked.connect(self.link_appimage)
-        
+
         layout.addWidget(titlewidget)
         layout.addWidget(info_label)
         layout.addWidget(self.executable_btn)
         layout.addWidget(self.premade_btn)
-        
+
         self.setLayout(layout)
-    
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.moveFlag = True
             self.movePosition = event.globalPos() - self.pos()
             self.setCursor(QCursor(Qt.OpenHandCursor))
             event.accept()
-    
+
     def mouseMoveEvent(self, event):
         if Qt.LeftButton and self.moveFlag:
             self.move(event.globalPos() - self.movePosition)
             event.accept()
-    
+
     def mouseReleaseEvent(self, event):
         self.moveFlag = False
         self.setCursor(Qt.ArrowCursor)
-        
+
     def get_appimage(self):
         self.hide()
-        self.filename =  QFileDialog.getOpenFileName(self, 'Select executable',  '/',"Executable files (*.AppImage *.bin *.sh *)")
+        self.filename = QFileDialog.getOpenFileName(
+            self, "Select executable", "/", "Executable files (*.AppImage *.bin *.sh *)"
+        )
+
     def link_appimage(self):
         self.hide()
-        os.symlink("/usr/bin/minecraft-pi-reborn-client", f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+        os.symlink(
+            "/usr/bin/minecraft-pi-reborn-client",
+            f"/home/{USER}/.planet-launcher/minecraft.AppImage",
+        )
         self.filename = list()
         self.filename.append(False)
 
 
 class Planet(QMainWindow):
-    
+
     launchfeatures = dict()
     env = os.environ.copy()
 
     def __init__(self):
         super().__init__()
-        
+
         RPC = pypresence.Presence(787496148763541505)
-        try: 
+        try:
             RPC = pypresence.Presence(787496148763541505)
             RPC.connect()
-            RPC.update(state="Launched with Planet Launcher",  details="Minecraft Pi Edition: Reborn",  large_image="logo",  small_image=random.choice(["heart",  "portal",  "multiplayer",  "pi"]))
+            RPC.update(
+                state="Launched with Planet Launcher",
+                details="Minecraft Pi Edition: Reborn",
+                large_image="logo",
+                small_image=random.choice(["heart", "portal", "multiplayer", "pi"]),
+            )
         except:
             print("Unable to initalize Discord RPC. Skipping.")
-        
+
         if not os.path.exists(f"/home/{USER}/.planet-launcher/config.json"):
-            
+
             self.conf = {
-                "username": "StevePi", 
-                "options": launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage"), 
-                "hidelauncher": True, 
-                "profile": "Modded MCPE", 
-                "render_distance": "Short", 
-                "theme": "QDarkTheme Light", 
-                "discord_rpc": True, 
+                "username": "StevePi",
+                "options": launcher.get_features_dict(
+                    f"/home/{USER}/.planet-launcher/minecraft.AppImage"
+                ),
+                "hidelauncher": True,
+                "profile": "Modded MCPE",
+                "render_distance": "Short",
+                "theme": "QDarkTheme Light",
+                "discord_rpc": True,
             }
-            
-            with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
+
+            with open(f"/home/{USER}/.planet-launcher/config.json", "w") as file:
                 file.write(json.dumps(self.conf))
         else:
             with open(f"/home/{USER}/.planet-launcher/config.json") as file:
                 self.conf = json.loads(file.read())
-        
 
         self.setWindowTitle("Planet")
 
@@ -178,27 +195,29 @@ class Planet(QMainWindow):
         tabs.setTabIcon(play_tab, QIcon(f"{absolute_path}/assets/logo512.png"))
         features_tab = tabs.addTab(self.features_tab(), "Features")
         tabs.setTabIcon(features_tab, QIcon(f"{absolute_path}/assets/heart512.png"))
-        servers_tab = tabs.addTab(self.servers_tab(),  "Servers")
-        tabs.setTabIcon(servers_tab, QIcon(f"{absolute_path}/assets/multiplayer512.png"))
-        #mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
-        #tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
+        servers_tab = tabs.addTab(self.servers_tab(), "Servers")
+        tabs.setTabIcon(
+            servers_tab, QIcon(f"{absolute_path}/assets/multiplayer512.png")
+        )
+        # mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
+        # tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
         tabs.setTabIcon(changelog_tab, QIcon(f"{absolute_path}/assets/pi512.png"))
 
         self.setCentralWidget(tabs)
 
         self.setGeometry(600, 900, 200, 200)
-        
+
         self.usernameedit.setText(self.conf["username"])
         self.profilebox.setCurrentText(self.conf["profile"])
         self.distancebox.setCurrentText(self.conf["render_distance"])
-        
+
         for feature in self.features:
             if self.conf["options"][feature]:
                 self.features[feature].setCheckState(Qt.Checked)
             else:
                 self.features[feature].setCheckState(Qt.Unchecked)
-        
+
         self.showlauncher.setChecked(self.conf["hidelauncher"])
 
         self.set_features()
@@ -208,7 +227,9 @@ class Planet(QMainWindow):
 
         titlelayout = QGridLayout()
 
-        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
+            100, 100, Qt.KeepAspectRatio
+        )
 
         logolabel = QLabel()
         logolabel.setPixmap(logopixmap)
@@ -293,7 +314,9 @@ class Planet(QMainWindow):
         layout = QVBoxLayout()
 
         self.features = dict()
-        default_features = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+        default_features = launcher.get_features_dict(
+            f"/home/{USER}/.planet-launcher/minecraft.AppImage"
+        )
 
         for feature in default_features:
             checkbox = QCheckBox(feature)
@@ -326,7 +349,7 @@ class Planet(QMainWindow):
         widget.setLayout(fakelayout)
 
         return widget
-        
+
     def servers_tab(self) -> QWidget:
         widget = QWidget()
         layout = QGridLayout()
@@ -337,10 +360,12 @@ class Planet(QMainWindow):
         with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
             self.serversedit.setPlainText(servers.read())
 
-        infolabel = QLabel("Servers are stored in the format of <font color=\"gold\">IP: </font><font color=\"blue\">Port</font>")
+        infolabel = QLabel(
+            'Servers are stored in the format of <font color="gold">IP: </font><font color="blue">Port</font>'
+        )
 
         layout.addWidget(self.serversedit, 0, 0)
-        layout.addWidget(infolabel,  6, 0)
+        layout.addWidget(infolabel, 6, 0)
 
         widget.setLayout(layout)
         return widget
@@ -375,11 +400,7 @@ class Planet(QMainWindow):
 
     def changelog_tab(self):
         web = QWebView()
-        web.load(
-            QUrl().fromLocalFile(
-                f"{absolute_path}/assets/changelog.html"
-            )
-        )
+        web.load(QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html"))
 
         return web
 
@@ -389,18 +410,18 @@ class Planet(QMainWindow):
                 self.launchfeatures[feature] = True
             else:
                 self.launchfeatures[feature] = False
-                
+
     def save_profile(self):
         self.conf["username"] = self.usernameedit.text()
         self.conf["options"] = self.launchfeatures
         self.conf["render_distance"] = self.distancebox.currentText()
         self.conf["hidelauncher"] = self.showlauncher.isChecked()
-        
-        with open(f"/home/{USER}/.planet-launcher/config.json",  "w") as file:
-                file.write(json.dumps(self.conf))
-    
+
+        with open(f"/home/{USER}/.planet-launcher/config.json", "w") as file:
+            file.write(json.dumps(self.conf))
+
     def save_servers(self):
-        with open(f"/home/{USER}/.minecraft-pi/servers.txt",  "w") as file:
+        with open(f"/home/{USER}/.minecraft-pi/servers.txt", "w") as file:
             file.write(self.serversedit.toPlainText())
 
     def launch(self):
@@ -411,39 +432,40 @@ class Planet(QMainWindow):
             self.env, self.distancebox.currentText()
         )
 
-        print(self.env)
         if self.showlauncher.isChecked() == True:
             self.hide()
-        launcher.run(self.env,  f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+            launcher.run(
+                self.env, f"/home/{USER}/.planet-launcher/minecraft.AppImage"
+            ).wait()
+        else:
+            launcher.run(self.env, f"/home/{USER}/.planet-launcher/minecraft.AppImage")
         self.show()
 
 
 if __name__ == "__main__":
-    
+
     apppath = str()
-    
+
     app = QApplication(sys.argv)
     app.setPalette(qdarktheme.load_palette("dark"))
-    
 
-    
     if not os.path.exists(f"/home/{USER}/.planet-launcher/minecraft.AppImage"):
         pluto = ConfigPluto()
         pluto.show()
         pluto.exec()
-        if pluto.filename[0] == '':
+        if pluto.filename[0] == "":
             sys.exit(-1)
         elif pluto.filename[0] == False:
             print("Using /usr/bin as an executable.")
         else:
-            with open(pluto.filename[0],  "rb") as appimage:
-                with open(f"/home/{USER}/.planet-launcher/minecraft.AppImage",  "wb") as out:
+            with open(pluto.filename[0], "rb") as appimage:
+                with open(
+                    f"/home/{USER}/.planet-launcher/minecraft.AppImage", "wb"
+                ) as out:
                     out.write(appimage.read())
-                    os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage",   0o777)
-    
-    
+                    os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage", 0o777)
+
     window = Planet()
     window.show()
-    
-   
+
     app.exec()
