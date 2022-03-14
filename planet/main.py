@@ -62,7 +62,7 @@ class ConfigPluto(QDialog):
         layout = QVBoxLayout()
         titlelayout = QGridLayout()
         
-        logopixmap = QPixmap("assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        logopixmap = QPixmap(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
         namelabel = QLabel("Pluto Wizard")
         
         logolabel = QLabel()
@@ -158,26 +158,26 @@ class Planet(QMainWindow):
 
         self.setWindowTitle("Planet")
 
-        self.setWindowIcon(QIcon("assets/logo512.png"))
+        self.setWindowIcon(QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png"))
 
         tabs = QTabWidget()
         tabs.setTabPosition(QTabWidget.West)
         tabs.setMovable(True)
 
         play_tab = tabs.addTab(self.play_tab(), "Play")
-        tabs.setTabIcon(play_tab, QIcon("assets/logo512.png"))
+        tabs.setTabIcon(play_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png"))
         features_tab = tabs.addTab(self.features_tab(), "Features")
-        tabs.setTabIcon(features_tab, QIcon("assets/heart512.png"))
+        tabs.setTabIcon(features_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/heart512.png"))
         servers_tab = tabs.addTab(self.servers_tab(),  "Servers")
-        tabs.setTabIcon(servers_tab, QIcon("assets/multiplayer512.png"))
+        tabs.setTabIcon(servers_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/multiplayer512.png"))
         #mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
-        #tabs.setTabIcon(mods_tab, QIcon("assets/portal512.png"))
+        #tabs.setTabIcon(mods_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
-        tabs.setTabIcon(changelog_tab, QIcon("assets/pi512.png"))
+        tabs.setTabIcon(changelog_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/pi512.png"))
 
         self.setCentralWidget(tabs)
 
-        self.setGeometry(600, 800, 200, 200)
+        self.setGeometry(600, 900, 200, 200)
         
         self.usernameedit.setText(self.conf["username"])
         self.profilebox.setCurrentText(self.conf["profile"])
@@ -198,7 +198,7 @@ class Planet(QMainWindow):
 
         titlelayout = QGridLayout()
 
-        logopixmap = QPixmap("assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        logopixmap = QPixmap(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
 
         logolabel = QLabel()
         logolabel.setPixmap(logopixmap)
