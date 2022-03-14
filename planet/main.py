@@ -463,7 +463,7 @@ if __name__ == "__main__":
                     f"/home/{USER}/.planet-launcher/minecraft.AppImage", "wb"
                 ) as out:
                     out.write(appimage.read())
-                    os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage", 0o777)
+                    os.chmod(f"/home/{USER}/.planet-launcher/minecraft.AppImage", 0o755)
 
     window = Planet()
     window.show()
