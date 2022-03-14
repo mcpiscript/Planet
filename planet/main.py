@@ -150,7 +150,6 @@ class Planet(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        RPC = pypresence.Presence(787496148763541505)
         try:
             RPC = pypresence.Presence(787496148763541505)
             RPC.connect()
