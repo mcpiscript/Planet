@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 
 
@@ -22,13 +23,23 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 
 import sys
-import launcher
-from splashes import SPLASHES
 import os
 import random
 from datetime import date
 import json
 import pathlib
+
+absolute_path = pathlib.Path(__file__).parent.absolute()
+
+if str(absolute_path).startswith("/usr/bin"):
+    absolute_path = "/usr/lib/planet-launcher/"
+
+sys.path.append(absolute_path)
+if os.path.exists("/usr/lib/planet-launcher/"):
+    sys.path.append("/usr/lib/planet-launcher/")
+
+import launcher
+from splashes import SPLASHES
 
 
 from PyQt5.QtCore import *
@@ -39,7 +50,6 @@ from PyQt5.QtWebKitWidgets import *
 
 import qdarktheme
 import pypresence
-
 
 dark_stylesheet = qdarktheme.load_stylesheet()
 
@@ -62,7 +72,7 @@ class ConfigPluto(QDialog):
         layout = QVBoxLayout()
         titlelayout = QGridLayout()
         
-        logopixmap = QPixmap(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
         namelabel = QLabel("Pluto Wizard")
         
         logolabel = QLabel()
@@ -158,22 +168,22 @@ class Planet(QMainWindow):
 
         self.setWindowTitle("Planet")
 
-        self.setWindowIcon(QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png"))
+        self.setWindowIcon(QIcon(f"{absolute_path}/assets/logo512.png"))
 
         tabs = QTabWidget()
         tabs.setTabPosition(QTabWidget.West)
         tabs.setMovable(True)
 
         play_tab = tabs.addTab(self.play_tab(), "Play")
-        tabs.setTabIcon(play_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png"))
+        tabs.setTabIcon(play_tab, QIcon(f"{absolute_path}/assets/logo512.png"))
         features_tab = tabs.addTab(self.features_tab(), "Features")
-        tabs.setTabIcon(features_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/heart512.png"))
+        tabs.setTabIcon(features_tab, QIcon(f"{absolute_path}/assets/heart512.png"))
         servers_tab = tabs.addTab(self.servers_tab(),  "Servers")
-        tabs.setTabIcon(servers_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/multiplayer512.png"))
+        tabs.setTabIcon(servers_tab, QIcon(f"{absolute_path}/assets/multiplayer512.png"))
         #mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
-        #tabs.setTabIcon(mods_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/portal512.png"))
+        #tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
-        tabs.setTabIcon(changelog_tab, QIcon(f"{pathlib.Path(__file__).parent.absolute()}/assets/pi512.png"))
+        tabs.setTabIcon(changelog_tab, QIcon(f"{absolute_path}/assets/pi512.png"))
 
         self.setCentralWidget(tabs)
 
@@ -198,7 +208,7 @@ class Planet(QMainWindow):
 
         titlelayout = QGridLayout()
 
-        logopixmap = QPixmap(f"{pathlib.Path(__file__).parent.absolute()}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
+        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(100, 100, Qt.KeepAspectRatio)
 
         logolabel = QLabel()
         logolabel.setPixmap(logopixmap)
@@ -367,7 +377,7 @@ class Planet(QMainWindow):
         web = QWebView()
         web.load(
             QUrl().fromLocalFile(
-                f"{pathlib.Path(__file__).parent.absolute()}/assets/changelog.html"
+                f"{absolute_path}/assets/changelog.html"
             )
         )
 

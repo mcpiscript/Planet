@@ -1,0 +1,4 @@
+pip3 install pyqtdarktheme pypresence
+link /usr/lib/planet-launcher/main.py /usr/bin/planet-launcher
+chmod 755 /usr/lib/planet-launcher/main.py
+link /usr/lib/planet-launcher/assets/planet-launcher.desktop /usr/share/applications/planet-launcher.desktop

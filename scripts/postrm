@@ -1,0 +1,2 @@
+rm -rf /usr/bin/planet-launcher
+rm -rf /usr/share/applications/planet-launcher.desktop
