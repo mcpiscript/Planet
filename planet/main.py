@@ -403,6 +403,23 @@ class Planet(QMainWindow):
         web.load(QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html"))
 
         return web
+        
+    
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton:
+            self.moveFlag = True
+            self.movePosition = event.globalPos() - self.pos()
+            self.setCursor(QCursor(Qt.OpenHandCursor))
+            event.accept()
+
+    def mouseMoveEvent(self, event):
+        if Qt.LeftButton and self.moveFlag:
+            self.move(event.globalPos() - self.movePosition)
+            event.accept()
+
+    def mouseReleaseEvent(self, event):
+        self.moveFlag = False
+        self.setCursor(Qt.ArrowCursor)
 
     def set_features(self):
         for feature in self.features:
