@@ -212,11 +212,13 @@ class Planet(QMainWindow):
         self.distancebox.setCurrentText(self.conf["render_distance"])
 
         for feature in self.features:
-            if self.conf["options"][feature]:
-                self.features[feature].setCheckState(Qt.Checked)
-            else:
-                self.features[feature].setCheckState(Qt.Unchecked)
-
+            try:
+                if self.conf["options"][feature]:
+                    self.features[feature].setCheckState(Qt.Checked)
+                else:
+                    self.features[feature].setCheckState(Qt.Unchecked)
+            except KeyError:
+                pass
         self.showlauncher.setChecked(self.conf["hidelauncher"])
 
         self.set_features()
@@ -402,8 +404,7 @@ class Planet(QMainWindow):
         web.load(QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html"))
 
         return web
-        
-    
+
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.moveFlag = True
