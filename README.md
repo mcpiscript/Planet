@@ -37,8 +37,8 @@
 
 ![Screenshot](https://github.com/mcpiscript/planet/raw/master/screenshot.png)
 
-### gMCPiL vs Planet
-| Feature | Planet | gMCPIL | jMCPIL |
+### gMCPjMCPIIL vs jMCPIL vs Planet
+| Feature | Planet | [gMCPIL](https://github.com/mcpi-revival/gmcpil | [jMCPIL](https://github.com/mcpi-revival/jmcpil) |
 |---------|--------|--------|--------|
 | Profile & feature saving | Yes | No | Yes |
 | AppImage support | Yes | No | No |
@@ -47,6 +47,8 @@
 | Tab icons | Yes | No | No |
 | Maintained | Yes | Yes | No |
 | Supported on Debian Buster | Yes | No | Yes |
+| Discord RPC | Yes | No | No |
+| External server support | Yes | Yes | Yes |
 
 ### Additional Credits
 Heart, Planet, and Portal icons by LEHAtupointow
