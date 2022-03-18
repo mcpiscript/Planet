@@ -39,6 +39,7 @@
 
 ### gMCPiL vs Planet
 | Feature | Planet | gMCPIL |
+|---------|--------|--------|
 | Profile & feature saving | Yes | No |
 | AppImage support | Yes | No |
 | Legacy DEB support | Yes | Yes |
