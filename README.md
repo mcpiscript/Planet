@@ -38,13 +38,15 @@
 ![Screenshot](https://github.com/mcpiscript/planet/raw/master/screenshot.png)
 
 ### gMCPiL vs Planet
-| Feature | Planet | gMCPIL |
-|---------|--------|--------|
-| Profile & feature saving | Yes | No |
-| AppImage support | Yes | No |
-| Legacy DEB support | Yes | Yes |
-| Official MCPi-Revival | No | Yes |
-| Tab icons | Yes | No |
+| Feature | Planet | gMCPIL | jMCPIL |
+|---------|--------|--------|--------|
+| Profile & feature saving | Yes | No | Yes |
+| AppImage support | Yes | No | No |
+| Legacy DEB support | Yes | Yes | Yes |
+| Official MCPi-Revival | No | Yes | Yes |
+| Tab icons | Yes | No | No |
+| Maintained | Yes | Yes | No |
+| Supported on Debian Buster | Yes | No | Yes |
 
 ### Additional Credits
 Heart, Planet, and Portal icons by LEHAtupointow
