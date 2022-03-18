@@ -37,6 +37,13 @@
 
 ![Screenshot](https://github.com/mcpiscript/planet/raw/master/screenshot.png)
 
+### gMCPiL vs Planet
+| Feature | Planet | gMCPIL |
+| Profile & feature saving | Yes | No |
+| AppImage support | Yes | No |
+| Legacy DEB support | Yes | Yes |
+| Official MCPi-Revival | No | Yes |
+| Tab icons | Yes | No |
 
 ### Additional Credits
 Heart, Planet, and Portal icons by LEHAtupointow
