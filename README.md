@@ -37,8 +37,8 @@
 
 ![Screenshot](https://github.com/mcpiscript/planet/raw/master/screenshot.png)
 
-### gMCPjMCPIIL vs jMCPIL vs Planet
-| Feature | Planet | [gMCPIL](https://github.com/mcpi-revival/gmcpil | [jMCPIL](https://github.com/mcpi-revival/jmcpil) |
+### gMCPIL vs jMCPIL vs Planet
+| Feature | Planet | [gMCPIL](https://github.com/mcpi-revival/gmcpil) | [jMCPIL](https://github.com/mcpi-revival/jmcpil) |
 |---------|--------|--------|--------|
 | Profile & feature saving | Yes | No | Yes |
 | AppImage support | Yes | No | No |
@@ -50,5 +50,11 @@
 | Discord RPC | Yes | No | No |
 | External server support | Yes | Yes | Yes |
 
+## Credits
+- @leha-code - Creator and maintainer
+- @red-exe-engineer - Active contributor
+
 ### Additional Credits
-Heart, Planet, and Portal icons by LEHAtupointow
+Heart, Planet, Pi, Steve and Portal icons by LEHAtupointow
+
+
