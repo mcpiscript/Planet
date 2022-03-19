@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """
 
+Planet is an improed launcher, inspired by jMCPIL, MCPIL and MCPIl-R
 
 Copyright (C) 2022  Alexey Pavlov
 Copyright (C) 2022  Red-Exe-Engineer
+Copyright (C) 2022  Bigjango13
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -300,7 +302,7 @@ class Planet(QMainWindow):
         
         # Load the logo pixmap
         logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
-            100, 100, Qt.KeepAspectRatio
+            100, 100, Qt.KeepAspectRatio #Scale it, but keep the aspect ratio
         )
 
         logolabel = QLabel() # Label for the pixmap
@@ -311,12 +313,12 @@ class Planet(QMainWindow):
         
         # Ester eggs
         if date.today().month == 4 and date.today().day == 1:
-            namelabel.setText("Banana Launcher")
+            namelabel.setText("Banana Launcher") # If the date is april fish, show the banana easter egg
         else:
             if random.randint(1, 100) == 1:
-                namelabel.setText("Pluto Launcher")
+                namelabel.setText("Pluto Launcher") # a 1/100, Pluto launcher
             else:
-                namelabel.setText("Planet Launcher")
+                namelabel.setText("Planet Launcher") #Else, just set it normal
 
         font = namelabel.font() # Font used
         font.setPointSize(30) # Set the font size
@@ -342,25 +344,27 @@ class Planet(QMainWindow):
 
         self.profilebox = QComboBox() 
         self.profilebox.addItems(
-            ["Vanilla MCPi", "Modded MCPi", "Modded MCPE", "Optimized MCPE", "Custom"]
+            ["Vanilla MCPi", "Modded MCPi", "Modded MCPE", "Optimized MCPE", "Custom"] # Add  items into the combo box
         )
-        self.profilebox.setCurrentText("Modded MCPE")
+        self.profilebox.setCurrentText("Modded MCPE") # Set the current selection
 
-        self.showlauncher = QRadioButton("Hide Launcher")
+        self.showlauncher = QRadioButton("Hide Launcher") # RadioButton used for hiding the launcher
 
-        self.playbutton = QPushButton("Play")
+        self.playbutton = QPushButton("Play") # The most powerful button
 
-        self.playbutton.setCheckable(True)
-        self.playbutton.clicked.connect(self.launch)
-
+        self.playbutton.setCheckable(True) # Allow checking it
+        self.playbutton.clicked.connect(self.launch) # Connect it to the executing function
+        
+        # Add widgets into the title layout
         titlelayout.addWidget(logolabel, 0, 0)
         titlelayout.addWidget(namelabel, 0, 1)
 
         titlewidget = QWidget()
-        titlewidget.setLayout(titlelayout)
+        titlewidget.setLayout(titlelayout) # Apply the layout onto a fake widget
 
-        layout.addWidget(titlewidget, 0, 0, 2, 5)
-
+        layout.addWidget(titlewidget, 0, 0, 2, 5) # Apply that widget onto the main layout
+        
+        # All other widgets are applied here
         layout.addWidget(splashlabel, 2, 0, 1, 6)
 
         layout.addWidget(usernamelabel, 3, 0)
@@ -378,7 +382,7 @@ class Planet(QMainWindow):
 
         widget = QWidget()
 
-        widget.setLayout(layout)
+        widget.setLayout(layout) # Apply the layout onto the main widget
 
         return widget
 
@@ -386,36 +390,37 @@ class Planet(QMainWindow):
 
         layout = QVBoxLayout()
 
-        self.features = dict()
-        default_features = launcher.get_features_dict(
+        self.features = dict() # Dictionary used for storing checkboxes for features
+        default_features = launcher.get_features_dict( # Get default feature list
             f"/home/{USER}/.planet-launcher/minecraft.AppImage"
         )
 
-        for feature in default_features:
-            checkbox = QCheckBox(feature)
-            if default_features[feature]:
+        for feature in default_features: # Loop in default features
+            checkbox = QCheckBox(feature) # For each feature, create a checkbox
+            # TODO: Fix the error if newer features are added here, or check for them in self.conf
+            if default_features[feature]: # Check if it's checked. If so, check it
                 checkbox.setCheckState(Qt.Checked)
             else:
                 checkbox.setCheckState(Qt.Unchecked)
 
-            checkbox.clicked.connect(self.set_features)
+            checkbox.clicked.connect(self.set_features) # Connect saving function
 
-            self.features[feature] = checkbox
+            self.features[feature] = checkbox # Add the checkbox into the list
 
-            layout.addWidget(checkbox)
+            layout.addWidget(checkbox) #Add the checkbox into the layout
 
-        fakewidget = QWidget()
-        fakewidget.setLayout(layout)
+        fakewidget = QWidget() # Create a fake widget to apply the layout on
+        fakewidget.setLayout(layout) # Apply the layoutonto
 
-        scroll = QScrollArea()
+        scroll = QScrollArea() # Add a scoll area
 
-        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
-        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        scroll.setWidgetResizable(True)
-        scroll.setWidget(fakewidget)
+        scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn) # Shoe the vertical scroll bar
+        scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff) # Hide the horizontak scroll bar
+        scroll.setWidgetResizable(True) # Allow window resizing and fix itt with the scrollbar
+        scroll.setWidget(fakewidget) # Set the main widget into the scrollbar
 
         fakelayout = QGridLayout()
-        fakelayout.addWidget(scroll, 0, 0)
+        fakelayout.addWidget(scroll, 0, 0) #Apply the scrollbar onto the layout
 
         widget = QWidget()
 
@@ -426,18 +431,18 @@ class Planet(QMainWindow):
     def servers_tab(self) -> QWidget:
         widget = QWidget()
         layout = QGridLayout()
+ 
+        self.serversedit = QTextEdit() # Create a text editing area 
 
-        self.serversedit = QTextEdit()
-
-        self.serversedit.textChanged.connect(self.save_servers)
+        self.serversedit.textChanged.connect(self.save_servers) # Connect on change to the save function
         with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
-            self.serversedit.setPlainText(servers.read())
+            self.serversedit.setPlainText(servers.read()) # Set the text of the text editing area
 
-        infolabel = QLabel(
+        infolabel = QLabel( #Label with information about the server format
             'Servers are stored in the format of <font color="gold">IP: </font><font color="blue">Port</font>'
         )
 
-        layout.addWidget(self.serversedit, 0, 0)
+        layout.addWidget(self.serversedit, 0, 0) # Add the widgets
         layout.addWidget(infolabel, 6, 0)
 
         widget.setLayout(layout)
@@ -446,9 +451,9 @@ class Planet(QMainWindow):
     def custom_mods_tab(self) -> QWidget:
         layout = QVBoxLayout()
 
-        for mod in os.listdir(f"/home/{USER}/.planet-launcher/mods/"):
-            checkbox = QCheckBox(mod)
-            checkbox.setCheckState(Qt.Unchecked)
+        for mod in os.listdir(f"/home/{USER}/.planet-launcher/mods/"): # Loop in every mod in the mod directory
+            checkbox = QCheckBox(mod) # Create a checkbox with the mod name
+            checkbox.setCheckState(Qt.Unchecked) # Set it to unchecked
 
             layout.addWidget(checkbox)
 
@@ -472,8 +477,9 @@ class Planet(QMainWindow):
         return widget
 
     def changelog_tab(self):
-        web = QWebView()
-        web.load(QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html"))
+        web = QWebView() # Create a webview object
+        web.load(QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html")) # Load the local file
+        # TODO: Use two different tabs for the webview
 
         return web
 
@@ -501,6 +507,7 @@ class Planet(QMainWindow):
                 self.launchfeatures[feature] = False
 
     def save_profile(self):
+        self.set_features()
         self.conf["username"] = self.usernameedit.text()
         self.conf["options"] = self.launchfeatures
         self.conf["render_distance"] = self.distancebox.currentText()
