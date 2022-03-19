@@ -49,6 +49,8 @@
 | Supported on Debian Buster | Yes | No | Yes |
 | Discord RPC | Yes | No | No |
 | External server support | Yes | Yes | Yes |
+| Flatpak support | Yes | No | No |
+| Pre-made profiles | No | Yes | Yes |
 
 ## Credits
 - @leha-code - Creator and maintainer
