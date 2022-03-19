@@ -22,6 +22,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 """
 
 
+# Built-in modules import
+
 import sys
 import os
 import random
@@ -29,32 +31,40 @@ from datetime import date
 import json
 import pathlib
 
+# Define the path used for later
 absolute_path = pathlib.Path(__file__).parent.absolute()
 
+# ran only if it's in a deb file
 if str(absolute_path).startswith("/usr/bin"):
     absolute_path = "/usr/lib/planet-launcher/"
 
+# Make the launcher import local files
 sys.path.append(absolute_path)
 if os.path.exists("/usr/lib/planet-launcher/"):
     sys.path.append("/usr/lib/planet-launcher/")
 
+
+# Local imports
 import launcher
 from splashes import SPLASHES
 
-
+# PyQt5 imports
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtWebKit import *
 from PyQt5.QtWebKitWidgets import *
 
-import qdarktheme
-import pypresence
+# Additional imports
+import qdarktheme  # Dark style for PyQt5
+import pypresence  # Discord RPC
 
+# Load dark theme
 dark_stylesheet = qdarktheme.load_stylesheet()
 
-USER = os.getenv("USER")
+USER = os.getenv("USER")  # Get the username, used for later
 
+# Create the mods directory if it does not exist
 if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
     os.makedirs(f"/home/{USER}/.planet-launcher/mods")
 
@@ -66,46 +76,58 @@ if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
 
 
 class ConfigPluto(QDialog):
+    """Startup configurator for Planet. Based on QDialog."""
+
     def __init__(self):
         super().__init__()
+        # Remove the window bar
         self.setWindowFlag(Qt.FramelessWindowHint)
 
-        layout = QVBoxLayout()
-        titlelayout = QGridLayout()
+        layout = QVBoxLayout()  # Real layout used by the widger
+        titlelayout = QGridLayout()  # Layout for the title
 
+        # Load the logo pixmap
         logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
             100, 100, Qt.KeepAspectRatio
         )
+
+        # Create the name label
         namelabel = QLabel("Pluto Wizard")
 
-        logolabel = QLabel()
-        logolabel.setPixmap(logopixmap)
-        logolabel.setAlignment(Qt.AlignRight)
+        logolabel = QLabel()  # label used for the logo
+        logolabel.setPixmap(logopixmap)  # Load the pixmap into the label
+        logolabel.setAlignment(Qt.AlignRight)  # Align right
 
-        font = namelabel.font()
+        font = namelabel.font()  # This font is just used to set the size
         font.setPointSize(30)
-        namelabel.setFont(font)
-        namelabel.setAlignment(Qt.AlignLeft)
+        namelabel.setFont(font)  # Apply the font to the label
+        namelabel.setAlignment(Qt.AlignLeft)  # Align left
 
-        titlelayout.addWidget(logolabel, 0, 0)
-        titlelayout.addWidget(namelabel, 0, 1)
+        titlelayout.addWidget(logolabel, 0, 0)  # Add the logo into the layout
+        titlelayout.addWidget(namelabel, 0, 1)  # Add the name into the layout
 
-        titlewidget = QWidget()
-        titlewidget.setLayout(titlelayout)
+        titlewidget = QWidget()  # Fake widget that takes the title layout
+        titlewidget.setLayout(titlelayout)  # Set the layout
 
+        # Label with information
         info_label = QLabel(
             'Please select the executable you downloaded.\nIf you installed a DEB, please select the "Link" option'
         )
 
-        self.executable_btn = QPushButton("Select executable")
-        self.executable_btn.clicked.connect(self.get_appimage)
+        self.executable_btn = QPushButton("Select executable")  # Button for AppImage
+        self.executable_btn.clicked.connect(
+            self.get_appimage
+        )  # Connect to the function
 
-        self.premade_btn = QPushButton("Link /usr/bin/minecraft-pi-reborn-client")
-        self.premade_btn.clicked.connect(self.link_appimage)
-        
-        self.flatpak_btn = QPushButton("Link flatpak")
-        self.flatpak_btn.clicked.connect(self.link_flatpak)
+        self.premade_btn = QPushButton(
+            "Link /usr/bin/minecraft-pi-reborn-client"
+        )  # Button for Pre-installed debs
+        self.premade_btn.clicked.connect(self.link_appimage)  # Connect to the function
 
+        self.flatpak_btn = QPushButton("Link flatpak")  # Button for linking flatpak
+        self.flatpak_btn.clicked.connect(self.link_flatpak)  # Connect to the function
+
+        # Adding things to widgets
         layout.addWidget(titlewidget)
         layout.addWidget(info_label)
         layout.addWidget(self.executable_btn)
@@ -113,6 +135,8 @@ class ConfigPluto(QDialog):
         layout.addWidget(self.flatpak_btn)
 
         self.setLayout(layout)
+
+    # Functions below are related to window movement
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -131,48 +155,72 @@ class ConfigPluto(QDialog):
         self.setCursor(Qt.ArrowCursor)
 
     def get_appimage(self):
-        self.hide()
+        self.hide()  # Hide the dialog
+        # Open the file dialog
         self.filename = QFileDialog.getOpenFileName(
             self, "Select executable", "/", "Executable files (*.AppImage *.bin *.sh *)"
         )
 
     def link_appimage(self):
-        self.hide()
+        self.hide()  # hide the dialog
+        # Link the executable with the AppImage
         os.symlink(
             "/usr/bin/minecraft-pi-reborn-client",
             f"/home/{USER}/.planet-launcher/minecraft.AppImage",
         )
-        self.filename = list()
-        self.filename.append(False)
-    
+        self.filename = list()  # Make a fake list
+        self.filename.append(
+            False
+        )  # Append False to the fake list. See end of file for more info
+
     def link_flatpak(self):
-        script_text = "#!/bin/bash\nflatpak run com.thebrokenrail.MCPIReborn $1"
-        with open(f"/home/{USER}/.planet-launcher/minecraft.AppImage",  "w") as file:
-            file.write(script_text)
+        script_text = (
+            "#!/bin/bash\nflatpak run com.thebrokenrail.MCPIReborn $1"
+        )  # Script contents
+        with open(
+            f"/home/{USER}/.planet-launcher/minecraft.AppImage", "w"
+        ) as file:  # Open the file
+            file.write(script_text)  # Write the script text
+
+        self.filename = list()  # Fake list. See function above for more info
+        self.filename.append(False)
 
 
 class Planet(QMainWindow):
+    """Main window class. Contains tabs and everything"""
 
-    launchfeatures = dict()
-    env = os.environ.copy()
+    launchfeatures = dict()  # Dictionary for custom features
+    env = os.environ.copy()  # ENV variables
 
     def __init__(self):
         super().__init__()
 
         try:
-            RPC = pypresence.Presence(787496148763541505)
-            RPC.connect()
+            RPC = pypresence.Presence(
+                787496148763541505
+            )  # Try to initialize pypresence and find Discord
+            RPC.connect()  # Connect to Discord
+            # Set the RPC Status
             RPC.update(
                 state="Launched with Planet Launcher",
                 details="Minecraft Pi Edition: Reborn",
-                large_image="logo",
-                small_image=random.choice(["heart", "portal", "multiplayer", "pi"]),
+                large_image=random.choice(
+                    ["revival", "logo"]
+                ),  # Randomly select the logo
+                small_image=random.choice(
+                    ["heart", "portal", "multiplayer", "logo", "revival"]
+                ),  # Randomly select the tiny image
             )
         except:
-            print("Unable to initalize Discord RPC. Skipping.")
+            print(
+                "Unable to initalize Discord RPC. Skipping."
+            )  # If it fails, e.g Discord is not found, skip. This doesn't matter much.
 
-        if not os.path.exists(f"/home/{USER}/.planet-launcher/config.json"):
+        if not os.path.exists(
+            f"/home/{USER}/.planet-launcher/config.json"
+        ):  # Config file does not exist.
 
+            # Set the configuration variable
             self.conf = {
                 "username": "StevePi",
                 "options": launcher.get_features_dict(
@@ -185,68 +233,83 @@ class Planet(QMainWindow):
                 "discord_rpc": True,
             }
 
-            with open(f"/home/{USER}/.planet-launcher/config.json", "w") as file:
+            with open(
+                f"/home/{USER}/.planet-launcher/config.json", "w"
+            ) as file:  # Write it to the configuration file
                 file.write(json.dumps(self.conf))
         else:
-            with open(f"/home/{USER}/.planet-launcher/config.json") as file:
+            with open(
+                f"/home/{USER}/.planet-launcher/config.json"
+            ) as file:  # Else, it exists: Read from it.
                 self.conf = json.loads(file.read())
 
-        self.setWindowTitle("Planet")
+        self.setWindowTitle("Planet")  # Set the window title
 
-        self.setWindowIcon(QIcon(f"{absolute_path}/assets/logo512.png"))
+        self.setWindowIcon(
+            QIcon(f"{absolute_path}/assets/logo512.png")
+        )  # Set the window icon
 
-        tabs = QTabWidget()
-        tabs.setTabPosition(QTabWidget.West)
-        tabs.setMovable(True)
+        tabs = QTabWidget()  # Create the tabs
+        tabs.setTabPosition(QTabWidget.South)  # Select the tab position.
+        tabs.setMovable(True)  # Allow tab movement.
 
-        play_tab = tabs.addTab(self.play_tab(), "Play")
-        tabs.setTabIcon(play_tab, QIcon(f"{absolute_path}/assets/logo512.png"))
-        features_tab = tabs.addTab(self.features_tab(), "Features")
-        tabs.setTabIcon(features_tab, QIcon(f"{absolute_path}/assets/heart512.png"))
-        servers_tab = tabs.addTab(self.servers_tab(), "Servers")
+        # Tab part. Please check every function for more info
+        play_tab = tabs.addTab(self.play_tab(), "Play")  # Add the play tab
+        tabs.setTabIcon(
+            play_tab, QIcon(f"{absolute_path}/assets/logo512.png")
+        )  # Set the icon for the tab
+        features_tab = tabs.addTab(self.features_tab(), "Features") # Add the features tab
+        tabs.setTabIcon(features_tab, QIcon(f"{absolute_path}/assets/heart512.png")) # set the icon for the tab
+        servers_tab = tabs.addTab(self.servers_tab(), "Servers") # Servers tab
         tabs.setTabIcon(
             servers_tab, QIcon(f"{absolute_path}/assets/multiplayer512.png")
-        )
+        ) # Set the icon
         # mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
         # tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
-        changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog")
-        tabs.setTabIcon(changelog_tab, QIcon(f"{absolute_path}/assets/pi512.png"))
+        changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog") # Changelog tab
+        tabs.setTabIcon(changelog_tab, QIcon(f"{absolute_path}/assets/pi512.png")) # Set the icon
 
-        self.setCentralWidget(tabs)
+        self.setCentralWidget(tabs) # Set the central widget to the tabs
 
-        self.setGeometry(600, 900, 200, 200)
-
-        self.usernameedit.setText(self.conf["username"])
-        self.profilebox.setCurrentText(self.conf["profile"])
-        self.distancebox.setCurrentText(self.conf["render_distance"])
+        self.setGeometry(600, 900, 200, 200) # Set the window geometry. Doesn't do much effect from my observations, unfortunartely
+ 
+        self.usernameedit.setText(self.conf["username"]) # Set the username text to the configuration's variant
+        self.profilebox.setCurrentText(self.conf["profile"]) # See top comment
+        self.distancebox.setCurrentText(self.conf["render_distance"]) # See top comments
 
         for feature in self.features:
             try:
                 if self.conf["options"][feature]:
-                    self.features[feature].setCheckState(Qt.Checked)
+                    self.features[feature].setCheckState(Qt.Checked) # Set to checked if the configuration has it to true
                 else:
-                    self.features[feature].setCheckState(Qt.Unchecked)
-            except KeyError:
+                    self.features[feature].setCheckState(Qt.Unchecked) # Else, set it unchecked
+            except KeyError: # May happen on downgrades or upgrades of the Reborn version
                 pass
+        
+        # Hide launcher/Show it depending on the config
         self.showlauncher.setChecked(self.conf["hidelauncher"])
-
+        
+        # Set the features
         self.set_features()
 
     def play_tab(self) -> QWidget:
-        layout = QGridLayout()
+        """The main tab, with the main functionality"""
+        layout = QGridLayout() # The layout
 
-        titlelayout = QGridLayout()
-
+        titlelayout = QGridLayout() # The layout for the title
+        
+        # Load the logo pixmap
         logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
             100, 100, Qt.KeepAspectRatio
         )
 
-        logolabel = QLabel()
-        logolabel.setPixmap(logopixmap)
-        logolabel.setAlignment(Qt.AlignRight)
+        logolabel = QLabel() # Label for the pixmap
+        logolabel.setPixmap(logopixmap) # apply the pixmap onto the label
+        logolabel.setAlignment(Qt.AlignRight) # Align the label
 
-        namelabel = QLabel()
-
+        namelabel = QLabel() # Label for the title 
+        
+        # Ester eggs
         if date.today().month == 4 and date.today().day == 1:
             namelabel.setText("Banana Launcher")
         else:
@@ -255,29 +318,29 @@ class Planet(QMainWindow):
             else:
                 namelabel.setText("Planet Launcher")
 
-        font = namelabel.font()
-        font.setPointSize(30)
-        namelabel.setFont(font)
-        namelabel.setAlignment(Qt.AlignLeft)
+        font = namelabel.font() # Font used
+        font.setPointSize(30) # Set the font size
+        namelabel.setFont(font) # Aplly the font onto the label
+        namelabel.setAlignment(Qt.AlignLeft) # Align the label
 
-        splashlabel = QLabel(f'<font color="gold">{random.choice(SPLASHES)}</font>')
-        splashlabel.adjustSize()
-        splashlabel.setAlignment(Qt.AlignHCenter)
+        splashlabel = QLabel(f'<font color="gold">{random.choice(SPLASHES)}</font>') # Label for splash. Uses QSS for color
+        splashlabel.adjustSize() # Adjust the size just in case
+        splashlabel.setAlignment(Qt.AlignHCenter) # Align the label
 
-        usernamelabel = QLabel("Username")
+        usernamelabel = QLabel("Username") # Label that is used to direct the line edit
 
-        self.usernameedit = QLineEdit()
-        self.usernameedit.setPlaceholderText("StevePi")
+        self.usernameedit = QLineEdit() # Line Edit for username
+        self.usernameedit.setPlaceholderText("StevePi") # Set ghost value
 
-        distancelabel = QLabel("Render Distance")
+        distancelabel = QLabel("Render Distance") # Label that is used to direct the combo box
 
-        self.distancebox = QComboBox()
-        self.distancebox.addItems(["Far", "Normal", "Short", "Tiny"])
-        self.distancebox.setCurrentText("Short")
+        self.distancebox = QComboBox() 
+        self.distancebox.addItems(["Far", "Normal", "Short", "Tiny"]) # Set the values
+        self.distancebox.setCurrentText("Short") # Set the default option
 
-        profilelabel = QLabel("Profile")
+        profilelabel = QLabel("Profile") # Label that is used to direct the combo box
 
-        self.profilebox = QComboBox()
+        self.profilebox = QComboBox() 
         self.profilebox.addItems(
             ["Vanilla MCPi", "Modded MCPi", "Modded MCPE", "Optimized MCPE", "Custom"]
         )
@@ -473,7 +536,7 @@ if __name__ == "__main__":
     apppath = str()
 
     app = QApplication(sys.argv)
-    app.setPalette(qdarktheme.load_palette("dark"))
+    app.setPalette(qdarktheme.load_palette("light"))
 
     if not os.path.exists(f"/home/{USER}/.planet-launcher/minecraft.AppImage"):
         pluto = ConfigPluto()
