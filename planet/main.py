@@ -102,11 +102,15 @@ class ConfigPluto(QDialog):
 
         self.premade_btn = QPushButton("Link /usr/bin/minecraft-pi-reborn-client")
         self.premade_btn.clicked.connect(self.link_appimage)
+        
+        self.flatpak_btn = QPushButton("Link flatpak")
+        self.flatpak_btn.clicked.connect(self.link_flatpak)
 
         layout.addWidget(titlewidget)
         layout.addWidget(info_label)
         layout.addWidget(self.executable_btn)
         layout.addWidget(self.premade_btn)
+        layout.addWidget(self.flatpak_btn)
 
         self.setLayout(layout)
 
@@ -140,6 +144,11 @@ class ConfigPluto(QDialog):
         )
         self.filename = list()
         self.filename.append(False)
+    
+    def link_flatpak(self):
+        script_text = "#!/bin/bash\nflatpak run com.thebrokenrail.MCPIReborn $1"
+        with open(f"/home/{USER}/.planet-launcher/minecraft.AppImage",  "w") as file:
+            file.write(script_text)
 
 
 class Planet(QMainWindow):
