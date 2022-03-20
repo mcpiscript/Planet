@@ -60,6 +60,7 @@ from PyQt5.QtWebKitWidgets import *
 # Additional imports
 import qdarktheme  # Dark style for PyQt5
 import pypresence  # Discord RPC
+from PIL import Image
 
 # Load dark theme
 dark_stylesheet = qdarktheme.load_stylesheet()
@@ -69,6 +70,9 @@ USER = os.getenv("USER")  # Get the username, used for later
 # Create the mods directory if it does not exist
 if not os.path.exists(f"/home/{USER}/.planet-launcher/mods"):
     os.makedirs(f"/home/{USER}/.planet-launcher/mods")
+    
+if not os.path.exists(f"/home/{USER}/.minecraft-pi/overrides/images/mob/"):
+    os.makedirs(f"/home/{USER}/.minecraft-pi/overrides/images/mob/")
 
 # if os.path.exists(f"/home/{USER}/.gmcpil.json"):
 #    with open(f"/home/{USER}/.gmcpil.json") as f:
@@ -231,7 +235,7 @@ class Planet(QMainWindow):
                 "hidelauncher": True,
                 "profile": "Modded MCPE",
                 "render_distance": "Short",
-                "theme": "QDarkTheme Light",
+                "theme": "dark",
                 "discord_rpc": True,
             }
 
@@ -252,7 +256,7 @@ class Planet(QMainWindow):
         )  # Set the window icon
 
         tabs = QTabWidget()  # Create the tabs
-        tabs.setTabPosition(QTabWidget.South)  # Select the tab position.
+        tabs.setTabPosition(QTabWidget.North)  # Select the tab position.
         tabs.setMovable(True)  # Allow tab movement.
 
         # Tab part. Please check every function for more info
@@ -349,6 +353,9 @@ class Planet(QMainWindow):
         self.profilebox.setCurrentText("Modded MCPE") # Set the current selection
 
         self.showlauncher = QRadioButton("Hide Launcher") # RadioButton used for hiding the launcher
+        
+        self.skin_button = QPushButton("Select Skin")
+        self.skin_button.clicked.connect(self.select_skin)
 
         self.playbutton = QPushButton("Play") # The most powerful button
 
@@ -376,9 +383,11 @@ class Planet(QMainWindow):
         layout.addWidget(profilelabel, 5, 0)
         layout.addWidget(self.profilebox, 5, 4, 1, 2)
 
-        layout.addWidget(self.showlauncher, 6, 4, 1, 2)
+        layout.addWidget(self.showlauncher, 6, 4)
+        
+        layout.addWidget(self.skin_button, 6, 0)
 
-        layout.addWidget(self.playbutton, 8, 5)
+        layout.addWidget(self.playbutton, 8, 4,  1, 2)
 
         widget = QWidget()
 
@@ -433,6 +442,11 @@ class Planet(QMainWindow):
         layout = QGridLayout()
  
         self.serversedit = QTextEdit() # Create a text editing area 
+        
+        if not os.path.exists(f"/home/{USER}/.minecraft-pi/servers.txt"):
+            with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
+                servers.write("pbptanarchy.tk")
+
 
         self.serversedit.textChanged.connect(self.save_servers) # Connect on change to the save function
         with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
@@ -519,6 +533,16 @@ class Planet(QMainWindow):
     def save_servers(self):
         with open(f"/home/{USER}/.minecraft-pi/servers.txt", "w") as file:
             file.write(self.serversedit.toPlainText())
+    
+    def select_skin(self):
+        filename = QFileDialog.getOpenFileName(
+            self, "Select skin file", "/", "PNG files (*.png)"
+        )
+        
+        with open(f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png",  "w") as skin:
+            skin.write("quick placeholder")
+        
+        Image.open(filename[0]).crop((0,0,64,32)).convert('RGBA').save(f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png")
 
     def launch(self):
         self.save_profile()
@@ -543,8 +567,10 @@ if __name__ == "__main__":
     apppath = str()
 
     app = QApplication(sys.argv)
-    app.setPalette(qdarktheme.load_palette("light"))
-
+    if os.path.exists(f"/home/{USER}/.planet-launcher/config.json"):
+        with open(f"/home/{USER}/.planet-launcher/config.json") as file:
+            app.setPalette(qdarktheme.load_palette(json.loads(file.read())["theme"]))
+    
     if not os.path.exists(f"/home/{USER}/.planet-launcher/minecraft.AppImage"):
         pluto = ConfigPluto()
         pluto.show()

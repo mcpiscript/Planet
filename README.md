@@ -10,9 +10,11 @@
     A better launcher for the Minecraft: Pi Edition Reborn mod.
     <br/>
     <br/>
+    <center>
     <a href="https://github.com/mcpiscript/Planet/issues">Report Bug</a>
     |
     <a href="https://github.com/mcpiscript/Planet/issues">Request Feature</a>
+    </center>
   </p>
 </p>
 
@@ -50,18 +52,19 @@ And, no launcher supports AppImage, thus Planet is required to run new versions 
 ### gMCPIL vs jMCPIL vs pipan vs Planet
 | Feature | Planet | [gMCPIL](https://github.com/mcpi-revival/gmcpil) | [jMCPIL](https://github.com/mcpi-revival/jmcpil) | [pipan](https://github.com/randomsoup/pipan) |
 |---------|--------|--------|--------|-------|
-| Profile & feature saving | Yes | No | Yes | No |
+| Profile & feature saving | Yes | Bullseye only | Yes | No |
 | AppImage support | Yes | No | No | No |
 | Legacy DEB support | Yes | Yes | Yes | Yes |
 | Official MCPi-Revival | No | Yes | Yes | No |
 | Tab icons | Yes | No | No | No |
-| Maintained | Yes | Yes | No | Yes |
+| Maintained | Yes | Yes | No | No |
 | Supported on Debian Buster | Yes | No | Yes | Yes |
 | Discord RPC | Yes | No | No | No |
 | External server support | Yes | Yes | Yes | No |
 | Flatpak support | Yes | No | No | No |
 | Pre-made profiles | No | Yes | Yes | Yes |
 | Easy GUI navigation | Yes | Yes | Yes | No |
+| Skin support | Yes | No | No | No |
 ## Credits
 - @leha-code - Creator and maintainer
 - @red-exe-engineer - Active contributor
