@@ -10,16 +10,15 @@
     A better launcher for the Minecraft: Pi Edition Reborn mod.
     <br/>
     <br/>
-    <center>
     <a href="https://github.com/mcpiscript/Planet/issues">Report Bug</a>
     |
     <a href="https://github.com/mcpiscript/Planet/issues">Request Feature</a>
-    </center>
   </p>
 </p>
 
+<center>
 ![Downloads](https://img.shields.io/github/downloads/mcpiscript/Planet/total) ![Contributors](https://img.shields.io/github/contributors/mcpiscript/Planet?color=dark-green) ![Issues](https://img.shields.io/github/issues/mcpiscript/Planet) ![License](https://img.shields.io/github/license/mcpiscript/Planet) [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmcpiscript%2FPlanet&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
-
+</center>
 
 <!--## Table Of Contents
 
@@ -62,7 +61,7 @@ And, no launcher supports AppImage, thus Planet is required to run new versions 
 | Discord RPC | Yes | No | No | No |
 | External server support | Yes | Yes | Yes | No |
 | Flatpak support | Yes | No | No | No |
-| Pre-made profiles | No | Yes | Yes | Yes |
+| Pre-made profiles | Yes | Yes | Yes | Yes |
 | Easy GUI navigation | Yes | Yes | Yes | No |
 | Skin support | Yes | No | No | No |
 ## Credits

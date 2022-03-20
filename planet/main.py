@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 
-Planet is an improed launcher, inspired by jMCPIL, MCPIL and MCPIl-R
+Planet is an improved launcher, inspired by jMCPIL, MCPIL and MCPIl-R
 
 Copyright (C) 2022  Alexey Pavlov
 Copyright (C) 2022  Red-Exe-Engineer
@@ -531,6 +531,7 @@ class Planet(QMainWindow):
         self.conf["username"] = self.usernameedit.text()
         self.conf["options"] = self.launchfeatures
         self.conf["render_distance"] = self.distancebox.currentText()
+        self.conf["profile"] = self.profilebox.currentText()
         self.conf["hidelauncher"] = self.showlauncher.isChecked()
 
         with open(f"/home/{USER}/.planet-launcher/config.json", "w") as file:
@@ -552,6 +553,24 @@ class Planet(QMainWindow):
 
     def launch(self):
         self.save_profile()
+        
+        
+        if self.profilebox.currentText().lower() == "vanilla mcpi":
+            self.launchfeatures = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+            for feature in self.launchfeatures:
+                self.launchfeatures[feature] = False
+        elif self.profilebox.currentText().lower() == "modded mcpi":
+            self.launchfeatures = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+            self.launchfeatures["Touch GUI"] = False
+        elif self.profilebox.currentText().lower() == "modded mcpe":
+            self.launchfeatures = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+        elif self.profilebox.currentText().lower() == "optimized mcpe":
+            self.launchfeatures = launcher.get_features_dict(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+            self.launchfeatures["Fancy Graphics"] = False
+            self.launchfeatures["Smooth Lightning"] = False
+            self.launchfeatures["Animated Water"] = False
+            self.launchfeatures['Disable "gui_blocks" Atlas'] = False
+        
         self.env = launcher.set_username(self.env, self.usernameedit.text())
         self.env = launcher.set_options(self.env, self.launchfeatures)
         self.env = launcher.set_render_distance(
