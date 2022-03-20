@@ -61,6 +61,7 @@ from PyQt5.QtWebKitWidgets import *
 import qdarktheme  # Dark style for PyQt5
 import pypresence  # Discord RPC
 from PIL import Image
+import darkdetect
 
 # Load dark theme
 dark_stylesheet = qdarktheme.load_stylesheet()
@@ -79,6 +80,11 @@ if not os.path.exists(f"/home/{USER}/.minecraft-pi/overrides/images/mob/"):
 #        DEFAULT_FEATURES = json.loads(f.read())["features"]
 # else:
 # TODO: Add a tab with a button to import features from gMCPIL
+
+if darkdetect.isDark():
+    theme = "dark"
+else:
+    theme = "light"
 
 
 class ConfigPluto(QDialog):
@@ -235,7 +241,7 @@ class Planet(QMainWindow):
                 "hidelauncher": True,
                 "profile": "Modded MCPE",
                 "render_distance": "Short",
-                "theme": "dark",
+                "theme": theme, 
                 "discord_rpc": True,
             }
 
@@ -570,6 +576,8 @@ if __name__ == "__main__":
     if os.path.exists(f"/home/{USER}/.planet-launcher/config.json"):
         with open(f"/home/{USER}/.planet-launcher/config.json") as file:
             app.setPalette(qdarktheme.load_palette(json.loads(file.read())["theme"]))
+    else:
+        app.setPalette(qdarktheme.load_palette(theme))
     
     if not os.path.exists(f"/home/{USER}/.planet-launcher/minecraft.AppImage"):
         pluto = ConfigPluto()

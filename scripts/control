@@ -4,7 +4,6 @@ Architecture: all
 Maintainer: mcpiscript <mcpiscript@gmail.com>
 Depends: python3-pyqt5, python3:any, python3-pyqt5.qtwebkit, python3-pyqt5.qtsvg, python3-pyqt5.qtwebkit, python3-pyqt5.qtmultimedia
 Replaces: mcpil, mcpil-r
-Provides: python3-pypresence
 Recommends: minecraft-pi-reborn-client, minecraft-pi-reborn-server, python3-pyqtdarkmode, python3-mcpi, python3-minecraft-pi, python3-morpheus-mcpi
 Section: games
 Priority: optional
