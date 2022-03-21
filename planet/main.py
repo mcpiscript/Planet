@@ -274,12 +274,12 @@ class Planet(QMainWindow):
         tabs.setTabIcon(features_tab, QIcon(f"{absolute_path}/assets/heart512.png")) # set the icon for the tab
         servers_tab = tabs.addTab(self.servers_tab(), "Servers") # Servers tab
         tabs.setTabIcon(
-            servers_tab, QIcon(f"{absolute_path}/assets/multiplayer512.png")
+            servers_tab, QIcon(f"{absolute_path}/assets/portal512.png")
         ) # Set the icon
         # mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
         # tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
         changelog_tab = tabs.addTab(self.changelog_tab(), "Changelog") # Changelog tab
-        tabs.setTabIcon(changelog_tab, QIcon(f"{absolute_path}/assets/pi512.png")) # Set the icon
+        tabs.setTabIcon(changelog_tab, QIcon(f"{absolute_path}/assets/git.png")) # Set the icon
 
         self.setCentralWidget(tabs) # Set the central widget to the tabs
 
