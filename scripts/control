@@ -1,5 +1,5 @@
 Package: planet-launcher
-Version: 1.0rc4
+Version: 1.0.0
 Architecture: all
 Maintainer: mcpiscript <mcpiscript@gmail.com>
 Depends: python3-pyqt5, python3:any, python3-pyqt5.qtwebkit, python3-pyqt5.qtsvg, python3-pyqt5.qtwebkit, python3-pyqt5.qtmultimedia
