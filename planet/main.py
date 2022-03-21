@@ -545,11 +545,11 @@ class Planet(QMainWindow):
         filename = QFileDialog.getOpenFileName(
             self, "Select skin file", "/", "PNG files (*.png)"
         )
+        if not filename == '':
+            with open(f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png",  "w") as skin:
+                skin.write("quick placeholder")
         
-        with open(f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png",  "w") as skin:
-            skin.write("quick placeholder")
-        
-        Image.open(filename[0]).crop((0,0,64,32)).convert('RGBA').save(f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png")
+            Image.open(filename[0]).crop((0,0,64,32)).convert('RGBA').save(f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png")
 
     def launch(self):
         self.save_profile()
