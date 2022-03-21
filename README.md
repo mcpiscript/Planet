@@ -61,7 +61,7 @@ If you're installing a DEB, all of them with the exception of Minecraft: Pi Edit
 | Legacy DEB support | Yes | Yes | Yes | Yes | Yes |
 | Official MCPi-Revival | No | Yes | Yes | No | Yes |
 | Tab icons | Yes | No | No | No | No |
-| Maintained | Yes | No | No | No | No |
+| Maintained | Yes | No | No | No | Yes |
 | Supported on Debian Buster | Yes | No | Yes | Yes | Yes |
 | Discord RPC | Yes | No | No | No | No |
 | External server support | Yes | Yes | Yes | No | No |
@@ -73,7 +73,7 @@ If you're installing a DEB, all of them with the exception of Minecraft: Pi Edit
 - Use Planet if you want a maintained and a feature-rich launcher.
 - Use gMCPIL if you are on Debian Bullseye, using a DEB install OR want a basic experience
 - Use jMCPIL if you're using a DEB install on a distro other than Debian Bullseye
-- Use the built-in launcher if you like to use the command line.
+- Use the built-in launcher if you like to fill in things constantly
 - Don't use pipan, it's a dirty prototype, not a working launcher
 ## Credits
 - @leha-code - Creator and maintainer
