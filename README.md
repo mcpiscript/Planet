@@ -36,7 +36,7 @@
 -->
 
 ![Screenshot](https://github.com/mcpiscript/planet/raw/master/screenshot.png)
-<!--
+
 Planet is a **maintained, feature-rich and a flexible** launcher. It is supported everywhere: Just install PyQt5, Python, and MCPi, and you're done! Planet was created because none of the other launchers were universal, stable, maintained and feature-rich.
 ## Installation
 #### Prerequisites
