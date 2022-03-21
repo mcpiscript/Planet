@@ -47,7 +47,7 @@ Planet is a **maintained, feature-rich and a flexible** launcher. It is supporte
 * `pyqtdarkmode`
 * Pillow
 
-If you're installing a DEB, all of them with the exception of Minecraft: Pi Edition: Reborn will be automatically installed. Please install an AppImage for the latest build. If you want a DEB, please consider checking out [MCPi-Reborn++](https://github.com/mobilegmyt/mcpi-reborn-extended).
+If you're installing a DEB, all of them with the exception of Minecraft: Pi Edition: Reborn will be automatically installed. Please install an AppImage for the latest build. If you want a DEB, please consider checking out [MCPI++](https://github.com/mobilegmyt/mcpi-reborn-extended).
 #### Installation
 1. Download the DEB from the releases section.
 2. Install the DEB using `apt`
