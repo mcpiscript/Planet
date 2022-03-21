@@ -76,9 +76,9 @@ If you're installing a DEB, all of them with the exception of Minecraft: Pi Edit
 - Use the built-in launcher if you like to fill in things constantly
 - Don't use pipan, it's a dirty prototype, not a working launcher
 ## Credits
-- @leha-code - Creator and maintainer
-- @red-exe-engineer - Active contributor
-- @bigjango13 - Multiple fixes
+- [Leha-code](https://github.com/leha-code) - Creator and maintainer
+- [Red-exe-engineer](https://github.com/red-exe-engineer) - Active contributor
+- [Bigjango13](https://github.com/bigjango13) - Multiple fixes
 
 ### Additional Credits
 Heart, Planet, Pi, Steve and Portal icons by LEHAtupointow
