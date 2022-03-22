@@ -206,6 +206,7 @@ class Planet(QMainWindow):
 
     def __init__(self):
         super().__init__()
+        self.center()
 
         try:
             RPC = pypresence.Presence(
@@ -518,6 +519,12 @@ class Planet(QMainWindow):
     def mouseReleaseEvent(self, event):
         self.moveFlag = False
         self.setCursor(Qt.ArrowCursor)
+        
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
 
     def set_features(self):
         for feature in self.features:
