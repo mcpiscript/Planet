@@ -51,11 +51,11 @@ import launcher
 from splashes import SPLASHES
 
 # PyQt5 imports
-from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import *
-from PyQt5.QtWebKit import *
-from PyQt5.QtWebKitWidgets import *
+from qtpy.QtCore import *
+from qtpy.QtWidgets import *
+from qtpy.QtGui import *
+from qtpy.QtWebEngine import *
+from qtpy.QtWebEngineWidgets import *
 
 # Additional imports
 import qdarktheme  # Dark style for PyQt5
@@ -498,7 +498,7 @@ class Planet(QMainWindow):
         return widget
 
     def changelog_tab(self):
-        web = QWebView() # Create a webview object
+        web = QWebEngineView() # Create a webview object
         web.load(QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html")) # Load the local file
         # TODO: Use two different tabs for the webview
 
