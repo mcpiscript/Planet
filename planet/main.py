@@ -245,6 +245,7 @@ class Planet(QMainWindow):
                 "render_distance": "Short",
                 "theme": theme,
                 "discord_rpc": True,
+                "version":  "extended_2.3.2"
             }
 
             with open(
@@ -394,9 +395,22 @@ class Planet(QMainWindow):
 
         self.skin_button = QPushButton("Select Skin")
         self.skin_button.clicked.connect(self.select_skin)
-        
+
         self.versionbox = QComboBox()
-        self.versionbox.addItems(["Far", "Normal", "Short", "Tiny"])  # Set the values
+
+        versions = json.loads(web.get_versions())["versions"]
+
+        version_list = list()
+
+        for version in versions:
+            version_list.append(versions[version])
+
+        version_name_list = list()
+
+        for version in version_list:
+            version_name_list.append(version["name"])
+
+        self.versionbox.addItems(version_name_list)  # Set the values
         self.versionbox.setCurrentText("Short")  # Set the default option
 
         self.playbutton = QPushButton("Play")  # The most powerful button
@@ -432,7 +446,7 @@ class Planet(QMainWindow):
         layout.addWidget(self.showlauncher, 6, 4)
 
         layout.addWidget(self.skin_button, 6, 0)
-        
+
         layout.addWidget(self.versionbox, 8, 0, 1, 3)
 
         layout.addWidget(self.playbutton, 8, 4, 1, 2)

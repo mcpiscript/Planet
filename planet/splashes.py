@@ -39,6 +39,8 @@ SPLASHES = [
     "Підтримай Україну!",
     "Supercalifragilisticexpialidocious!",
     "Now with multiplayer!",
-    "ENGINEER GAMING",
-    "Play Minecraft Pi Edition, watch Red-Exe-Engineer, get PIG!", 
+    "RED EXE ENGINEER GAMING",
+    "Play Minecraft Pi Edition, watch Red-Exe-Engineer, get PIG!",
+    "Wat", 
+    "About the same size as Earth", 
 ]

@@ -1,14 +1,13 @@
-from urllib.request import Request, urlopen
+from urllib.request import urlopen
 import requests
 
 
 def get_versions() -> str:
     return str(
         urlopen(
-            Request(
-                "https://gist.github.com/leha-code/3e8fea40346536b451e45fc1728ed250/raw/versions.json"
-            )
-        ).read()
+            "https://gist.github.com/leha-code/3e8fea40346536b451e45fc1728ed250/raw/versions.json"
+        ).read(),
+        "UTF-8",
     )
 
 
