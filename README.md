@@ -53,6 +53,8 @@ If you're installing a DEB, all of them with the exception of Minecraft: Pi Edit
 [![badge](https://github.com/Botspot/pi-apps/blob/master/icons/badge.png?raw=true)](https://github.com/Botspot/pi-apps)  
 ###### Option B (Raspberry Pi Only)
 [![badge](https://cdn.discordapp.com/attachments/717494538205397052/957080742293295134/addonsmini.png)](https://raspbian-addons.org)
+
+
 Install the `planet-launcher` package through APT.
 ###### Option C (Any Debian-Based)
 Use [our PPA](https://github.com/mcpiscript/ppa)
