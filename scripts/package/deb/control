@@ -2,9 +2,10 @@ Package: planet-launcher
 Version: 1.0.0
 Architecture: all
 Maintainer: mcpiscript <mcpiscript@gmail.com>
-Depends: python3-pyqt5, python3:any, python3-pyqt5.qtwebkit, python3-pyqt5.qtsvg, python3-pyqt5.qtwebkit, python3-pyqt5.qtmultimedia
+Depends: python3-pyqt5, python3:any, python3-pyqt5.qtwebkit, python3-pyqt5.qtsvg, python3-pyqt5.qtwebkit, python3-pyqt5.qtmultimedia, gcc
 Replaces: mcpil, mcpil-r, gmcpil, jmcpil
 Recommends: python3-pyqtdarkmode, python3-minecraftpi
+Provides: pi-nbt
 Section: games
 Priority: optional
 Homepage: https://github.com/mcpiscript/Planet

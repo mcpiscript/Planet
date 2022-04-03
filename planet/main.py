@@ -52,11 +52,11 @@ from splashes import SPLASHES
 import web
 
 # PyQt5 imports
-from qtpy.QtCore import *
-from qtpy.QtWidgets import *
-from qtpy.QtGui import *
-from qtpy.QtWebEngine import *
-from qtpy.QtWebEngineWidgets import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtWebEngine import *
+from PyQt5.QtWebEngineWidgets import *
 
 # Additional imports
 import qdarktheme  # Dark style for PyQt5
