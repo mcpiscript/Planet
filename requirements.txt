@@ -1,4 +1,4 @@
-qtpy
+pyqt5
 pyqtdarktheme
 pypresence
 pillow
