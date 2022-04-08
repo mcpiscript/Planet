@@ -37,18 +37,26 @@ def remove_header(filename: str):
     #    write_file.write(data[8:])
     # This is WIP code! Do not use!
     
-    return subprocess.Popen(["/usr/bin/pi-nbt",  "remove-header",  filename])
+    return subprocess.Popen(["pi-nbt",  "remove-header",  filename,  filename+"_temp.dat"]).wait()
 
 def add_header(filename: str):
-    return subprocess.Popen(["/usr/bin/pi-nbt",  "add-header",  filename])
+    return subprocess.Popen(["pi-nbt",  "add-header",  filename+"_temp.dat",  filename]).wait()
 
 
-def load_nbt(filename: str,  header_type = None):
-    if  header_type == "level.dat":
+def load_nbt(filename: str,  header=False):
+    if  header:
         remove_header(filename)
-    elif header_type not in ["level.dat",  None]:
-        raise Exception("Invalid file! Please use header_type=None to open a file without a header")
     
-    return nbtlib.load(filename,  gzipped=False,  byteorder="little")
+    with nbtlib.load(filename=filename+"_temp.dat",  gzipped=False,   byteorder="little") as nbt:
+        return nbt
+        
+
+def save_nbt(nbt: nbtlib.File,  filename: str,  header=True):
+    nbt.save(filename+"_temp.dat")
+    if header:
+        add_header(filename)        
+    
+    
+
     
     

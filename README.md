@@ -92,5 +92,4 @@ Use [our PPA](https://github.com/mcpiscript/ppa)
 
 ### Additional Credits
 Heart, Planet, Pi, Steve and Portal icons by LEHAtupointow
-
-
+Wrench by [Santoniche on OpenGameArt.org](https://opengameart.org/content/wrench-0).
