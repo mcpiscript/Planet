@@ -59,6 +59,8 @@ from PyQt5.QtGui import *
 from PyQt5.QtWebEngine import *
 from PyQt5.QtWebEngineWidgets import *
 
+from qtwidgets import AnimatedToggle
+
 # Additional imports
 import qdarktheme  # Dark style for PyQt5
 import pypresence  # Discord RPC
@@ -246,7 +248,7 @@ class Planet(QMainWindow):
                 "render_distance": "Short",
                 "theme": theme,
                 "discord_rpc": True,
-                "version":  "extended_2.3.2"
+                "version": "extended_2.3.2",
             }
 
             with open(
@@ -264,10 +266,10 @@ class Planet(QMainWindow):
         self.setWindowIcon(
             QIcon(f"{absolute_path}/assets/logo512.png")
         )  # Set the window icon
-        
+
         self.widget = QWidget()
         self.layout = QStackedLayout()
-        
+
         tabs = QTabWidget()  # Create the tabs
         tabs.setTabPosition(QTabWidget.North)  # Select the tab position.
         tabs.setMovable(True)  # Allow tab movement.
@@ -290,12 +292,10 @@ class Planet(QMainWindow):
         # mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
         # tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
         settings_tab = tabs.addTab(self.settings_tab(), "Settings")  # Changelog tab
-        tabs.setTabIcon(
-            settings_tab, QIcon(f"{absolute_path}/assets/wrench512.png")
-        )
-        
+        tabs.setTabIcon(settings_tab, QIcon(f"{absolute_path}/assets/wrench512.png"))
+
         self.layout.addWidget(tabs)
-        
+
         self.widget.setLayout(self.layout)
 
         self.setCentralWidget(self.widget)  # Set the central widget to the tabs
@@ -403,20 +403,20 @@ class Planet(QMainWindow):
 
         self.versionbox = QComboBox()
 
-        #versions = json.loads(web.get_versions())["versions"]
+        # versions = json.loads(web.get_versions())["versions"]
 
-        #version_list = list()
+        # version_list = list()
 
-        #for version in versions:
-         #   version_list.append(versions[version])
+        # for version in versions:
+        #   version_list.append(versions[version])
 
-        #version_name_list = list()
+        # version_name_list = list()
 
-        #for version in version_list:
-           # version_name_list.append(version["name"])
+        # for version in version_list:
+        # version_name_list.append(version["name"])
 
-       # self.versionbox.addItems(version_name_list)  # Set the values
-        #self.versionbox.setCurrentText("Short")  # Set the default option
+        # self.versionbox.addItems(version_name_list)  # Set the values
+        # self.versionbox.setCurrentText("Short")  # Set the default option
 
         self.playbutton = QPushButton("Play")  # The most powerful button
 
@@ -450,7 +450,7 @@ class Planet(QMainWindow):
 
         layout.addWidget(self.showlauncher, 6, 4)
 
-        #layout.addWidget(self.versionbox, 8, 0, 1, 3)
+        # layout.addWidget(self.versionbox, 8, 0, 1, 3)
 
         layout.addWidget(self.playbutton, 8, 4, 1, 2)
 
@@ -574,62 +574,60 @@ class Planet(QMainWindow):
         # TODO: Use two different tabs for the webview
 
         return web_engine
-        
+
     def settings_widget(self):
         widget = QWidget()
-        
+
         layout = QGridLayout()
-        
+
         skin_label = QLabel("Set the skin")
-        
+
         self.skin_button = QPushButton("Select Skin")
         self.skin_button.clicked.connect(self.select_skin)
-        
+
         config_label = QLabel("Reset config")
-        
+
         self.delete_config_button = QPushButton("Delete config")
         self.delete_config_button.clicked.connect(self.delete_config)
-        
+
         appimage_label = QLabel("Delete executable")
-        
+
         self.delete_appimage_button = QPushButton("Delete")
         self.delete_appimage_button.clicked.connect(self.delete_appimage)
-        
-        
+
         layout.addWidget(skin_label, 0, 0)
         layout.addWidget(self.skin_button, 0, 1)
-        
+
         layout.addWidget(config_label, 1, 0)
-        layout.addWidget(self.delete_config_button,  1, 1)
-        
+        layout.addWidget(self.delete_config_button, 1, 1)
+
         layout.addWidget(appimage_label, 2, 0)
-        layout.addWidget(self.delete_appimage_button,  2, 1)
-        
+        layout.addWidget(self.delete_appimage_button, 2, 1)
+
         widget.setLayout(layout)
-        
+
         return widget
-        
-        
+
     def settings_tab(self):
         tabs = QTabWidget()
         tabs.setTabPosition(QTabWidget.South)
-        
-        settings_tab = tabs.addTab(self.settings_widget(),  "General")
-        changelog_tab = tabs.addTab(self.changelog_widget(),  "Changelog")
-        editor_tab = tabs.addTab(mcpiedit.NBTEditor(),  "MCPIEdit")
-        
+
+        settings_tab = tabs.addTab(self.settings_widget(), "General")
+        changelog_tab = tabs.addTab(self.changelog_widget(), "Changelog")
+        editor_tab = tabs.addTab(mcpiedit.NBTEditor(), "MCPIEdit")
+
         tabs.setTabIcon(
             settings_tab, QIcon(f"{absolute_path}/assets/wrench512.png")
         )  # Set the icon
-        
+
         tabs.setTabIcon(
             changelog_tab, QIcon(f"{absolute_path}/assets/git.png")
         )  # Set the icon
-        
+
         tabs.setTabIcon(
             editor_tab, QIcon(f"{absolute_path}/assets/mcpiedit.png")
         )  # Set the icon
-        
+
         return tabs
 
     def mousePressEvent(self, event):
@@ -689,12 +687,12 @@ class Planet(QMainWindow):
             Image.open(filename[0]).crop((0, 0, 64, 32)).convert("RGBA").save(
                 f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png"
             )
-            
+
     def delete_config(self):
         os.remove(f"/home/{USER}/.planet-launcher/config.json")
         self.hide()
         sys.exit()
-    
+
     def delete_appimage(self):
         os.remove(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
         self.hide()

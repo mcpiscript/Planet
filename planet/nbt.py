@@ -30,33 +30,36 @@ SOFTWARE.
 import nbtlib
 import subprocess
 
+
 def remove_header(filename: str):
-    #with open(filename,  "rb") as file:
+    # with open(filename,  "rb") as file:
     #   data = file.read()
-    #with open(filename,  "wb") as write_file:
+    # with open(filename,  "wb") as write_file:
     #    write_file.write(data[8:])
     # This is WIP code! Do not use!
-    
-    return subprocess.Popen(["pi-nbt",  "remove-header",  filename,  filename+"_temp.dat"]).wait()
+
+    return subprocess.Popen(
+        ["pi-nbt", "remove-header", filename, filename + "_temp.dat"]
+    ).wait()
+
 
 def add_header(filename: str):
-    return subprocess.Popen(["pi-nbt",  "add-header",  filename+"_temp.dat",  filename]).wait()
+    return subprocess.Popen(
+        ["pi-nbt", "add-header", filename + "_temp.dat", filename]
+    ).wait()
 
 
-def load_nbt(filename: str,  header=False):
-    if  header:
-        remove_header(filename)
-    
-    with nbtlib.load(filename=filename+"_temp.dat",  gzipped=False,   byteorder="little") as nbt:
-        return nbt
-        
-
-def save_nbt(nbt: nbtlib.File,  filename: str,  header=True):
-    nbt.save(filename+"_temp.dat")
+def load_nbt(filename: str, header=False):
     if header:
-        add_header(filename)        
-    
-    
+        remove_header(filename)
 
-    
-    
+    with nbtlib.load(
+        filename=filename + "_temp.dat", gzipped=False, byteorder="little"
+    ) as nbt:
+        return nbt
+
+
+def save_nbt(nbt: nbtlib.File, filename: str, header=True):
+    nbt.save(filename + "_temp.dat")
+    if header:
+        add_header(filename)
