@@ -63,12 +63,15 @@ class EditorTab(QWidget):
         self.tabs.setTabPosition(QTabWidget.West)
         self.tabs.setMovable(True)
 
-        self.tabs.addTab(self.main_tab(), "World")
+        self.tabs.addTab(self.main_tab(), "General")
+        self.tabs.addTab(self.world_tab(), "World")
 
         self.name_edit.setText(str(self.nbt["LevelName"]))
         self.timestamp_box.setValue(int(self.nbt["LastPlayed"]))
         self.game_box.setCurrentText(GAME_INTREGERS[str(int(self.nbt["GameType"]))])
         self.seed_edit.setText(str(int(self.nbt["RandomSeed"])))
+        self.time_edit.setText(str(int(self.nbt["Time"])))
+        #self.mobs_toggle.setChecked(BOOLEAN_INTREGERS[int(self.nbt["SpawnMobs"])]) # REMOVED BECAUSE DOES NOT WORK 
 
         layout.addWidget(self.tabs)
 
@@ -101,10 +104,16 @@ class EditorTab(QWidget):
         self.game_box = QComboBox()
         self.game_box.addItems(["Survival", "Creative"])
         
-        self.mobs_toggle = AnimatedToggle(
-            checked_color="#59b8e0",
-            pulse_checked_color="#92cee8"
-        )
+        #self.mobs_toggle = AnimatedToggle(
+        #    checked_color="#59b8e0",
+        #    pulse_checked_color="#92cee8"
+        #)
+        
+        self.time_label = QLabel("Time (In Ticks)")
+        
+        self.time_edit = QLineEdit()
+        self.time_edit.setPlaceholderText("1770")
+        self.time_edit.setValidator(QIntValidator())
         
 
         self.save_button = QPushButton("Save")
@@ -122,12 +131,25 @@ class EditorTab(QWidget):
         layout.addWidget(self.game_label, 3, 0)
         layout.addWidget(self.game_box, 3, 1)
         
-        layout.addWidget(self.mobs_toggle,  4, 1)
+        layout.addWidget(self.time_label,  4, 0)
+        layout.addWidget(self.time_edit,  4, 1)
 
         layout.addWidget(self.save_button, 5, 1)
 
         widget.setLayout(layout)
 
+        return widget
+        
+        
+    
+    def world_tab(self):
+        
+        layout = QGridLayout()
+        
+        
+        widget = QWidget()
+        widget.setLayout(layout)
+        
         return widget
 
     def save(self):

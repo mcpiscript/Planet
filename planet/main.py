@@ -689,14 +689,34 @@ class Planet(QMainWindow):
             )
 
     def delete_config(self):
-        os.remove(f"/home/{USER}/.planet-launcher/config.json")
-        self.hide()
-        sys.exit()
+        dialog = QMessageBox()
+        dialog.setWindowTitle("Are you sure you want to reset?")
+        dialog.setText("Are you sure you want to delete the config? This action is unrecoverable.")
+        dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
+        dialog.setIcon(QMessageBox.Warning)
+        
+        button = dialog.exec()
+        
+        if button == QMessageBox.Ok:
+        
+            os.remove(f"/home/{USER}/.planet-launcher/config.json")
+            self.hide()
+            sys.exit()
 
     def delete_appimage(self):
-        os.remove(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
-        self.hide()
-        sys.exit()
+        dialog = QMessageBox()
+        dialog.setWindowTitle("Are you sure you want to reset?")
+        dialog.setText("Are you sure you want to delete the AppImage? This action is unrecoverable.")
+        dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
+        dialog.setIcon(QMessageBox.Warning)
+        
+        button = dialog.exec()
+        
+        if button == QMessageBox.Ok:
+        
+            os.remove(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
+            self.hide()
+            sys.exit()
 
     def launch(self):
         self.save_profile()
