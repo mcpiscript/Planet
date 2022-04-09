@@ -56,8 +56,8 @@ import mcpiedit
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtWebEngine import *
-from PyQt5.QtWebEngineWidgets import *
+from PyQt5.QtWebKit import *
+from PyQt5.QtWebKitWidgets import *
 
 from qtwidgets import AnimatedToggle
 
@@ -567,7 +567,7 @@ class Planet(QMainWindow):
         return widget
 
     def changelog_widget(self):
-        web_engine = QWebEngineView()  # Create a webview object
+        web_engine = QWebView()  # Create a webview object
         web_engine.load(
             QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html")
         )  # Load the local file
