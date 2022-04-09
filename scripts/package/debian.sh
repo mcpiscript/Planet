@@ -10,6 +10,9 @@ mkdir build/planet/usr/lib
 cp -r ./planet/ ./build/planet/usr/lib/planet-launcher
 
 mkdir build/planet/DEBIAN
+
+cp ./LICENSE ./build/planet/DEBIAN/license
+
 cp ./scripts/package/deb/control ./build/planet/DEBIAN/control
 cp ./scripts/package/deb/postinst ./build/planet/DEBIAN/postinst
 cp ./scripts/package/deb/postrm ./build/planet/DEBIAN/postrm
