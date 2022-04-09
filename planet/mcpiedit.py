@@ -10,8 +10,6 @@ from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 
-from qtwidgets import AnimatedToggle
-
 import nbt
 
 USER = os.getenv("USER")  # Get the username, used for later
@@ -72,6 +70,11 @@ class EditorTab(QWidget):
         self.seed_edit.setText(str(int(self.nbt["RandomSeed"])))
         self.time_edit.setText(str(int(self.nbt["Time"])))
         #self.mobs_toggle.setChecked(BOOLEAN_INTREGERS[int(self.nbt["SpawnMobs"])]) # REMOVED BECAUSE DOES NOT WORK 
+        
+        
+        self.spawn_x_box.setValue(int(self.nbt["SpawnX"]))
+        self.spawn_y_box.setValue(int(self.nbt["SpawnY"]))
+        self.spawn_z_box.setValue(int(self.nbt["SpawnZ"]))
 
         layout.addWidget(self.tabs)
 
@@ -146,6 +149,35 @@ class EditorTab(QWidget):
         
         layout = QGridLayout()
         
+        x_label = QLabel("Spawnpoint X")
+        
+        self.spawn_x_box = QSpinBox()
+        self.spawn_x_box.setMinimum(-128)
+        self.spawn_x_box.setMaximum(128)
+        
+        y_label = QLabel("Spawnpoint Y")
+        
+        self.spawn_y_box = QSpinBox()
+        self.spawn_y_box.setMinimum(-64)
+        self.spawn_y_box.setMaximum(64)
+
+        
+        z_label = QLabel("Spawnpoint Z")
+        
+        self.spawn_z_box = QSpinBox()
+        self.spawn_z_box.setMinimum(-128)
+        self.spawn_z_box.setMaximum(128)
+        
+        layout.addWidget(x_label,  0, 0)
+        layout.addWidget(y_label,  1, 0)
+        layout.addWidget(z_label,  2, 0)
+
+        
+        layout.addWidget(self.spawn_x_box,  0, 1)
+        layout.addWidget(self.spawn_y_box,  1, 1)
+        layout.addWidget(self.spawn_z_box,  2, 1)
+
+        
         
         widget = QWidget()
         widget.setLayout(layout)
@@ -157,6 +189,14 @@ class EditorTab(QWidget):
         self.nbt["LastPlayed"] = nbt.nbtlib.Long(self.timestamp_box.value())
         self.nbt["GameType"] = GAME_TYPES[self.game_box.currentText()]
         self.nbt["RandomSeed"] = nbt.nbtlib.Long(int(self.seed_edit.text()))
+        self.nbt["Time"] = nbt.nbtlib.Long(int(self.time_edit.text()))
+        
+        self.nbt["SpawnX"] = nbt.nbtlib.Int(self.spawn_x_box.value())
+        self.nbt["SpawnY"] = nbt.nbtlib.Int(self.spawn_y_box.value())
+        self.nbt["SpawnZ"] = nbt.nbtlib.Int(self.spawn_z_box.value())
+        
+        
+        
 
         nbt.save_nbt(self.nbt, self.filename)
 
