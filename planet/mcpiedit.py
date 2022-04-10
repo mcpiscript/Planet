@@ -150,6 +150,7 @@ class EditorTab(QWidget):
         self.time_edit.setPlaceholderText("1770")
         self.time_edit.setValidator(QIntValidator())
         
+        self.back_button = QPushButton("Back")
 
         self.save_button = QPushButton("Save")
         self.save_button.clicked.connect(self.save)
@@ -169,6 +170,7 @@ class EditorTab(QWidget):
         layout.addWidget(self.time_label,  4, 0)
         layout.addWidget(self.time_edit,  4, 1)
 
+        layout.addWidget(self.back_button, 5, 0)
         layout.addWidget(self.save_button, 5, 1)
 
         widget.setLayout(layout)
@@ -257,8 +259,11 @@ class NBTEditor(QWidget):
         
         if fname[0] == '':
             return
+            
+        editor = EditorTab(fname[0])
+        editor.back_button.clicked.connect(lambda: self.layout.setCurrentIndex(0))
 
-        self.layout.addWidget(EditorTab(fname[0]))
+        self.layout.insertWidget(1,  editor)
         self.layout.setCurrentIndex(1)
         self.setLayout(self.layout)
 
