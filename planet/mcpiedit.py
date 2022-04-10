@@ -33,18 +33,50 @@ GAME_INTREGERS = {"0": "Survival", "1": "Creative"}
 BOOLEAN_INTREGERS = {0: False, 1: True}
 BOOLEAN_INTREGERS_REVERSED = {False: 0, True: 1}
 
+class AboutWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        
+        layout = QVBoxLayout()
+        
+        label = QLabel("About MCPIedit")
+        label.setAlignment(Qt.AlignHCenter)
+        font = label.font()  # Font used
+        font.setPointSize(15)  # Set the font size
+        label.setFont(font)  # Aplly the font onto the label
+        
+        desc_label = QLabel("The default built-in NBT editor for Planet.\n\nMCPIedit makes use of Pi-NBT\n from the original MCPIedit project\nby TheBrokenRail, which is\nlicensed under the MIT license.")
+        desc_label.setAlignment(Qt.AlignHCenter)
+        
+        layout.addWidget(label)
+        layout.addWidget(desc_label)
+        
+        self.setLayout(layout)
+
 
 class FileSelectorTab(QWidget):
     def __init__(self):
         super().__init__()
 
-        layout = QGridLayout()
+        layout = QVBoxLayout()
+        
+        info_label = QLabel("NBT editors allow you to edit your world\nfiles to change game modes, time,\nand even the world name. Select an NBT\nfile to edit using the button below.")
+        info_label.setAlignment(Qt.AlignHCenter)
 
         self.load_button = QPushButton("Select NBT File")
+        
+        self.about_button = QPushButton("About")
+        self.about_button.clicked.connect(self.about_window)
 
-        layout.addWidget(self.load_button, 0, 0)
+        layout.addWidget(info_label)
+        layout.addWidget(self.load_button)
+        layout.addWidget(self.about_button)
 
         self.setLayout(layout)
+        
+    def about_window(self):
+        self.window = AboutWindow()
+        self.window.show()
 
 
 class EditorTab(QWidget):
@@ -222,6 +254,9 @@ class NBTEditor(QWidget):
             f"/home/{USER}/.minecraft-pi/games/com.mojang/minecraftWorlds/",
             "Minecraft Pi Level NBT (level.dat)",
         )
+        
+        if fname[0] == '':
+            return
 
         self.layout.addWidget(EditorTab(fname[0]))
         self.layout.setCurrentIndex(1)
