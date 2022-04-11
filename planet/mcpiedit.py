@@ -107,6 +107,10 @@ class EditorTab(QWidget):
         self.spawn_x_box.setValue(int(self.nbt["SpawnX"]))
         self.spawn_y_box.setValue(int(self.nbt["SpawnY"]))
         self.spawn_z_box.setValue(int(self.nbt["SpawnZ"]))
+        
+        self.player_spawn_x_box.setValue(int(self.nbt["Player"]["SpawnX"]))
+        self.player_spawn_y_box.setValue(int(self.nbt["Player"]["SpawnY"]))
+        self.player_spawn_z_box.setValue(int(self.nbt["Player"]["SpawnZ"]))
 
         layout.addWidget(self.tabs)
 
@@ -202,21 +206,60 @@ class EditorTab(QWidget):
         self.spawn_z_box.setMinimum(-128)
         self.spawn_z_box.setMaximum(128)
         
+        player_x_label = QLabel("Player Spawnpoint X")
+        
+        self.player_spawn_x_box = QSpinBox()
+        self.player_spawn_x_box.setMinimum(-128)
+        self.player_spawn_x_box.setMaximum(128)
+        
+        player_y_label = QLabel("Player Spawnpoint Y")
+        
+        self.player_spawn_y_box = QSpinBox()
+        self.player_spawn_y_box.setMinimum(-64)
+        self.player_spawn_y_box.setMaximum(64)
+
+        
+        player_z_label = QLabel("Player Spawnpoint Z")
+        
+        self.player_spawn_z_box = QSpinBox()
+        self.player_spawn_z_box.setMinimum(-128)
+        self.player_spawn_z_box.setMaximum(128)
+        
         layout.addWidget(x_label,  0, 0)
         layout.addWidget(y_label,  1, 0)
         layout.addWidget(z_label,  2, 0)
+        
+        layout.addWidget(player_x_label,  3, 0)
+        layout.addWidget(player_y_label,  4, 0)
+        layout.addWidget(player_z_label,  5, 0)
+        
+        note_label = QLabel("Note:\nPlayer spawnpoints are very buggy!\nYou might spawn in the wrong\nplace or even outside the world!\nDo not use on valuable worlds.")
+
 
         
         layout.addWidget(self.spawn_x_box,  0, 1)
         layout.addWidget(self.spawn_y_box,  1, 1)
         layout.addWidget(self.spawn_z_box,  2, 1)
+        
+        layout.addWidget(self.player_spawn_x_box,  3, 1)
+        layout.addWidget(self.player_spawn_y_box,  4, 1)
+        layout.addWidget(self.player_spawn_z_box,  5, 1)
+        
+        layout.addWidget(note_label, 6, 0,  1, 2)
 
         
         
         widget = QWidget()
         widget.setLayout(layout)
         
-        return widget
+        self.scroll = QScrollArea()
+        
+        self.scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setWidget(widget)
+        
+        return self.scroll
 
     def save(self):
         self.nbt["LevelName"] = nbt.nbtlib.String(self.name_edit.text())
@@ -229,6 +272,9 @@ class EditorTab(QWidget):
         self.nbt["SpawnY"] = nbt.nbtlib.Int(self.spawn_y_box.value())
         self.nbt["SpawnZ"] = nbt.nbtlib.Int(self.spawn_z_box.value())
         
+        self.nbt["Player"]["SpawnX"] = nbt.nbtlib.Int(self.player_spawn_x_box.value())
+        self.nbt["Player"]["SpawnY"] = nbt.nbtlib.Int(self.player_spawn_y_box.value())
+        self.nbt["Player"]["SpawnZ"] = nbt.nbtlib.Int(self.player_spawn_z_box.value())
         
         
 

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 
-Planet is an improved launcher, inspired by jMCPIL, MCPIL and MCPIl-R
+Planet is an improved launcher for Minecraft Pi Edition: Reborn, inspired by gMCPIL, jMCPIL, MCPIL and MCPIL-R.
 
 Copyright (C) 2022  Alexey Pavlov
 Copyright (C) 2022  Red-Exe-Engineer
@@ -594,6 +594,10 @@ class Planet(QMainWindow):
 
         self.delete_appimage_button = QPushButton("Delete")
         self.delete_appimage_button.clicked.connect(self.delete_appimage)
+        
+        self.import_gmcpil_button = QPushButton("Import settings")
+        self.import_gmcpil_button.clicked.connect(self.import_gmpil)
+
 
         layout.addWidget(skin_label, 0, 0)
         layout.addWidget(self.skin_button, 0, 1)
@@ -629,6 +633,25 @@ class Planet(QMainWindow):
         )  # Set the icon
 
         return tabs
+        
+        
+    def import_gmcpil(self):
+        with open(f"/home/{USER}/.gmcpil.json") as f:
+            gmcpil_features = json.loads(f.read())["features"]
+            for feature in gmcpil_features:
+                try:
+                    if gmcpil_features[feature]:
+                        self.features[feature].setCheckState(
+                            Qt.Checked
+                        )  # Set to checked if the configuration has it to true
+                        self.conf["options"][feature] = True
+                    else:
+                        self.features[feature].setCheckState(
+                            Qt.Unchecked
+                        )  # Else, set it unchecked
+                        self.conf["options"][feature] = False
+                except KeyError:  # May happen on downgrades or upgrades of the Reborn version
+                    pass
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
