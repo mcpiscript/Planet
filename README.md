@@ -46,6 +46,9 @@ Planet is a **maintained, feature-rich and a flexible** launcher. It is supporte
 * `pypresence`
 * `pyqtdarkmode`
 * Pillow
+* `qtwidgets`
+* `darkdetect`
+* PyNBT
 
 If you're installing a DEB, all of them with the exception of Minecraft: Pi Edition: Reborn will be automatically installed. Please install an AppImage for the latest build. If you want a DEB, please consider checking out [MCPI++](https://github.com/mobilegmyt/mcpi-reborn-extended).
 #### Installation
@@ -72,19 +75,32 @@ Use [our PPA](https://github.com/mcpiscript/ppa)
 | Official MCPi-Revival | No | Yes | Yes | No | Yes |
 | Tab icons | Yes | No | No | No | No |
 | Maintained | Yes | No | No | No | Yes |
-| Supported on Debian Buster | Yes | No | Yes | Yes | Yes |
+| Supported on Debian Buster | Yes, some bugs exist | No | Yes | Yes | Yes |
 | Discord RPC | Yes | No | No | No | No |
 | External server support | Yes | Yes | Yes | No | No |
 | Flatpak support | Not tested | No | No | No | Yes |
 | Pre-made profiles | Yes | Yes | Yes | Yes | No |
 | Easy GUI navigation | Yes | Yes | Yes | No | Yes |
 | Skin support | Yes | No | No | No | No |
+| Built-in NBT editor | Yes | No | No | No | No |
 ###### Conclusion
 - Use Planet if you want a maintained and a feature-rich launcher.
 - Use gMCPIL if you are on Debian Bullseye, using a DEB install OR want a basic experience
 - Use jMCPIL if you're using a DEB install on a distro other than Debian Bullseye
 - Use the built-in launcher if you like to fill in things constantly
 - Don't use pipan, it's a dirty prototype, not a working launcher
+
+
+## Roadmap
+[*] AppImage support
+[*] Skin support
+[*] NBT editor
+[ ] Texture packs
+[ ] Mods
+[ ] Chat logging
+[ ] MarketPi
+
+
 ## Credits
 - [Leha-code](https://github.com/leha-code) - Creator and maintainer
 - [Red-exe-engineer](https://github.com/red-exe-engineer) - Active contributor
