@@ -190,9 +190,7 @@ class ConfigPluto(QDialog):
         )  # Append False to the fake list. See end of file for more info
 
     def link_flatpak(self):
-        script_text = (
-            "#!/bin/bash\nflatpak run com.thebrokenrail.MCPIReborn $1"
-        )  # Script contents
+        script_text = "#!/bin/bash\nflatpak run com.thebrokenrail.MCPIReborn $1"  # Script contents
         with open(
             f"/home/{USER}/.planet-launcher/minecraft.AppImage", "w"
         ) as file:  # Open the file

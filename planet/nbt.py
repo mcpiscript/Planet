@@ -53,15 +53,15 @@ def load_nbt(filename: str, header=False):
     if header:
         remove_header(filename)
 
-    with open(filename+"_temp.dat",  "rb") as nbt:
-        nbt = pynbt.NBTFile(io=nbt,  little_endian=True)
+    with open(filename + "_temp.dat", "rb") as nbt:
+        nbt = pynbt.NBTFile(io=nbt, little_endian=True)
         return nbt
 
 
 def save_nbt(nbt: pynbt.NBTFile, filename: str, header=True):
-    
-    with open(filename+"_temp.dat",  "wb") as writefile:
-        nbt.save(io=writefile,  little_endian = True)
-    
+
+    with open(filename + "_temp.dat", "wb") as writefile:
+        nbt.save(io=writefile, little_endian=True)
+
     if header:
         add_header(filename)

@@ -103,7 +103,9 @@ class EditorTab(QWidget):
 
         self.name_edit.setText(str(self.nbt["LevelName"].value))
         self.timestamp_box.setValue(int(self.nbt["LastPlayed"].value))
-        self.game_box.setCurrentText(GAME_INTREGERS[str(int(self.nbt["GameType"].value))])
+        self.game_box.setCurrentText(
+            GAME_INTREGERS[str(int(self.nbt["GameType"].value))]
+        )
         self.seed_edit.setText(str(int(self.nbt["RandomSeed"].value)))
         self.time_edit.setText(str(int(self.nbt["Time"].value)))
         # self.mobs_toggle.setChecked(BOOLEAN_INTREGERS[int(self.nbt["SpawnMobs"])]) # REMOVED BECAUSE DOES NOT WORK
@@ -270,12 +272,17 @@ class EditorTab(QWidget):
         self.nbt["SpawnY"] = nbt.pynbt.TAG_Int(self.spawn_y_box.value())
         self.nbt["SpawnZ"] = nbt.pynbt.TAG_Int(self.spawn_z_box.value())
 
-        self.nbt["Player"]["SpawnX"] = nbt.pynbt.TAG_Int(self.player_spawn_x_box.value())
-        self.nbt["Player"]["SpawnY"] = nbt.pynbt.TAG_Int(self.player_spawn_y_box.value())
-        self.nbt["Player"]["SpawnZ"] = nbt.pynbt.TAG_Int(self.player_spawn_z_box.value())
+        self.nbt["Player"]["SpawnX"] = nbt.pynbt.TAG_Int(
+            self.player_spawn_x_box.value()
+        )
+        self.nbt["Player"]["SpawnY"] = nbt.pynbt.TAG_Int(
+            self.player_spawn_y_box.value()
+        )
+        self.nbt["Player"]["SpawnZ"] = nbt.pynbt.TAG_Int(
+            self.player_spawn_z_box.value()
+        )
 
         nbt.save_nbt(self.nbt, self.filename)
-        
 
 
 class NBTEditor(QWidget):
