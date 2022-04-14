@@ -4,3 +4,4 @@ pypresence
 pillow
 qtwidgets
 darkdetect
+pynbt

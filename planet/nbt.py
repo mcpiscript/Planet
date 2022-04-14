@@ -27,7 +27,7 @@ SOFTWARE.
 
 """
 
-import nbtlib
+import pynbt
 import subprocess
 
 
@@ -53,13 +53,15 @@ def load_nbt(filename: str, header=False):
     if header:
         remove_header(filename)
 
-    with nbtlib.load(
-        filename=filename + "_temp.dat", gzipped=False, byteorder="little"
-    ) as nbt:
+    with open(filename+"_temp.dat",  "rb") as nbt:
+        nbt = pynbt.NBTFile(io=nbt,  little_endian=True)
         return nbt
 
 
-def save_nbt(nbt: nbtlib.File, filename: str, header=True):
-    nbt.save(filename + "_temp.dat")
+def save_nbt(nbt: pynbt.NBTFile, filename: str, header=True):
+    
+    with open(filename+"_temp.dat",  "wb") as writefile:
+        nbt.save(io=writefile,  little_endian = True)
+    
     if header:
         add_header(filename)

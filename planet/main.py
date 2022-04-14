@@ -594,10 +594,9 @@ class Planet(QMainWindow):
 
         self.delete_appimage_button = QPushButton("Delete")
         self.delete_appimage_button.clicked.connect(self.delete_appimage)
-        
-        self.import_gmcpil_button = QPushButton("Import settings")
-        self.import_gmcpil_button.clicked.connect(self.import_gmpil)
 
+        self.import_gmcpil_button = QPushButton("Import settings")
+        self.import_gmcpil_button.clicked.connect(self.import_gmcpil)
 
         layout.addWidget(skin_label, 0, 0)
         layout.addWidget(self.skin_button, 0, 1)
@@ -633,8 +632,7 @@ class Planet(QMainWindow):
         )  # Set the icon
 
         return tabs
-        
-        
+
     def import_gmcpil(self):
         with open(f"/home/{USER}/.gmcpil.json") as f:
             gmcpil_features = json.loads(f.read())["features"]
@@ -714,14 +712,16 @@ class Planet(QMainWindow):
     def delete_config(self):
         dialog = QMessageBox()
         dialog.setWindowTitle("Are you sure you want to reset?")
-        dialog.setText("Are you sure you want to delete the config? This action is unrecoverable.")
+        dialog.setText(
+            "Are you sure you want to delete the config? This action is unrecoverable."
+        )
         dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
         dialog.setIcon(QMessageBox.Warning)
-        
+
         button = dialog.exec()
-        
+
         if button == QMessageBox.Ok:
-        
+
             os.remove(f"/home/{USER}/.planet-launcher/config.json")
             self.hide()
             sys.exit()
@@ -729,14 +729,16 @@ class Planet(QMainWindow):
     def delete_appimage(self):
         dialog = QMessageBox()
         dialog.setWindowTitle("Are you sure you want to reset?")
-        dialog.setText("Are you sure you want to delete the AppImage? This action is unrecoverable.")
+        dialog.setText(
+            "Are you sure you want to delete the AppImage? This action is unrecoverable."
+        )
         dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
         dialog.setIcon(QMessageBox.Warning)
-        
+
         button = dialog.exec()
-        
+
         if button == QMessageBox.Ok:
-        
+
             os.remove(f"/home/{USER}/.planet-launcher/minecraft.AppImage")
             self.hide()
             sys.exit()
