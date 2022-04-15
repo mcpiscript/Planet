@@ -49,6 +49,7 @@ Planet is a **maintained, feature-rich and a flexible** launcher. It is supporte
 * `qtwidgets`
 * `darkdetect`
 * PyNBT
+* `click`
 
 If you're installing a DEB, all of them with the exception of Minecraft: Pi Edition: Reborn will be automatically installed. Please install an AppImage for the latest build. If you want a DEB, please consider checking out [MCPI++](https://github.com/mobilegmyt/mcpi-reborn-extended).
 #### Installation
@@ -92,13 +93,19 @@ Use [our PPA](https://github.com/mcpiscript/ppa)
 
 
 ## Roadmap
-[*] AppImage support
-[*] Skin support
-[*] NBT editor
-[ ] Texture packs
-[ ] Mods
-[ ] Chat logging
-[ ] MarketPi
+- [x] AppImage support
+- [x] Skin support
+- [x] NBT editor
+- [ ] Texture packs (In progress)
+- [ ] Mods
+- [ ] Chat logging
+- [ ] MarketPi
+
+## License
+Planet is licensed under the [GNU Affero General Public License](https://www.gnu.org/licenses/agpl-3.0.en.html)
+
+
+![Logo](https://www.gnu.org/graphics/agplv3-with-text-162x68.png)
 
 
 ## Credits
@@ -107,5 +114,5 @@ Use [our PPA](https://github.com/mcpiscript/ppa)
 - [Bigjango13](https://github.com/bigjango13) - Multiple fixes
 
 ### Additional Credits
-Heart, Planet, Pi, Steve and Portal icons by LEHAtupointow
+Heart, Planet, Pi, Steve and Portal icons by LEHAtupointow.
 Wrench by [Santoniche on OpenGameArt.org](https://opengameart.org/content/wrench-0).
