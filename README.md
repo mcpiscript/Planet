@@ -1,7 +1,7 @@
 <br/>
 <p align="center">
   <a href="https://github.com/mcpiscript/Planet">
-    <img src="https://github.com/mcpiscript/planet/raw/master/planet/assets/logo512.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/mcpiscript/planet/raw/master/planet/assets/img/full/logo512.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Planet Launcher</h3>
