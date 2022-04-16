@@ -10,11 +10,11 @@
     An interactive launcher for MCPi-Reborn
     <br/>
     <br/>
-    <a href="https://github.com/mcpiscript/Planet"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/mcpiscript/Planet#installation"><strong>Try Planet now »</strong></a>
     <br/>
     <br/>
     <a href="https://github.com/mcpiscript/Planet/issues">Report Bug</a>
-    .
+    |
     <a href="https://github.com/mcpiscript/Planet/issues">Request Feature</a>
   </p>
 </p>
@@ -67,7 +67,7 @@ If you're installing a DEB, all of them with the exception of Minecraft: Pi Edit
 ###### Option A (Raspberry Pi Only)
 [![badge](https://github.com/Botspot/pi-apps/blob/master/icons/badge.png?raw=true)](https://github.com/Botspot/pi-apps)  
 ###### Option B (Raspberry Pi Only)
-[![badge](https://cdn.discordapp.com/attachments/717494538205397052/957080742293295134/addonsmini.png)](https://raspbian-addons.org)
+[<img src="https://cdn.discordapp.com/attachments/717494538205397052/957080742293295134/addonsmini.png" alt="Logo" width="160" height="80">](https://raspbian-addons.org)
 
 
 Install the `planet-launcher` package through APT.

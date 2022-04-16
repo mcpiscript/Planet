@@ -61,4 +61,8 @@ SPLASHES = [
     "Play Minecraft Pi Edition, watch Red-Exe-Engineer, get PIG!",
     "Wat",
     "About the same size as Earth",
+    "Now with translations!",
+    "Now with dynamic building!",
+    "Now with more surprises!",
+    "Now with more confusion!",
 ]

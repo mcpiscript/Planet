@@ -134,6 +134,9 @@ INDEX = [
     "terrain.png",
 ]
 
+def install_pack():
+    pass
+
 
 
 @click.group()
@@ -142,7 +145,7 @@ def main():
     
 @main.command(help="Install a texture pack")
 @click.option("--file", "--zipfile",  "-f",  "texture_path",  help="Texture pack path.", type=click.Path(exists=True))
-@click.option("--mcpit",  is_flag=True, default=True)
+#@click.option("--mcpit",  is_flag=True, default=True)
 def install(texture_path,  mcpit):
     if texture_path == None:
         click.echo("Please supply a path")
