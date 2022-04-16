@@ -32,6 +32,9 @@ import random
 from datetime import date
 import json
 import pathlib
+import gettext
+
+LOCALE = os.getenv('LANG', 'en')
 
 # Define the path used for later
 absolute_path = pathlib.Path(__file__).parent.absolute()
@@ -45,6 +48,8 @@ sys.path.append(absolute_path)
 if os.path.exists("/usr/lib/planet-launcher/"):
     sys.path.append("/usr/lib/planet-launcher/")
 
+
+_ = gettext.translation('main', localedir=str(absolute_path)+"/assets/translations/", languages=[LOCALE]).gettext
 
 # Local imports
 import launcher
@@ -103,7 +108,7 @@ class ConfigPluto(QDialog):
         titlelayout = QGridLayout()  # Layout for the title
 
         # Load the logo pixmap
-        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
+        logopixmap = QPixmap(f"{absolute_path}/assets/img/full/logo512.png").scaled(
             100, 100, Qt.KeepAspectRatio
         )
 
@@ -126,21 +131,21 @@ class ConfigPluto(QDialog):
         titlewidget.setLayout(titlelayout)  # Set the layout
 
         # Label with information
-        info_label = QLabel(
+        info_label = QLabel(_(
             'Please select the executable you downloaded.\nIf you installed a DEB, please select the "Link" option'
-        )
+        ))
 
-        self.executable_btn = QPushButton("Select executable")  # Button for AppImage
+        self.executable_btn = QPushButton(_("Select executable"))  # Button for AppImage
         self.executable_btn.clicked.connect(
             self.get_appimage
         )  # Connect to the function
 
-        self.premade_btn = QPushButton(
+        self.premade_btn = QPushButton(_(
             "Link /usr/bin/minecraft-pi-reborn-client"
-        )  # Button for Pre-installed debs
+        ))  # Button for Pre-installed debs
         self.premade_btn.clicked.connect(self.link_appimage)  # Connect to the function
 
-        self.flatpak_btn = QPushButton("Link flatpak")  # Button for linking flatpak
+        self.flatpak_btn = QPushButton(_("Link flatpak"))  # Button for linking flatpak
         self.flatpak_btn.clicked.connect(self.link_flatpak)  # Connect to the function
 
         # Adding things to widgets
@@ -174,7 +179,7 @@ class ConfigPluto(QDialog):
         self.hide()  # Hide the dialog
         # Open the file dialog
         self.filename = QFileDialog.getOpenFileName(
-            self, "Select executable", "/", "Executable files (*.AppImage *.bin *.sh *)"
+            self, _("Select executable"), "/", "Executable files (*.AppImage *.bin *.sh *)"
         )
 
     def link_appimage(self):
@@ -219,8 +224,8 @@ class Planet(QMainWindow):
             RPC.connect()  # Connect to Discord
             # Set the RPC Status
             RPC.update(
-                state="Launched with Planet Launcher",
-                details="Minecraft Pi Edition: Reborn",
+                state=_("Launched with Planet Launcher"),
+                details=_("Minecraft Pi Edition: Reborn"),
                 large_image=random.choice(
                     ["revival", "logo"]
                 ),  # Randomly select the logo
@@ -230,7 +235,7 @@ class Planet(QMainWindow):
             )
         except:
             print(
-                "Unable to initalize Discord RPC. Skipping."
+                _("Unable to initalize Discord RPC. Skipping.")
             )  # If it fails, e.g Discord is not found, skip. This doesn't matter much.
 
         if not os.path.exists(
@@ -261,10 +266,10 @@ class Planet(QMainWindow):
             ) as file:  # Else, it exists: Read from it.
                 self.conf = json.loads(file.read())
 
-        self.setWindowTitle("Planet")  # Set the window title
+        self.setWindowTitle(_("Planet"))  # Set the window title
 
         self.setWindowIcon(
-            QIcon(f"{absolute_path}/assets/logo512.png")
+            QIcon(f"{absolute_path}/assets/img/full/logo512.png")
         )  # Set the window icon
 
         self.widget = QWidget()
@@ -275,24 +280,24 @@ class Planet(QMainWindow):
         tabs.setMovable(True)  # Allow tab movement.
 
         # Tab part. Please check every function for more info
-        play_tab = tabs.addTab(self.play_tab(), "Play")  # Add the play tab
+        play_tab = tabs.addTab(self.play_tab(), _("Play"))  # Add the play tab
         tabs.setTabIcon(
-            play_tab, QIcon(f"{absolute_path}/assets/logo512.png")
+            play_tab, QIcon(f"{absolute_path}/assets/img/full/logo512.png")
         )  # Set the icon for the tab
         features_tab = tabs.addTab(
-            self.features_tab(), "Features"
+            self.features_tab(), _("Features")
         )  # Add the features tab
         tabs.setTabIcon(
-            features_tab, QIcon(f"{absolute_path}/assets/heart512.png")
+            features_tab, QIcon(f"{absolute_path}/assets/img/full/heart512.png")
         )  # set the icon for the tab
-        servers_tab = tabs.addTab(self.servers_tab(), "Servers")  # Servers tab
+        servers_tab = tabs.addTab(self.servers_tab(), _("Servers"))  # Servers tab
         tabs.setTabIcon(
-            servers_tab, QIcon(f"{absolute_path}/assets/portal512.png")
+            servers_tab, QIcon(f"{absolute_path}/assets/img/full/portal512.png")
         )  # Set the icon
         # mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
         # tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
-        settings_tab = tabs.addTab(self.settings_tab(), "Settings")  # Changelog tab
-        tabs.setTabIcon(settings_tab, QIcon(f"{absolute_path}/assets/wrench512.png"))
+        settings_tab = tabs.addTab(self.settings_tab(), _("Settings"))  # Changelog tab
+        tabs.setTabIcon(settings_tab, QIcon(f"{absolute_path}/assets/img/full/wrench512.png"))
 
         self.layout.addWidget(tabs)
 
@@ -338,7 +343,7 @@ class Planet(QMainWindow):
         titlelayout = QGridLayout()  # The layout for the title
 
         # Load the logo pixmap
-        logopixmap = QPixmap(f"{absolute_path}/assets/logo512.png").scaled(
+        logopixmap = QPixmap(f"{absolute_path}/assets/img/full/logo512.png").scaled(
             100, 100, Qt.KeepAspectRatio  # Scale it, but keep the aspect ratio
         )
 
@@ -351,13 +356,13 @@ class Planet(QMainWindow):
         # Ester eggs
         if date.today().month == 4 and date.today().day == 1:
             namelabel.setText(
-                "Banana Launcher"
+                _("Banana Launcher")
             )  # If the date is april fish, show the banana easter egg
         else:
             if random.randint(1, 100) == 1:
-                namelabel.setText("Pluto Launcher")  # a 1/100, Pluto launcher
+                namelabel.setText(_("Pluto Launcher"))  # a 1/100, Pluto launcher
             else:
-                namelabel.setText("Planet Launcher")  # Else, just set it normal
+                namelabel.setText(_("Planet Launcher"))  # Else, just set it normal
 
         font = namelabel.font()  # Font used
         font.setPointSize(30)  # Set the font size
@@ -370,20 +375,20 @@ class Planet(QMainWindow):
         splashlabel.adjustSize()  # Adjust the size just in case
         splashlabel.setAlignment(Qt.AlignHCenter)  # Align the label
 
-        usernamelabel = QLabel("Username")  # Label that is used to direct the line edit
+        usernamelabel = QLabel(_("Username"))  # Label that is used to direct the line edit
 
         self.usernameedit = QLineEdit()  # Line Edit for username
-        self.usernameedit.setPlaceholderText("StevePi")  # Set ghost value
+        self.usernameedit.setPlaceholderText(_("StevePi"))  # Set ghost value
 
         distancelabel = QLabel(
-            "Render Distance"
+            _("Render Distance")
         )  # Label that is used to direct the combo box
 
         self.distancebox = QComboBox()
         self.distancebox.addItems(["Far", "Normal", "Short", "Tiny"])  # Set the values
         self.distancebox.setCurrentText("Short")  # Set the default option
 
-        profilelabel = QLabel("Profile")  # Label that is used to direct the combo box
+        profilelabel = QLabel(_("Profile"))  # Label that is used to direct the combo box
 
         self.profilebox = QComboBox()
         self.profilebox.addItems(
@@ -398,7 +403,7 @@ class Planet(QMainWindow):
         self.profilebox.setCurrentText("Modded MCPE")  # Set the current selection
 
         self.showlauncher = QRadioButton(
-            "Hide Launcher"
+            _("Hide Launcher")
         )  # RadioButton used for hiding the launcher
 
         self.versionbox = QComboBox()
@@ -527,7 +532,7 @@ class Planet(QMainWindow):
             )  # Set the text of the text editing area
 
         infolabel = QLabel(  # Label with information about the server format
-            'Servers are stored in the format of <font color="gold">IP: </font><font color="blue">Port</font>'
+            _('Servers are stored in the format of <font color="gold">IP: </font><font color="blue">Port</font>')
         )
 
         layout.addWidget(self.serversedit, 0, 0)  # Add the widgets
@@ -569,7 +574,7 @@ class Planet(QMainWindow):
     def changelog_widget(self):
         web_engine = QWebView()  # Create a webview object
         web_engine.load(
-            QUrl().fromLocalFile(f"{absolute_path}/assets/changelog.html")
+            QUrl().fromLocalFile(f"{absolute_path}/assets/misc/changelog.html")
         )  # Load the local file
         # TODO: Use two different tabs for the webview
 
@@ -580,22 +585,22 @@ class Planet(QMainWindow):
 
         layout = QGridLayout()
 
-        skin_label = QLabel("Set the skin")
+        skin_label = QLabel(_("Set the skin"))
 
-        self.skin_button = QPushButton("Select Skin")
+        self.skin_button = QPushButton(_("Select Skin"))
         self.skin_button.clicked.connect(self.select_skin)
 
-        config_label = QLabel("Reset config")
+        config_label = QLabel(_("Reset config"))
 
-        self.delete_config_button = QPushButton("Delete config")
+        self.delete_config_button = QPushButton(_("Delete config"))
         self.delete_config_button.clicked.connect(self.delete_config)
 
-        appimage_label = QLabel("Delete executable")
+        appimage_label = QLabel(_("Delete executable"))
 
-        self.delete_appimage_button = QPushButton("Delete")
+        self.delete_appimage_button = QPushButton(_("Delete"))
         self.delete_appimage_button.clicked.connect(self.delete_appimage)
 
-        self.import_gmcpil_button = QPushButton("Import settings")
+        self.import_gmcpil_button = QPushButton(_("Import settings"))
         self.import_gmcpil_button.clicked.connect(self.import_gmcpil)
 
         layout.addWidget(skin_label, 0, 0)
@@ -615,20 +620,20 @@ class Planet(QMainWindow):
         tabs = QTabWidget()
         tabs.setTabPosition(QTabWidget.South)
 
-        settings_tab = tabs.addTab(self.settings_widget(), "General")
-        changelog_tab = tabs.addTab(self.changelog_widget(), "Changelog")
-        editor_tab = tabs.addTab(mcpiedit.NBTEditor(), "MCPIEdit")
+        settings_tab = tabs.addTab(self.settings_widget(), _("General"))
+        changelog_tab = tabs.addTab(self.changelog_widget(), _("Changelog"))
+        editor_tab = tabs.addTab(mcpiedit.NBTEditor(), _("MCPIEdit"))
 
         tabs.setTabIcon(
-            settings_tab, QIcon(f"{absolute_path}/assets/wrench512.png")
+            settings_tab, QIcon(f"{absolute_path}/assets/img/full/wrench512.png")
         )  # Set the icon
 
         tabs.setTabIcon(
-            changelog_tab, QIcon(f"{absolute_path}/assets/git.png")
+            changelog_tab, QIcon(f"{absolute_path}/assets/img/full/git.png")
         )  # Set the icon
 
         tabs.setTabIcon(
-            editor_tab, QIcon(f"{absolute_path}/assets/mcpiedit.png")
+            editor_tab, QIcon(f"{absolute_path}/assets/img/full/mcpiedit.png")
         )  # Set the icon
 
         return tabs
@@ -697,7 +702,7 @@ class Planet(QMainWindow):
 
     def select_skin(self):
         filename = QFileDialog.getOpenFileName(
-            self, "Select skin file", "/", "PNG files (*.png)"
+            self, _("Select skin file"), "/", "PNG files (*.png)"
         )
         if not filename == "":
             with open(
@@ -711,9 +716,9 @@ class Planet(QMainWindow):
 
     def delete_config(self):
         dialog = QMessageBox()
-        dialog.setWindowTitle("Are you sure you want to reset?")
+        dialog.setWindowTitle(_("Are you sure you want to reset?"))
         dialog.setText(
-            "Are you sure you want to delete the config? This action is unrecoverable."
+            _("Are you sure you want to delete the config? This action is unrecoverable.")
         )
         dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
         dialog.setIcon(QMessageBox.Warning)
@@ -728,9 +733,9 @@ class Planet(QMainWindow):
 
     def delete_appimage(self):
         dialog = QMessageBox()
-        dialog.setWindowTitle("Are you sure you want to reset?")
+        dialog.setWindowTitle(_("Are you sure you want to reset?"))
         dialog.setText(
-            "Are you sure you want to delete the AppImage? This action is unrecoverable."
+            _("Are you sure you want to delete the AppImage? This action is unrecoverable.")
         )
         dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
         dialog.setIcon(QMessageBox.Warning)
@@ -804,7 +809,7 @@ if __name__ == "__main__":
         if pluto.filename[0] == "":
             sys.exit(-1)
         elif pluto.filename[0] == False:
-            print("Using /usr/bin as an executable.")
+            print(_("Using /usr/bin as an executable."))
         else:
             with open(pluto.filename[0], "rb") as appimage:
                 with open(

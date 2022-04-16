@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 
 Copyright (C) 2022  Alexey Pavlov
@@ -77,16 +78,76 @@ INDEX = [
     "terrain.png",
 ]
 
+INDEX = [
+    # Armor
+    "chain_1.png",
+    "chain_2.png",
+    "cloth_1.png",
+    "cloth_2.png",
+    "diamond_1.png",
+    "diamond_2.png",
+    "gold_1.png",
+    "gold_2.png",
+    "iron_1.png",
+    "iron_2.png",
+    # Miscelannous
+    "kz.png",
+    "clouds.png",
+    # Font and GUI
+    "default8.png",
+    "background.png",
+    "bg32.png",
+    "cursor.png",
+    "default_world.png",
+    "gui.png",
+    "gui2.png",
+    "gui_blocks.png",
+    "icons.png",
+    "itemframe.png",
+    "items.png",  # Items
+    "pi_title.png",
+    "spritesheet.png",
+    "title.png",
+    "touchgui.png",
+    "minecon140.png",
+    "raknet_high_72.png",
+    "raknet_low_18.png",
+    # Item entitites
+    "arrows.png",
+    "camera.png",
+    "sign.png",
+    # Mobs
+    "char.png",
+    "chicken.png",
+    "cow.png",
+    "creeper.png",
+    "pig.png",
+    "pigzombie.png",
+    "sheep.png",
+    "sheep_fur.png",
+    "skeleton.png",
+    "spider.png",
+    "zombie.png",
+    # Misc entities
+    "particles.png",
+    # Blocks
+    "terrain.png",
+]
+
+
 
 @click.group()
 def main():
     pass
     
-@main.command()
-@click.option("--path",  "-p",  "texture_path",  help="Texture pack path.")
-@click.option("--mcpit",  is_flag=True)
+@main.command(help="Install a texture pack")
+@click.option("--file", "--zipfile",  "-f",  "texture_path",  help="Texture pack path.", type=click.Path(exists=True))
+@click.option("--mcpit",  is_flag=True, default=True)
 def install(texture_path,  mcpit):
-    click.echo("bruh")
+    if texture_path == None:
+        click.echo("Please supply a path")
+        return
+    click.echo("Path is "+click.format_filename(texture_path))
     
 if __name__ == "__main__":
     main()
