@@ -1,0 +1,165 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: planet-launcher\n"
+"POT-Creation-Date: 2022-04-15 16:48-0400\n"
+"PO-Revision-Date: 2022-04-16 21:54\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: planet-launcher\n"
+"X-Crowdin-Project-ID: 510486\n"
+"X-Crowdin-Language: es-ES\n"
+"X-Crowdin-File: main.po\n"
+"X-Crowdin-File-ID: 2\n"
+"Language: es_ES\n"
+
+#: main.py:134
+msgid "Please select the executable you downloaded.\n"
+"If you installed a DEB, please select the \"Link\" option"
+msgstr "Por favor, seleccione el ejecutable que descargó.\n"
+"Si instaló un DEB, seleccione la opción \"Enlace\""
+
+#: main.py:138 main.py:182
+msgid "Select executable"
+msgstr "Seleccionar ejecutable"
+
+#: main.py:143
+msgid "Link /usr/bin/minecraft-pi-reborn-client"
+msgstr "Enlace /usr/bin/minecraft-pi-reborn-client"
+
+#: main.py:148
+msgid "Link flatpak"
+msgstr "Enlace flatpak"
+
+#: main.py:227
+msgid "Launched with Planet Launcher"
+msgstr "Lanzado con Planet Launcher"
+
+#: main.py:228
+msgid "Minecraft Pi Edition: Reborn"
+msgstr "Minecraft: Pi Edición: Renacer"
+
+#: main.py:238
+msgid "Unable to initalize Discord RPC. Skipping."
+msgstr "No se puede iniciar Discord RPC. Omitir."
+
+#: main.py:269
+msgid "Planet"
+msgstr "Planet"
+
+#: main.py:283
+msgid "Play"
+msgstr "Jugar"
+
+#: main.py:288
+msgid "Features"
+msgstr "Funcionalidades"
+
+#: main.py:293
+msgid "Servers"
+msgstr "Servidores"
+
+#: main.py:299
+msgid "Settings"
+msgstr "Ajustes"
+
+#: main.py:359
+msgid "Banana Launcher"
+msgstr "Lanzador de Banana"
+
+#: main.py:363
+msgid "Pluto Launcher"
+msgstr "Lanzador de Pluto"
+
+#: main.py:365
+msgid "Planet Launcher"
+msgstr "Lanzador de Planet"
+
+#: main.py:378
+msgid "Username"
+msgstr "Nombre"
+
+#: main.py:381
+msgid "StevePi"
+msgstr "StevePi"
+
+#: main.py:384
+msgid "Render Distance"
+msgstr "Distancia de renderizado"
+
+#: main.py:391
+msgid "Profile"
+msgstr "Perfil"
+
+#: main.py:406
+msgid "Hide Launcher"
+msgstr "Ocultar lanzador"
+
+#: main.py:535
+msgid "Servers are stored in the format of <font color=\"gold\">IP: </font><font color=\"blue\">Port</font>"
+msgstr "Los servidores se almacenan en el formato de <font color=\"gold\">IP: </font><font color=\"blue\">Puerto</font>"
+
+#: main.py:588
+msgid "Set the skin"
+msgstr "Establecer el aspecto"
+
+#: main.py:590
+msgid "Select Skin"
+msgstr "Seleccionar aspecto"
+
+#: main.py:593
+msgid "Reset config"
+msgstr "Restablecer configuración"
+
+#: main.py:595
+msgid "Delete config"
+msgstr "Eliminar configuración"
+
+#: main.py:598
+msgid "Delete executable"
+msgstr "Borrar ejecutable"
+
+#: main.py:600
+msgid "Delete"
+msgstr "Borrar"
+
+#: main.py:603
+msgid "Import settings"
+msgstr "Importar ajustes"
+
+#: main.py:623
+msgid "General"
+msgstr "General"
+
+#: main.py:624
+msgid "Changelog"
+msgstr "Lista de cambios"
+
+#: main.py:625
+msgid "MCPIEdit"
+msgstr "MCPIEdit"
+
+#: main.py:705
+msgid "Select skin file"
+msgstr "Seleccionar archivo de aspecto"
+
+#: main.py:719 main.py:736
+msgid "Are you sure you want to reset?"
+msgstr "¿Estás seguro de que quieres resetear?"
+
+#: main.py:721
+msgid "Are you sure you want to delete the config? This action is unrecoverable."
+msgstr "¿Está seguro de que desea eliminar la configuración? Esta acción es irrecuperable."
+
+#: main.py:738
+msgid "Are you sure you want to delete the AppImage? This action is unrecoverable."
+msgstr "¿Está seguro de que desea eliminar el AppImage? Esta acción es irrecuperable."
+
+#: main.py:812
+msgid "Using /usr/bin as an executable."
+msgstr "Usando /usr/bin como un ejecutable."
+

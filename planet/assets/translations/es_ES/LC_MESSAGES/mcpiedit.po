@@ -1,0 +1,133 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: planet-launcher\n"
+"POT-Creation-Date: 2022-04-15 18:43-0400\n"
+"PO-Revision-Date: 2022-04-16 21:54\n"
+"Last-Translator: \n"
+"Language-Team: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: planet-launcher\n"
+"X-Crowdin-Project-ID: 510486\n"
+"X-Crowdin-Language: es-ES\n"
+"X-Crowdin-File: mcpiedit.po\n"
+"X-Crowdin-File-ID: 4\n"
+"Language: es_ES\n"
+
+#: mcpiedit.py:69
+msgid "The default built-in NBT editor for Planet.\n\n"
+"MCPIedit makes use of Pi-NBT\n"
+" from the original MCPIedit project\n"
+"by TheBrokenRail, which is\n"
+"licensed under the MIT license."
+msgstr "El editor NBT incorporado por defecto para Planet.\n\n"
+"MCPIedit hace uso de Pi-NBT\n"
+" del proyecto MCPIedit original\n"
+"de TheBrokenRail, que está\n"
+"licenciado bajo la licencia MIT."
+
+#: mcpiedit.py:86
+msgid "NBT editors allow you to edit your world\n"
+"files to change game modes, time,\n"
+"and even the world name. Select an NBT\n"
+"file to edit using the button below."
+msgstr "Los editores NBT te permiten editar los archivos del mundo\n"
+"para cambiar los modos de juego, el tiempo,\n"
+"e incluso el nombre del mundo. Seleccione un archivo NBT\n"
+"para editar usando el botón de abajo."
+
+#: mcpiedit.py:90
+msgid "Select NBT File"
+msgstr "Seleccionar archivo NBT"
+
+#: mcpiedit.py:92
+msgid "About"
+msgstr "Sobre"
+
+#: mcpiedit.py:120
+msgid "General"
+msgstr "General"
+
+#: mcpiedit.py:121
+msgid "World"
+msgstr "Mundo"
+
+#: mcpiedit.py:150
+msgid "World name"
+msgstr "Nombre del mundo"
+
+#: mcpiedit.py:153
+msgid "OneChunk"
+msgstr "UnoFragmento"
+
+#: mcpiedit.py:161
+msgid "Last Played Timestamp"
+msgstr "Última jugada"
+
+#: mcpiedit.py:166
+msgid "Game mode"
+msgstr "Modo de juego"
+
+#: mcpiedit.py:176
+msgid "Time (In Ticks)"
+msgstr "Tiempo (en Tics)"
+
+#: mcpiedit.py:182
+msgid "Back"
+msgstr "Atrás"
+
+#: mcpiedit.py:184
+msgid "Save"
+msgstr "Guardar"
+
+#: mcpiedit.py:213
+msgid "Spawnpoint X"
+msgstr "Ubicación de Regenerar X"
+
+#: mcpiedit.py:219
+msgid "Spawnpoint Y"
+msgstr "Ubicación de Regenerar Y"
+
+#: mcpiedit.py:225
+msgid "Spawnpoint Z"
+msgstr "Ubicación de Regenerar Z"
+
+#: mcpiedit.py:231
+msgid "Player Spawnpoint X"
+msgstr "Ubicación de Regenerar X del jugador"
+
+#: mcpiedit.py:237
+msgid "Player Spawnpoint Y"
+msgstr "Ubicación de Regenerar Y del jugador"
+
+#: mcpiedit.py:243
+msgid "Player Spawnpoint Z"
+msgstr "Ubicación de Regenerar Z del jugador"
+
+#: mcpiedit.py:258
+msgid "Note:\n"
+"Player spawnpoints are very buggy!\n"
+"You might spawn in the wrong\n"
+"place or even outside the world!\n"
+"Do not use on valuable worlds."
+msgstr "Nota:\n"
+"¡Los puntos de aparición de jugadores son muy erróneos!\n"
+"¡Puedes aparecer en el lugar\n"
+"incorrecto o incluso fuera del mundo!\n"
+"No utilices en mundos valiosos."
+
+#: mcpiedit.py:323
+msgid "Open NBT File"
+msgstr "Abrir archivo NBT"
+
+#: mcpiedit.py:325
+msgid "Minecraft Pi Level NBT (level.dat)"
+msgstr "Nivel NBT de Minecraft Pi (level.dat)"
+
+#: mcpiedit.py:344
+msgid "MCPIEdit"
+msgstr "MCPIEdit"
+
