@@ -19,64 +19,14 @@ Copyright (C) 2022  Alexey Pavlov
 
 """
 
+from zipfile import *
+import os
+import shutil
+
 
 import click
 
-INDEX = [
-    # Armor
-    "armor/chain_1.png",
-    "armor/chain_2.png",
-    "armor/cloth_1.png",
-    "armor/cloth_2.png",
-    "armor/diamond_1.png",
-    "armor/diamond_2.png",
-    "armor/gold_1.png",
-    "armor/gold_2.png",
-    "armor/iron_1.png",
-    "armor/iron_2.png",
-    # Miscelannous
-    "art/kz.png",
-    "environment/clouds.png",
-    # Font and GUI
-    "font/default8.png",
-    "gui/background.png",
-    "gui/bg32.png",
-    "gui/cursor.png",
-    "gui/default_world.png",
-    "gui/gui.png",
-    "gui/gui2.png",
-    "gui/gui_blocks.png",
-    "gui/icons.png",
-    "gui/itemframe.png",
-    "gui/items.png",  # Items
-    "gui/pi_title.png",
-    "gui/spritesheet.png",
-    "gui/title.png",
-    "gui/touchgui.png",
-    "gui/badge/minecon140.png",
-    "gui/logo/raknet_high_72.png",
-    "gui/logo/raknet_low_18.png",
-    # Item entitites
-    "item/arrows.png",
-    "item/camera.png",
-    "item/sign.png",
-    # Mobs
-    "mob/char.png",
-    "mob/chicken.png",
-    "mob/cow.png",
-    "mob/creeper.png",
-    "mob/pig.png",
-    "mob/pigzombie.png",
-    "mob/sheep.png",
-    "mob/sheep_fur.png",
-    "mob/skeleton.png",
-    "mob/spider.png",
-    "mob/zombie.png",
-    # Misc entities
-    "particles.png",
-    # Blocks
-    "terrain.png",
-]
+USER = os.getenv("USER") 
 
 INDEX = [
     # Armor
@@ -109,7 +59,7 @@ INDEX = [
     "spritesheet.png",
     "title.png",
     "touchgui.png",
-    "minecon140.png",
+    "badge/minecon140.png",
     "raknet_high_72.png",
     "raknet_low_18.png",
     # Item entitites
@@ -117,7 +67,6 @@ INDEX = [
     "camera.png",
     "sign.png",
     # Mobs
-    "char.png",
     "chicken.png",
     "cow.png",
     "creeper.png",
@@ -134,9 +83,68 @@ INDEX = [
     "terrain.png",
 ]
 
-def install_pack():
-    pass
+TEXTURE_PATHS = [
+    "armor/chain_1.png",
+    "armor/chain_2.png",
+    "armor/cloth_1.png",
+    "armor/cloth_2.png",
+    "armor/diamond_1.png",
+    "armor/diamond_2.png",
+    "armor/gold_1.png",
+    "armor/gold_2.png",
+    "armor/iron_1.png",
+    "armor/iron_2.png",
+    "art/kz.png",
+    "environment/clouds.png",
+    "font/default8.png",
+    "gui/background.png",
+    "gui/bg32.png",
+    "gui/cursor.png",
+    "gui/default_world.png",
+    "gui/gui.png",
+    "gui/gui2.png",
+    "gui/gui_blocks.png",
+    "gui/icons.png",
+    "gui/itemframe.png",
+    "gui/items.png",
+    "gui/pi_title.png",
+    "gui/spritesheet.png",
+    "gui/title.png",
+    "gui/touchgui.png",
+    "gui/badge/minecon140.png",
+    "gui/logo/raknet_high_72.png",
+    "gui/logo/raknet_low_18.png",
+    "item/arrows.png",
+    "item/camera.png",
+    "item/sign.png",
+    "mob/chicken.png",
+    "mob/cow.png",
+    "mob/creeper.png",
+    "mob/pig.png",
+    "mob/pigzombie.png",
+    "mob/sheep.png",
+    "mob/sheep_fur.png",
+    "mob/skeleton.png",
+    "mob/spider.png",
+    "mob/zombie.png",
+    "particles.png",
+    "terrain.png"
+]
 
+def install_pack(zip_path):
+    not_found = list()
+    found = list()
+    with ZipFile(zip_path) as zip_file:
+        for file in zip_file.namelist():
+            if file in INDEX:
+                found.append(file)
+            else:
+                not_found.append(file)
+        for file in found:
+            zip_file.extract(file,  path=f"/home/{USER}/.minecraft-pi/overrides/images/"+TEXTURE_PATHS[INDEX.index(file)][:-len(INDEX[INDEX.index(file)])])
+
+def erase_pack():
+    shutil.rmtree(f"/home/{USER}/.minecraft-pi/overrides/images")
 
 
 @click.group()
@@ -146,11 +154,15 @@ def main():
 @main.command(help="Install a texture pack")
 @click.option("--file", "--zipfile",  "-f",  "texture_path",  help="Texture pack path.", type=click.Path(exists=True))
 #@click.option("--mcpit",  is_flag=True, default=True)
-def install(texture_path,  mcpit):
+def install(texture_path):
     if texture_path == None:
         click.echo("Please supply a path")
         return
-    click.echo("Path is "+click.format_filename(texture_path))
+    install_pack(texture_path)
+    
+@main.command(help="Erase the pack files")
+def erase():
+    erase_pack()
     
 if __name__ == "__main__":
     main()
