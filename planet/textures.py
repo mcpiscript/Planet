@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """
+MCPiT: Minecraft Pi Edition Texturepack Tool v.1.1
 
 Copyright (C) 2022  Alexey Pavlov
 
@@ -131,7 +132,11 @@ TEXTURE_PATHS = [
     "terrain.png"
 ]
 
-def install_pack(zip_path):
+def pepack_install(zip_path):
+    with ZipFile(zip_path) as zip_file:
+        zip_file.extractall(path=f"/home/{USER}/.minecraft-pi/overrides/")
+
+def mcpit_install(zip_path):
     not_found = list()
     found = list()
     with ZipFile(zip_path) as zip_file:
@@ -140,8 +145,22 @@ def install_pack(zip_path):
                 found.append(file)
             else:
                 not_found.append(file)
+                
         for file in found:
             zip_file.extract(file,  path=f"/home/{USER}/.minecraft-pi/overrides/images/"+TEXTURE_PATHS[INDEX.index(file)][:-len(INDEX[INDEX.index(file)])])
+        
+        if "changelog" in  zip_file.namelist():
+            with zip_file.open("changelog") as file:
+                click.echo(file.read())
+        if "credits" in  zip_file.namelist():
+            with zip_file.open("credits") as file:
+                click.echo(file.read())
+
+def install_pack(zip_path,  pack_format):
+    if pack_format == "mcpit":
+        mcpit_install(zip_path)
+    elif pack_format == "pepack":
+        pepack_install(zip_path)
 
 def erase_pack():
     shutil.rmtree(f"/home/{USER}/.minecraft-pi/overrides/images")
@@ -150,19 +169,22 @@ def erase_pack():
 @click.group()
 def main():
     pass
-    
+
 @main.command(help="Install a texture pack")
-@click.option("--file", "--zipfile",  "-f",  "texture_path",  help="Texture pack path.", type=click.Path(exists=True))
-#@click.option("--mcpit",  is_flag=True, default=True)
-def install(texture_path):
-    if texture_path == None:
-        click.echo("Please supply a path")
-        return
-    install_pack(texture_path)
+@click.argument("pack_path",   type=click.Path(exists=True))
+@click.option("--mcpit", "-m",  "pack_format",  is_flag=True, default=True,  help="Use MCPiT format.",  flag_value="mcpit")
+@click.option("--pepack", "-p",  "pack_format",   is_flag=True, default=False,  help="Use PEPack format.",  flag_value="pepack")
+def install(pack_path,  pack_format):
+    install_pack(pack_path,  pack_format)
     
 @main.command(help="Erase the pack files")
 def erase():
     erase_pack()
+    
+@main.command(help = "Show version and license")
+def version():
+    click.echo(__doc__)
+
     
 if __name__ == "__main__":
     main()

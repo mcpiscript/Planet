@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Planet Launcher
 Exec=/usr/bin/planet-launcher
-Icon=/usr/lib/planet-launcher/assets/logo512.png
+Icon=/usr/lib/planet-launcher/assets/img/full/logo512.png
 Type=Application
 Comment=A better launcher
 GenericName=Minecraft Pi Launcher
