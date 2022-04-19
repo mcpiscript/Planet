@@ -60,7 +60,7 @@ INDEX = [
     "spritesheet.png",
     "title.png",
     "touchgui.png",
-    "badge/minecon140.png",
+    "minecon140.png",
     "raknet_high_72.png",
     "raknet_low_18.png",
     # Item entitites
