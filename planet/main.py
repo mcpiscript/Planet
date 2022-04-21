@@ -34,7 +34,7 @@ import json
 import pathlib
 import gettext
 
-LOCALE = os.getenv('LANG', 'en')
+LOCALE = os.getenv("LANG", "en")
 
 # Define the path used for later
 absolute_path = pathlib.Path(__file__).parent.absolute()
@@ -49,7 +49,9 @@ if os.path.exists("/usr/lib/planet-launcher/"):
     sys.path.append("/usr/lib/planet-launcher/")
 
 
-_ = gettext.translation('main', localedir=str(absolute_path)+"/assets/translations/", languages=[LOCALE]).gettext
+_ = gettext.translation(
+    "main", localedir=str(absolute_path) + "/assets/translations/", languages=[LOCALE]
+).gettext
 
 # Local imports
 import launcher
@@ -131,18 +133,20 @@ class ConfigPluto(QDialog):
         titlewidget.setLayout(titlelayout)  # Set the layout
 
         # Label with information
-        info_label = QLabel(_(
-            'Please select the executable you downloaded.\nIf you installed a DEB, please select the "Link" option'
-        ))
+        info_label = QLabel(
+            _(
+                'Please select the executable you downloaded.\nIf you installed a DEB, please select the "Link" option'
+            )
+        )
 
         self.executable_btn = QPushButton(_("Select executable"))  # Button for AppImage
         self.executable_btn.clicked.connect(
             self.get_appimage
         )  # Connect to the function
 
-        self.premade_btn = QPushButton(_(
-            "Link /usr/bin/minecraft-pi-reborn-client"
-        ))  # Button for Pre-installed debs
+        self.premade_btn = QPushButton(
+            _("Link /usr/bin/minecraft-pi-reborn-client")
+        )  # Button for Pre-installed debs
         self.premade_btn.clicked.connect(self.link_appimage)  # Connect to the function
 
         self.flatpak_btn = QPushButton(_("Link flatpak"))  # Button for linking flatpak
@@ -179,7 +183,10 @@ class ConfigPluto(QDialog):
         self.hide()  # Hide the dialog
         # Open the file dialog
         self.filename = QFileDialog.getOpenFileName(
-            self, _("Select executable"), "/", "Executable files (*.AppImage *.bin *.sh *)"
+            self,
+            _("Select executable"),
+            "/",
+            "Executable files (*.AppImage *.bin *.sh *)",
         )
 
     def link_appimage(self):
@@ -297,7 +304,9 @@ class Planet(QMainWindow):
         # mods_tab = tabs.addTab(self.custom_mods_tab(), "Mods")
         # tabs.setTabIcon(mods_tab, QIcon(f"{absolute_path}/assets/portal512.png"))
         settings_tab = tabs.addTab(self.settings_tab(), _("Settings"))  # Changelog tab
-        tabs.setTabIcon(settings_tab, QIcon(f"{absolute_path}/assets/img/full/wrench512.png"))
+        tabs.setTabIcon(
+            settings_tab, QIcon(f"{absolute_path}/assets/img/full/wrench512.png")
+        )
 
         self.layout.addWidget(tabs)
 
@@ -375,7 +384,9 @@ class Planet(QMainWindow):
         splashlabel.adjustSize()  # Adjust the size just in case
         splashlabel.setAlignment(Qt.AlignHCenter)  # Align the label
 
-        usernamelabel = QLabel(_("Username"))  # Label that is used to direct the line edit
+        usernamelabel = QLabel(
+            _("Username")
+        )  # Label that is used to direct the line edit
 
         self.usernameedit = QLineEdit()  # Line Edit for username
         self.usernameedit.setPlaceholderText(_("StevePi"))  # Set ghost value
@@ -388,7 +399,9 @@ class Planet(QMainWindow):
         self.distancebox.addItems(["Far", "Normal", "Short", "Tiny"])  # Set the values
         self.distancebox.setCurrentText("Short")  # Set the default option
 
-        profilelabel = QLabel(_("Profile"))  # Label that is used to direct the combo box
+        profilelabel = QLabel(
+            _("Profile")
+        )  # Label that is used to direct the combo box
 
         self.profilebox = QComboBox()
         self.profilebox.addItems(
@@ -532,7 +545,9 @@ class Planet(QMainWindow):
             )  # Set the text of the text editing area
 
         infolabel = QLabel(  # Label with information about the server format
-            _('Servers are stored in the format of <font color="gold">IP: </font><font color="blue">Port</font>')
+            _(
+                'Servers are stored in the format of <font color="gold">IP: </font><font color="blue">Port</font>'
+            )
         )
 
         layout.addWidget(self.serversedit, 0, 0)  # Add the widgets
@@ -718,7 +733,9 @@ class Planet(QMainWindow):
         dialog = QMessageBox()
         dialog.setWindowTitle(_("Are you sure you want to reset?"))
         dialog.setText(
-            _("Are you sure you want to delete the config? This action is unrecoverable.")
+            _(
+                "Are you sure you want to delete the config? This action is unrecoverable."
+            )
         )
         dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
         dialog.setIcon(QMessageBox.Warning)
@@ -735,7 +752,9 @@ class Planet(QMainWindow):
         dialog = QMessageBox()
         dialog.setWindowTitle(_("Are you sure you want to reset?"))
         dialog.setText(
-            _("Are you sure you want to delete the AppImage? This action is unrecoverable.")
+            _(
+                "Are you sure you want to delete the AppImage? This action is unrecoverable."
+            )
         )
         dialog.setStandardButtons(QMessageBox.Ok | QMessageBox.Abort)
         dialog.setIcon(QMessageBox.Warning)

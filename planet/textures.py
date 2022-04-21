@@ -27,7 +27,7 @@ import shutil
 
 import click
 
-USER = os.getenv("USER") 
+USER = os.getenv("USER")
 
 INDEX = [
     # Armor
@@ -129,12 +129,14 @@ TEXTURE_PATHS = [
     "mob/spider.png",
     "mob/zombie.png",
     "particles.png",
-    "terrain.png"
+    "terrain.png",
 ]
+
 
 def pepack_install(zip_path):
     with ZipFile(zip_path) as zip_file:
         zip_file.extractall(path=f"/home/{USER}/.minecraft-pi/overrides/")
+
 
 def mcpit_install(zip_path):
     not_found = list()
@@ -145,22 +147,28 @@ def mcpit_install(zip_path):
                 found.append(file)
             else:
                 not_found.append(file)
-                
+
         for file in found:
-            zip_file.extract(file,  path=f"/home/{USER}/.minecraft-pi/overrides/images/"+TEXTURE_PATHS[INDEX.index(file)][:-len(INDEX[INDEX.index(file)])])
-        
-        if "changelog" in  zip_file.namelist():
+            zip_file.extract(
+                file,
+                path=f"/home/{USER}/.minecraft-pi/overrides/images/"
+                + TEXTURE_PATHS[INDEX.index(file)][: -len(INDEX[INDEX.index(file)])],
+            )
+
+        if "changelog" in zip_file.namelist():
             with zip_file.open("changelog") as file:
                 click.echo(file.read())
-        if "credits" in  zip_file.namelist():
+        if "credits" in zip_file.namelist():
             with zip_file.open("credits") as file:
                 click.echo(file.read())
 
-def install_pack(zip_path,  pack_format):
+
+def install_pack(zip_path, pack_format):
     if pack_format == "mcpit":
         mcpit_install(zip_path)
     elif pack_format == "pepack":
         pepack_install(zip_path)
+
 
 def erase_pack():
     shutil.rmtree(f"/home/{USER}/.minecraft-pi/overrides/images")
@@ -170,21 +178,40 @@ def erase_pack():
 def main():
     pass
 
+
 @main.command(help="Install a texture pack")
-@click.argument("pack_path",   type=click.Path(exists=True))
-@click.option("--mcpit", "-m",  "pack_format",  is_flag=True, default=True,  help="Use MCPiT format.",  flag_value="mcpit")
-@click.option("--pepack", "-p",  "pack_format",   is_flag=True, default=False,  help="Use PEPack format.",  flag_value="pepack")
-def install(pack_path,  pack_format):
-    install_pack(pack_path,  pack_format)
-    
+@click.argument("pack_path", type=click.Path(exists=True))
+@click.option(
+    "--mcpit",
+    "-m",
+    "pack_format",
+    is_flag=True,
+    default=True,
+    help="Use MCPiT format.",
+    flag_value="mcpit",
+)
+@click.option(
+    "--pepack",
+    "-p",
+    "pack_format",
+    is_flag=True,
+    default=False,
+    help="Use PEPack format.",
+    flag_value="pepack",
+)
+def install(pack_path, pack_format):
+    install_pack(pack_path, pack_format)
+
+
 @main.command(help="Erase the pack files")
 def erase():
     erase_pack()
-    
-@main.command(help = "Show version and license")
+
+
+@main.command(help="Show version and license")
 def version():
     click.echo(__doc__)
 
-    
+
 if __name__ == "__main__":
     main()

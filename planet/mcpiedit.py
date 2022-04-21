@@ -26,7 +26,7 @@ import os
 import pathlib
 import gettext
 
-LOCALE = os.getenv('LANG')
+LOCALE = os.getenv("LANG")
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -47,8 +47,12 @@ if os.path.exists("/usr/lib/planet-launcher/"):
 
 if not os.path.exists(f"/home/{USER}/.minecraft-pi/games/com.mojang/minecraftWorlds/"):
     os.makedirs(f"/home/{USER}/.minecraft-pi/games/com.mojang/minecraftWorlds/")
-    
-_ = gettext.translation('mcpiedit', localedir=str(absolute_path)+"/assets/translations/", languages=[LOCALE]).gettext
+
+_ = gettext.translation(
+    "mcpiedit",
+    localedir=str(absolute_path) + "/assets/translations/",
+    languages=[LOCALE],
+).gettext
 
 GAME_TYPES = {"Survival": nbt.pynbt.TAG_Int(0), "Creative": nbt.pynbt.TAG_Int(1)}
 
@@ -71,7 +75,9 @@ class AboutWindow(QWidget):
         label.setFont(font)  # Aplly the font onto the label
 
         desc_label = QLabel(
-            _("The default built-in NBT editor for Planet.\n\nMCPIedit makes use of Pi-NBT\n from the original MCPIedit project\nby TheBrokenRail, which is\nlicensed under the MIT license.")
+            _(
+                "The default built-in NBT editor for Planet.\n\nMCPIedit makes use of Pi-NBT\n from the original MCPIedit project\nby TheBrokenRail, which is\nlicensed under the MIT license."
+            )
         )
         desc_label.setAlignment(Qt.AlignHCenter)
 
@@ -88,7 +94,9 @@ class FileSelectorTab(QWidget):
         layout = QVBoxLayout()
 
         info_label = QLabel(
-            _("NBT editors allow you to edit your world\nfiles to change game modes, time,\nand even the world name. Select an NBT\nfile to edit using the button below.")
+            _(
+                "NBT editors allow you to edit your world\nfiles to change game modes, time,\nand even the world name. Select an NBT\nfile to edit using the button below."
+            )
         )
         info_label.setAlignment(Qt.AlignHCenter)
 
@@ -260,7 +268,9 @@ class EditorTab(QWidget):
         layout.addWidget(player_z_label, 5, 0)
 
         note_label = QLabel(
-            _("Note:\nPlayer spawnpoints are very buggy!\nYou might spawn in the wrong\nplace or even outside the world!\nDo not use on valuable worlds.")
+            _(
+                "Note:\nPlayer spawnpoints are very buggy!\nYou might spawn in the wrong\nplace or even outside the world!\nDo not use on valuable worlds."
+            )
         )
 
         layout.addWidget(self.spawn_x_box, 0, 1)
