@@ -7,7 +7,7 @@
   <h3 align="center">Planet Launcher</h3>
 
   <p align="center">
-    An interactive launcher for MCPi-Reborn
+    An interactive launcher for MCPi-Reborn.
     <br/>
     <br/>
     <a href="https://github.com/mcpiscript/Planet#installation"><strong>Try Planet now »</strong></a>
@@ -16,6 +16,8 @@
     <a href="https://github.com/mcpiscript/Planet/issues">Report Bug</a>
     |
     <a href="https://github.com/mcpiscript/Planet/issues">Request Feature</a>
+    |
+    <a href="https://mcpiscript.github.io/Planet/">Website (Under Development)</a>
   </p>
 </p>
 
