@@ -152,6 +152,7 @@ Planet is licensed under the [GNU Affero General Public License](https://www.gnu
 
 - [Leha-code](https://github.com/leha-code) - Creator and maintainer
 - [Red-exe-engineer](https://github.com/red-exe-engineer) - Active contributor
+- [Grimet14](https://github.com/grimet14) - Active contributor
 - [Bigjango13](https://github.com/bigjango13) - Multiple fixes
 
 ### Translations
