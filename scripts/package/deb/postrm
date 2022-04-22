@@ -1,4 +1,0 @@
-rm -rf /usr/bin/planet-launcher
-rm -rf /usr/share/applications/planet-launcher.desktop
-rm -rf /usr/bin/pi-nbt
-rm -rf /usr/bin/mcpit
