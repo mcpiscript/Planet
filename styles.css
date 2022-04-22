@@ -1,0 +1,15 @@
+body {
+    background-color: black;
+}
+
+.mainimage {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.mainheader {
+    font-family: 'IBM Plex Sans Hebrew', sans-serif;
+    font-size: 1.5em;
+    text-align: center;
+    color: white;
+}

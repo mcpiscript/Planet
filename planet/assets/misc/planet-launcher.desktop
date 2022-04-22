@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Planet Launcher
-Exec=/usr/bin/planet-launcher
-Icon=/usr/lib/planet-launcher/assets/img/full/logo512.png
-Type=Application
-Comment=A better launcher
-GenericName=Minecraft Pi Launcher
-Categories=games, minecraft
-Keywords=Minecraft, MCPIL, gMCPIL, jMCPIL, Minecraft Pi, Minecraft launcher, MCPI, MCPI-Revival, mcpiscript 

@@ -1,6 +1,0 @@
-pip3 install pyqtdarktheme pypresence pillow darkdetect qtwidgets pynbt
-link /usr/lib/planet-launcher/main.py /usr/bin/planet-launcher
-chmod 755 /usr/lib/planet-launcher/main.py
-link /usr/lib/planet-launcher/assets/misc/planet-launcher.desktop /usr/share/applications/planet-launcher.desktop
-link /usr/lib/planet-launcher/textures.py /usr/bin/mcpit
-gcc /usr/lib/planet-launcher/pi-nbt.c -o /usr/bin/pi-nbt

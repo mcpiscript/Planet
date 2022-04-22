@@ -1,7 +1,0 @@
-pyqt5
-pyqtdarktheme
-pypresence
-pillow
-qtwidgets
-darkdetect
-pynbt
