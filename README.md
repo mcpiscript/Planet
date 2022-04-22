@@ -7,3 +7,6 @@
   <h3 align="center">Planet Launcher Website</h3>
 
   <p align="center">The website for the planet launcher project. (Under development)</p>
+  
+  <p align="center">https://mcpiscript.github.io/Planet/</p>
+
