@@ -1,0 +1,165 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: planet-launcher\n"
+"POT-Creation-Date: 2022-04-15 16:48-0400\n"
+"PO-Revision-Date: 2022-04-27 00:40\n"
+"Last-Translator: \n"
+"Language-Team: Polish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Crowdin-Project: planet-launcher\n"
+"X-Crowdin-Project-ID: 510486\n"
+"X-Crowdin-Language: pl\n"
+"X-Crowdin-File: main.po\n"
+"X-Crowdin-File-ID: 2\n"
+"Language: pl_PL\n"
+
+#: main.py:134
+msgid "Please select the executable you downloaded.\n"
+"If you installed a DEB, please select the \"Link\" option"
+msgstr "Wybierz plik wykonywalny, który pobrałeś.\n"
+"Jeśli zainstalowałeś plik DEB, należy wybrać opcję \"Linkuj\""
+
+#: main.py:138 main.py:182
+msgid "Select executable"
+msgstr "Wybierz plik wykonywalny"
+
+#: main.py:143
+msgid "Link /usr/bin/minecraft-pi-reborn-client"
+msgstr "Linkuj /usr/bin/minecraft-pi-reborn-client"
+
+#: main.py:148
+msgid "Link flatpak"
+msgstr "Linkuj flatpak"
+
+#: main.py:227
+msgid "Launched with Planet Launcher"
+msgstr "Uruchomiono z Planet Launcher"
+
+#: main.py:228
+msgid "Minecraft Pi Edition: Reborn"
+msgstr "Minecraft Pi Edition: Reborn"
+
+#: main.py:238
+msgid "Unable to initalize Discord RPC. Skipping."
+msgstr "Nie można zakończyć Discord RPC. Pomijanie."
+
+#: main.py:269
+msgid "Planet"
+msgstr "Planet"
+
+#: main.py:283
+msgid "Play"
+msgstr "Graj"
+
+#: main.py:288
+msgid "Features"
+msgstr "Funkcje"
+
+#: main.py:293
+msgid "Servers"
+msgstr "Serwery"
+
+#: main.py:299
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: main.py:359
+msgid "Banana Launcher"
+msgstr "Banana Launcher"
+
+#: main.py:363
+msgid "Pluto Launcher"
+msgstr "Pluto Launcher"
+
+#: main.py:365
+msgid "Planet Launcher"
+msgstr "Planet Launcher"
+
+#: main.py:378
+msgid "Username"
+msgstr "Nazwa gracza"
+
+#: main.py:381
+msgid "StevePi"
+msgstr "StevePi"
+
+#: main.py:384
+msgid "Render Distance"
+msgstr "Dystans renderowania"
+
+#: main.py:391
+msgid "Profile"
+msgstr "Profil"
+
+#: main.py:406
+msgid "Hide Launcher"
+msgstr "Ukryj Launcher"
+
+#: main.py:535
+msgid "Servers are stored in the format of <font color=\"gold\">IP: </font><font color=\"blue\">Port</font>"
+msgstr "Serwery są przechowywane w formacie <font color=\"gold\">IP: </font><font color=\"blue\">Port</font>"
+
+#: main.py:588
+msgid "Set the skin"
+msgstr "Wybierz własny awatar"
+
+#: main.py:590
+msgid "Select Skin"
+msgstr "Wybierz awatar"
+
+#: main.py:593
+msgid "Reset config"
+msgstr "Resetuj konfigurację"
+
+#: main.py:595
+msgid "Delete config"
+msgstr "Usuń konfigurację"
+
+#: main.py:598
+msgid "Delete executable"
+msgstr "Usuń plik wykonywalny"
+
+#: main.py:600
+msgid "Delete"
+msgstr "Usuń"
+
+#: main.py:603
+msgid "Import settings"
+msgstr "Importuj ustawienia"
+
+#: main.py:623
+msgid "General"
+msgstr "Ogólne"
+
+#: main.py:624
+msgid "Changelog"
+msgstr "Spis treści aktualizacji"
+
+#: main.py:625
+msgid "MCPIEdit"
+msgstr "MCPIEdit"
+
+#: main.py:705
+msgid "Select skin file"
+msgstr "Wybierz plik własnego awataru"
+
+#: main.py:719 main.py:736
+msgid "Are you sure you want to reset?"
+msgstr "Jesteś pewien, że chcesz resetować?"
+
+#: main.py:721
+msgid "Are you sure you want to delete the config? This action is unrecoverable."
+msgstr "Na pewno chcesz usunąć tę konfigurację? Ta operacja jest nieodwracalna."
+
+#: main.py:738
+msgid "Are you sure you want to delete the AppImage? This action is unrecoverable."
+msgstr "Czy na pewno chcesz usunąć AppImage? Ta akcja jest nieodwracalna."
+
+#: main.py:812
+msgid "Using /usr/bin as an executable."
+msgstr "Używanie /usr/bin jako pliku wykonywalnego."
+

@@ -159,6 +159,7 @@ Planet is licensed under the [GNU Affero General Public License](https://www.gnu
 ### Translations
 - Spanish translation by [BasedSkeleton](https://github.com/basedskeleton)
 - Russian translation by [Leha-code](https://github.com/leha-code)
+- Polish translation by karolxyz8
 
 ### Additional Credits
 - Heart, Planet, Pi, Steve and Portal icons by LEHAtupointow.
