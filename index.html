@@ -10,6 +10,23 @@
     <link rel="shortcut icon" type="image/png" href="./img/favicon.ico"/>
     <link rel="stylesheet" href="styles.css">
     <title>Planet Launcher</title>
+
+    <style>
+        body {
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
 </head>
 <body>
     <div class="mainimage">
@@ -18,6 +35,13 @@
     <div class="beginningtext">
         <h1 class="mainheader">Planet Launcher</h1>
         <h3 class="secondheader">An interactive launcher for minecraft pi edition, reborn!</h3>
+        <p>
+            <a href="https://github.com/mcpiscript/Planet" target="_blank" class="githubpagehyperlink">GitHub page</a>.
+        </p>
     </div>
+    <div class="screenshotimage">
+        <img src="./img/screenshot.png" alt="screenshot of launcher" class="launcherimage">
+    </div>
+    
 </body>
 </html>
