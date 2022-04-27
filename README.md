@@ -7,7 +7,7 @@
   <h3 align="center">Planet Launcher</h3>
 
   <p align="center">
-    An interactive launcher for MCPi-Reborn
+    An interactive launcher for MCPi-Reborn.
     <br/>
     <br/>
     <a href="https://github.com/mcpiscript/Planet#installation"><strong>Try Planet now »</strong></a>
@@ -16,6 +16,8 @@
     <a href="https://github.com/mcpiscript/Planet/issues">Report Bug</a>
     |
     <a href="https://github.com/mcpiscript/Planet/issues">Request Feature</a>
+    |
+    <a href="https://mcpiscript.github.io/Planet/">Website (Under Development)</a>
   </p>
 </p>
 
@@ -151,6 +153,7 @@ Planet is licensed under the [GNU Affero General Public License](https://www.gnu
 
 - [Leha-code](https://github.com/leha-code) - Creator and maintainer
 - [Red-exe-engineer](https://github.com/red-exe-engineer) - Active contributor
+- [Grimet14](https://github.com/grimet14) - Active contributor
 - [Bigjango13](https://github.com/bigjango13) - Multiple fixes
 
 ### Translations
