@@ -47,7 +47,7 @@ Instead of making you type in every single field, Planet lets you write it one t
 * Pillow was used for skin manipulation
 * PyNBT is used for the built-in MCPIedit
 * `click` is an awesome interface, unfortunately, not to handle autoclickers, but for CLI interfaces used in the texture pack tool.
-
+* The NBT editor is now served through [`editpi`](https://github.com/mcpiscript/editpi)
 
 ## Installation
 #### Prerequisites
@@ -61,6 +61,7 @@ Instead of making you type in every single field, Planet lets you write it one t
 * `darkdetect`
 * PyNBT
 * `click`
+* EditPi
 
 If you're installing a DEB, all of them with the exception of Minecraft: Pi Edition: Reborn will be automatically installed. Please install an AppImage for the latest build. If you want a DEB, please consider checking out [MCPI++](https://github.com/mobilegmyt/mcpi-reborn-extended).
 #### Installation

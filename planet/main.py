@@ -56,8 +56,6 @@ _ = gettext.translation(
 # Local imports
 import launcher
 from splashes import SPLASHES
-import web
-import mcpiedit
 
 # PyQt5 imports
 from PyQt5.QtCore import *
@@ -66,13 +64,14 @@ from PyQt5.QtGui import *
 from PyQt5.QtWebKit import *
 from PyQt5.QtWebKitWidgets import *
 
-from qtwidgets import AnimatedToggle
 
 # Additional imports
 import qdarktheme  # Dark style for PyQt5
 import pypresence  # Discord RPC
 from PIL import Image
 import darkdetect
+
+import editpi as mcpiedit
 
 # Load dark theme
 dark_stylesheet = qdarktheme.load_stylesheet()
