@@ -58,7 +58,7 @@ def set_username(env, username: str = "StevePi"):
 
 def set_render_distance(env, distance: str = "SHORT"):
     if distance.upper() not in ["TINY", "SHORT", "NORMAL", "FAR"]:
-        raise Exception("Invalid render distance")
+        raise ValueError("Invalid render distance: {0}".format(distance))
     else:
         env["MCPI_RENDER_DISTANCE"] = distance
         return env
