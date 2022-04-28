@@ -33,6 +33,7 @@ from datetime import date
 import json
 import pathlib
 import gettext
+from warnings import WarningMessage
 
 LOCALE = os.getenv("LANG", "en")
 
@@ -134,7 +135,7 @@ class ConfigPluto(QDialog):
         # Label with information
         info_label = QLabel(
             _(
-                'Please select the executable you downloaded.\nIf you installed a DEB, please select the "Link" option'
+                'Please select the executable you downloaded.\nIf you installed a DEB/Flatpak, please select the "Link" option'
             )
         )
 
@@ -240,10 +241,7 @@ class Planet(QMainWindow):
                 ),  # Randomly select the tiny image
             )
         except:
-            print(
-                _("Unable to initalize Discord RPC. Skipping.")
-            )  # If it fails, e.g Discord is not found, skip. This doesn't matter much.
-
+            print("Warning: Unable to initalize Discord RPC. Skipping...") # If it fails, e.g Discord is not found, skip. This doesn't matter much.
         if not os.path.exists(
             f"/home/{USER}/.planet-launcher/config.json"
         ):  # Config file does not exist.
@@ -405,8 +403,8 @@ class Planet(QMainWindow):
         self.profilebox = QComboBox()
         self.profilebox.addItems(
             [
-                "Vanilla MCPi",
-                "Modded MCPi",
+                "Vanilla MCPI",
+                "Modded MCPI",
                 "Modded MCPE",
                 "Optimized MCPE",
                 "Custom",
@@ -533,7 +531,7 @@ class Planet(QMainWindow):
 
         if not os.path.exists(f"/home/{USER}/.minecraft-pi/servers.txt"):
             with open(f"/home/{USER}/.minecraft-pi/servers.txt", 'w') as servers:
-                servers.write("pbptanarchy.tk")
+                servers.write("\n")
 
         self.serversedit.textChanged.connect(
             self.save_servers
@@ -599,7 +597,7 @@ class Planet(QMainWindow):
 
         layout = QGridLayout()
 
-        skin_label = QLabel(_("Set the skin"))
+        skin_label = QLabel(_("Set the player's skin"))
 
         self.skin_button = QPushButton(_("Select Skin"))
         self.skin_button.clicked.connect(self.select_skin)
@@ -668,6 +666,7 @@ class Planet(QMainWindow):
                         )  # Else, set it unchecked
                         self.conf["options"][feature] = False
                 except KeyError:  # May happen on downgrades or upgrades of the Reborn version
+                    raise Warning("Warning: KeyError, but it probably doesn't matter.")
                     pass
 
     def mousePressEvent(self, event):
