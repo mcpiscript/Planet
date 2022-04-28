@@ -6,6 +6,7 @@ Planet is an improved launcher for Minecraft Pi Edition: Reborn, inspired by gMC
 Copyright (C) 2022  Alexey Pavlov
 Copyright (C) 2022  Red-Exe-Engineer
 Copyright (C) 2022  Bigjango13
+Copyright (C) 2022  paradox89
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
