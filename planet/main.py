@@ -538,7 +538,7 @@ class Planet(QMainWindow):
         self.serversedit.textChanged.connect(
             self.save_servers
         )  # Connect on change to the save function
-        with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
+        with open(f"/home/{USER}/.minecraft-pi/servers.txt", 'r') as servers:
             self.serversedit.setPlainText(
                 servers.read()
             )  # Set the text of the text editing area
