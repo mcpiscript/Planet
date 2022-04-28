@@ -72,6 +72,7 @@ from PIL import Image
 import darkdetect
 
 import editpi as mcpiedit
+import mcpit
 
 # Load dark theme
 dark_stylesheet = qdarktheme.load_stylesheet()
@@ -148,15 +149,15 @@ class ConfigPluto(QDialog):
         )  # Button for Pre-installed debs
         self.premade_btn.clicked.connect(self.link_appimage)  # Connect to the function
 
-        self.flatpak_btn = QPushButton(_("Link flatpak"))  # Button for linking flatpak
-        self.flatpak_btn.clicked.connect(self.link_flatpak)  # Connect to the function
+        #self.flatpak_btn = QPushButton(_("Link flatpak"))  # Button for linking flatpak
+        #self.flatpak_btn.clicked.connect(self.link_flatpak)  # Connect to the function
 
         # Adding things to widgets
         layout.addWidget(titlewidget)
         layout.addWidget(info_label)
         layout.addWidget(self.executable_btn)
         layout.addWidget(self.premade_btn)
-        layout.addWidget(self.flatpak_btn)
+        #layout.addWidget(self.flatpak_btn)
 
         self.setLayout(layout)
 
@@ -613,9 +614,16 @@ class Planet(QMainWindow):
 
         self.delete_appimage_button = QPushButton(_("Delete"))
         self.delete_appimage_button.clicked.connect(self.delete_appimage)
-
-        self.import_gmcpil_button = QPushButton(_("Import settings"))
-        self.import_gmcpil_button.clicked.connect(self.import_gmcpil)
+        
+        mcpit_install_label = QLabel(_("Install texture pack"))
+     
+        self.import_mcpit_button = QPushButton(_("Select file"))
+        self.import_mcpit_button.clicked.connect(self.install_texture_pack)
+        
+        mcpit_delete_label = QLabel(_("Delete texture pack"))
+        
+        self.delete_mcpit_button = QPushButton(_("Delete"))
+        self.delete_mcpit_button.clicked.connect(mcpit.erase_pack)
 
         layout.addWidget(skin_label, 0, 0)
         layout.addWidget(self.skin_button, 0, 1)
@@ -625,6 +633,12 @@ class Planet(QMainWindow):
 
         layout.addWidget(appimage_label, 2, 0)
         layout.addWidget(self.delete_appimage_button, 2, 1)
+        
+        layout.addWidget(mcpit_install_label)
+        layout.addWidget(self.import_mcpit_button,  3, 1)
+        
+        layout.addWidget(mcpit_delete_label)
+        layout.addWidget(self.delete_mcpit_button,  4, 1)
 
         widget.setLayout(layout)
 
@@ -727,6 +741,16 @@ class Planet(QMainWindow):
             Image.open(filename[0]).crop((0, 0, 64, 32)).convert("RGBA").save(
                 f"/home/{USER}/.minecraft-pi/overrides/images/mob/char.png"
             )
+            
+    def install_texture_pack(self):
+        pack = QFileDialog.getOpenFileName(
+            self, _("Select pack file"), "/", "mcpit files (*.mcpit);;PePack files (*.zip *.pepack)"
+        )
+        if pack[1] == "mcpit files (*.mcpit)":
+            mcpit.mcpit_install(pack[0],  False)
+        else:
+            mcpit.pepack_install(pack[0])
+        
 
     def delete_config(self):
         dialog = QMessageBox()

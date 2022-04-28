@@ -47,9 +47,8 @@ Instead of making you type in every single field, Planet lets you write it one t
 * Big thanks to `pypresence` developers, for making such a good interface to Discord RPC.
 * Thanks to `pyqtdarktheme` and `darkdetect` for awesome Qt theming tools.
 * Pillow was used for skin manipulation
-* PyNBT is used for the built-in MCPIedit
-* `click` is an awesome interface, unfortunately, not to handle autoclickers, but for CLI interfaces used in the texture pack tool.
 * The NBT editor is now served through [`editpi`](https://github.com/mcpiscript/editpi)
+* Texture packs are installed through [`mcpit`](https://github.com/mcpiscript/mcpit)
 
 ## Installation
 #### Prerequisites
@@ -61,9 +60,8 @@ Instead of making you type in every single field, Planet lets you write it one t
 * Pillow
 * `qtwidgets`
 * `darkdetect`
-* PyNBT
-* `click`
 * EditPi
+* `mcpit`
 
 If you're installing a DEB, all of them with the exception of Minecraft: Pi Edition: Reborn will be automatically installed. Please install an AppImage for the latest build. If you want a DEB, please consider checking out [MCPI++](https://github.com/mobilegmyt/mcpi-reborn-extended).
 #### Installation
@@ -101,6 +99,7 @@ Use [our PPA](https://github.com/mcpiscript/ppa)
 | Easy GUI navigation | Yes | Yes | Yes | No | Yes |
 | Skin support | Yes | No | No | No | No |
 | Built-in NBT editor | Yes | No | No | No | No |
+| Texure pack support | Yes | No | No | No | No |
 ###### Conclusion
 - Use Planet if you want a maintained and a feature-rich launcher.
 - Use gMCPIL if you are on Debian Bullseye, using a DEB install OR want a basic experience
@@ -114,11 +113,10 @@ Use [our PPA](https://github.com/mcpiscript/ppa)
 - [x] Skin support
 - [x] NBT editor
 - [x] Localization system [![Crowdin](https://badges.crowdin.net/planet-launcher/localized.svg)](https://crowdin.com/project/planet-launcher)
-- [ ] Texture packs (In progress)
+- [x] Texture pack support
 - [ ] Mods
 - [ ] Chat logging
 - [ ] MarketPi
-- [ ] World generation from seed
 
 ## Contributing
 
