@@ -533,7 +533,7 @@ class Planet(QMainWindow):
         self.serversedit = QTextEdit()  # Create a text editing area
 
         if not os.path.exists(f"/home/{USER}/.minecraft-pi/servers.txt"):
-            with open(f"/home/{USER}/.minecraft-pi/servers.txt") as servers:
+            with open(f"/home/{USER}/.minecraft-pi/servers.txt", 'w') as servers:
                 servers.write("pbptanarchy.tk")
 
         self.serversedit.textChanged.connect(
