@@ -49,9 +49,14 @@ if os.path.exists("/usr/lib/planet-launcher/"):
     sys.path.append("/usr/lib/planet-launcher/")
 
 
-_ = gettext.translation(
-    "main", localedir=str(absolute_path) + "/assets/translations/", languages=[LOCALE]
-).gettext
+try:
+    _ = gettext.translation(
+        "main", localedir=str(absolute_path) + "/assets/translations/", languages=[LOCALE]
+    ).gettext
+except:
+    _ = gettext.translation(
+        "main", localedir=str(absolute_path) + "/assets/translations/", languages=["en"]
+    ).gettext
 
 # Local imports
 import launcher
