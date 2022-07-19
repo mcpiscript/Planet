@@ -8,14 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./img/favicon.ico"/>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/jquery-3.6.0.min.js"></script>
     <title>Planet Launcher</title>
-
     <style>
         body {
-            animation: fadeInAnimation ease 3s;
-            animation-iteration-count: 1;
-            animation-fill-mode: forwards;
+            /*animation: fadeInAnimation ease 3s;
+            animation-iteration-count: s1;
+            animation-fill-mode: forwards;*/
         }
         @keyframes fadeInAnimation {
             0% {
@@ -29,19 +29,35 @@
 
 </head>
 <body>
-    <div class="mainimage">
-        <img src="./img/planet-logo.png" height="175" width=auto>
-    </div>
-    <div class="beginningtext">
-        <h1 class="mainheader">Planet Launcher</h1>
-        <h3 class="secondheader">An interactive launcher for minecraft pi edition, reborn!</h3>
-        <p>
-            <a href="https://github.com/mcpiscript/Planet" target="_blank" class="githubpagehyperlink">GitHub page</a>.
-        </p>
-    </div>
-    <div class="screenshotimage">
-        <img src="./img/screenshot.png" alt="screenshot of launcher" class="launcherimage">
-    </div>
-    
+    <main>
+        <div id="particles-js"></div>
+        <section>
+            <img id="header-img" src="./img/planet-logo.png" height="175" width=auto>
+            <h1>Planet Launcher</h1>
+            <h3>An interactive launcher for minecraft pi edition, reborn!</h3>
+            <p>
+                <a class="link" href="https://github.com/mcpiscript/Planet" target="_blank">GitHub page</a>
+            </p>
+        </section>
+        <section id="screenshots">
+            <img id="screenshot-img" src="./img/screenshot.png" alt="screenshot of launcher">
+        </section>
+    </main>
+    <script src="/js/particles.min.js">
+    </script>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("button").click(function () {
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                    particlesJS.load('particles-js', 'particlesjs-config.json', function () {
+                        console.log('working');
+                    })
+                });
+            });
+    </script>
 </body>
 </html>

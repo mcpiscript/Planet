@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+body {
+    background-color: black;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2em;
+    padding: 5px;
+    color: #ffc200;
+}
+
+h3 {
+    font-family: 'IBM Plex Sans Hebrew', sans-serif;
+    color: white;
+    padding: 10px;
+}
+
+.link {
+    font-family: 'IBM Plex Sans Hebrew', sans-serif;
+    color: white;
+    font-size: 1.2em;
+    color: rgb(0, 179, 255);
+    cursor: pointer;
+}
+
+.link:hover {
+    color: rgb(112, 224, 255);
+    text-decoration: underline;
+    transition: all .4s ease-in-out;
+}
+
+#header-img {
+    padding: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#screenshot-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    height: auto;
+}
+/*scroll bar style*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+#particles-js {
+    background-color: orange;
+    position: fixed;
+    height: 80%;
+    width: 80%;
+    margin: 0;
+    padding: 0;
+}
