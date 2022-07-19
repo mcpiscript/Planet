@@ -63,7 +63,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgb(0, 179, 255) /*#555*/;
 }
 #particles {
     position: fixed;
