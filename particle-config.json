@@ -17,7 +17,7 @@
         "color": "#000000"
       },
       "image": {
-        "src": "/Planet/img/planet-logo.png" 
+        "src": "./img/planet-logo.png" 
 
       },
       "polygon": {
