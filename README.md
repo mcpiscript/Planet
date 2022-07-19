@@ -51,10 +51,10 @@ Instead of making you type in every single field, Planet lets you write it one t
 * Texture packs are installed through [`mcpit`](https://github.com/mcpiscript/mcpit)
 
 ## Installation
-#### Prerequisites
+i#### Prerequisites
 * [Minecraft Pi: Reborn](https://jenkins.thebrokenrail.com) AppImage or DEB install
 * PyQt5
-* Python 3
+*i Python 3
 * `pypresence`
 * `qtdarktheme`
 * Pillow
@@ -152,6 +152,7 @@ Planet is licensed under the [GNU Affero General Public License](https://www.gnu
 - [Leha-code](https://github.com/leha-code) - Creator and maintainer
 - [Red-exe-engineer](https://github.com/red-exe-engineer) - Active contributor
 - [Grimet14](https://github.com/grimet14) - Active contributor
+- [g4o2](https://github.com/Maxhu787) - Making the website look better
 - [Bigjango13](https://github.com/bigjango13) - Multiple fixes
 
 ### Translations
