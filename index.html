@@ -8,8 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./img/favicon.ico"/>
-    <link rel="stylesheet" href="/css/styles.css">
-    <script src="/js/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Planet Launcher</title>
     <style>
         body {
@@ -30,7 +29,7 @@
 </head>
 <body>
     <main>
-        <div id="particles-js"></div>
+        <div id="particles"></div>
         <section>
             <img id="header-img" src="./img/planet-logo.png" height="175" width=auto>
             <h1>Planet Launcher</h1>
@@ -43,21 +42,11 @@
             <img id="screenshot-img" src="./img/screenshot.png" alt="screenshot of launcher">
         </section>
     </main>
-    <script src="/js/particles.min.js">
-    </script>
-    <script type="text/javascript">
-            $(document).ready(function () {
-                $("button").click(function () {
-                    window.scrollTo({
-                        top: 0,
-                        left: 0,
-                        behavior: 'smooth'
-                    });
-                    particlesJS.load('particles-js', 'particlesjs-config.json', function () {
-                        console.log('working');
-                    })
-                });
-            });
+    <script type="module" src="./js/particles.js"></script>
+    <script>
+        particlesJS.load('particles', 'js/particle-config.json', function () {
+            console.log('callback - particles.js config loaded');
+        });
     </script>
 </body>
 </html>

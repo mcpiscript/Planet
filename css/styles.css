@@ -65,11 +65,11 @@ h3 {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-#particles-js {
-    background-color: orange;
+#particles {
     position: fixed;
-    height: 80%;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+    z-index: -99;
 }
