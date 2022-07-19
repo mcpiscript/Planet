@@ -11,18 +11,17 @@
       "value": "#ffffff"
     },
     "shape": {
-      "type": "circle",
+      "type": "image",
       "stroke": {
         "width": 0,
         "color": "#000000"
       },
+      "image": {
+        "src": "/Planet/img/planet-logo.png" 
+
+      },
       "polygon": {
         "nb_sides": 5
-      },
-      "image": {
-        "src": "/g4o2-website/111.jpeg",
-        "width": 100,
-        "height": 100
       }
     },
     "opacity": {
