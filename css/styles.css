@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
+
 body {
     background-color: black;
     text-align: center;
@@ -40,6 +41,7 @@ h3 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    user-select: none;
 }
 
 #screenshot-img {
@@ -49,7 +51,8 @@ h3 {
     width: 30%;
     height: auto;
 }
-/*scroll bar style*/
+
+/*-----------------scroll bar style-----------------*/
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -63,8 +66,11 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(0, 179, 255) /*#555*/;
+    background: rgb(0, 179, 255)
+        /*#555*/
+    ;
 }
+
 #particles {
     position: fixed;
     height: 100%;
@@ -72,4 +78,103 @@ h3 {
     margin: 0;
     padding: 0;
     z-index: -99;
+}
+
+.selectDisable {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.selectEnable {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+
+
+/*-----------------------nav-----------------------*/
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.navbar-header {
+    background: rgb(0, 179, 255);
+    position: fixed;
+    width: 101%;
+    margin-top: -80px;
+    margin-left: -10px;
+}
+
+.navbar-header::after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.logo {
+    height: 55px;
+    width: 54px;
+    border-radius: 50px;
+    float: left;
+    margin-left: -90px;
+    padding-top: 5.5px;
+    padding-bottom: 4px;
+}
+
+nav {
+    z-index: 999;
+    float: right;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    display: inline-block;
+    margin-left: 60px;
+    padding-top: 23px;
+    position: relative;
+}
+
+nav>ul li a {
+    color: #444;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+nav>ul li a:hover {
+    color: #000;
+}
+
+nav>ul li a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background-color: #444;
+    position: absolute;
+    top: 0;
+    width: 0%;
+    transition: all ease-in-out 250ms;
+}
+
+nav>ul li a:hover::before {
+    width: 100%;
+}
+
+/*-----------------------nav-----------------------*/
+
+#main-content {
+    margin-top: 80px;
 }

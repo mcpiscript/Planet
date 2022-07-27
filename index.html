@@ -29,17 +29,33 @@
 </head>
 <body>
     <main>
+        <header class="navbar-header">
+            <div class="container">
+                <div class="logo-container">
+                    <a class="logo-header" href="#">
+                        <img class="logo" alt="logo" src="../Planet/img/planet-logo.png">
+                    </a>
+                </div>
+                <nav>
+                    <ul id="main-nav">
+                        <li><a href="#">Test</a></li>
+                        <li><a href="#">Test</a></li>
+                        <li><a href="#">Test</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
         <div id="particles"></div>
-        <section>
-            <img id="header-img" src="./img/planet-logo.png" height="175" width=auto>
-            <h1>Planet Launcher</h1>
+        <section id="main-content">
+            <img id="header-img" class="selectDisable" src="/Planet/img/planet-logo.png" height="175" width=auto>
+            <h1 class="selectDisable">Planet Launcher</h1>
             <h3>An interactive launcher for minecraft pi edition, reborn!</h3>
             <p>
                 <a class="link" href="https://github.com/mcpiscript/Planet" target="_blank">GitHub page</a>
             </p>
         </section>
         <section id="screenshots">
-            <img id="screenshot-img" src="./img/screenshot.png" alt="screenshot of launcher">
+            <img id="screenshot-img" src="/Planet/img/screenshot (1).png" alt="screenshot of launcher">
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
