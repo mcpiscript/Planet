@@ -40,7 +40,7 @@
                 <nav>
                     <ul id="main-nav">
                         <li><a href="#about">about</a></li>
-                        <li><a href="#screenshots">screenshots</a></li>
+                        <li><a href="#features">features</a></li>
                         <li><a href="#github">github page</a></li>
                         <li><a id="stats"></a></li>
                     </ul>
@@ -53,13 +53,14 @@
             <h1 class="selectDisable">Planet Launcher</h1>
             <h3>An interactive launcher for minecraft pi edition, reborn!</h3>
         </section>
-        <section id="screenshots"><!--&#60; &#62;-->
+        <section id="features"><!--&#60; &#62;-->
             <button class="leftBtn card-btn" onclick="prev()"><img src="./img/left.svg"></button>
             <div class="card card-1">
                 <img id="card-img" class="card-img" src="./img/screenshot1.png" alt="Screenshot">
                 <div class="container">
                     <h4><b>Planet Launcher</b></h4>
-                    <p id="cardText">Planet Launcher</p>
+                    <p id="cardText">Instead of making you type in every single field, Planet lets you write it one time, auto-save, and forget for the rest
+                    of your life.</p>
                 </div>
             </div>
             <button class="rightBtn card-btn" onclick="next()"><img src="./img/right.svg"></button>
@@ -123,15 +124,15 @@
         }
         function setText(arr) {
             if(arr == 1) {
-                document.getElementById("cardText").innerText = "1";
+                document.getElementById("cardText").innerText = "Instead of making you type in every single field, Planet lets you write it one time, auto-save, and forget for the rest of your life";
             } else if(arr == 2) {
-                document.getElementById("cardText").innerText = "2";
+                document.getElementById("cardText").innerText = "With Planet, you don't have to redo everything, just because that you forgot to turn on a teeny little flag";
             } else if (arr == 3) {
-                document.getElementById("cardText").innerText = "3";
+                document.getElementById("cardText").innerText = "Planet lets you edit server info easily, right inside the launcher";
             } else if (arr == 4) {
-                document.getElementById("cardText").innerText = "4";
+                document.getElementById("cardText").innerText = "Planet makes seting up skins, texturepacks, and all sorts of things easier";
             } else if (arr == 5) {
-                document.getElementById("cardText").innerText = "5";
+                document.getElementById("cardText").innerText = "With Planet, you can edit seeds, world names, and all sorts of configurations easily";
             }
         }
         //console.log(window.innerHeight, window.pageYOffset, document.body.offsetHeight)
