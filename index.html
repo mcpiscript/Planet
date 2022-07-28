@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./img/favicon.ico"/>
     <link rel="stylesheet" href="./css/styles.css">
-    <script src="./js/img.js"></script>
+    <script type="module" src="./js/jquery-3.6.0.min.js"></script>
     <title>Planet Launcher</title>
     <style>
         body {
@@ -42,6 +42,7 @@
                         <li><a href="#">about</a></li>
                         <li><a href="#">screenshots</a></li>
                         <li><a href="#">github page</a></li>
+                        <li><a id="stats"></a></li>
                     </ul>
                 </nav>
             </div>
@@ -58,7 +59,7 @@
                 <img id="card-img" class="card-img" src="./img/screenshot1.png" alt="Screenshot">
                 <div class="container">
                     <h4><b>Planet Launcher</b></h4>
-                    <p id="card-desc">Planet Launcher</p>
+                    <p id="cardText">Planet Launcher</p>
                 </div>
             </div>
             <button class="rightBtn card-btn" onclick="next()"><img src="./img/right.svg"></button>
@@ -76,13 +77,60 @@
         var prevScrollpos = window.pageYOffset;
             window.onscroll = function () {
                 var currentScrollPos = window.pageYOffset;
-                if (prevScrollpos > currentScrollPos) {
+                /*if (prevScrollpos > currentScrollPos) {
                     document.getElementById("nav").style.opacity = "1";
                 } else {
                     document.getElementById("nav").style.opacity = "0";
-                }
+                }*/
                 prevScrollpos = currentScrollPos;
+                console.log(window.pageYOffset)
+                if(window.pageYOffset > 260) {
+                    document.getElementsByClassName("card")[0].style.width = "30%";
+                } else {
+                    document.getElementsByClassName("card")[0].style.width = "20%";
+                }
+                document.getElementById("stats").innerHTML = Math.round(window.pageYOffset);
             }
+            window.onload = function() {
+                window.scroll({
+                    top: 0,
+                    behavior: "smooth"
+                })
+            }
+
+        let imgNum = 1;
+        let temp = ['./img/screenshot', "1", '.png'];
+
+        function prev() {
+            if (imgNum > 1) {
+                imgNum -= 1;
+            }
+            temp[1] = imgNum.toString();
+            document.getElementById("card-img").src = temp.join("");
+            setText(imgNum);
+        }
+
+        function next() {
+            if (imgNum < 5) {
+                imgNum += 1;
+            }
+            temp[1] = imgNum.toString();
+            document.getElementById("card-img").src = temp.join("");
+            setText(imgNum);
+        }
+        function setText(arr) {
+            if(arr == 1) {
+                document.getElementById("cardText").innerText = "1";
+            } else if(arr == 2) {
+                document.getElementById("cardText").innerText = "2";
+            } else if (arr == 3) {
+                document.getElementById("cardText").innerText = "3";
+            } else if (arr == 4) {
+                document.getElementById("cardText").innerText = "4";
+            } else if (arr == 5) {
+                document.getElementById("cardText").innerText = "5";
+            }
+        }
     </script>
 </body>
 </html>

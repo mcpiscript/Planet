@@ -60,6 +60,7 @@ h3 {
     margin: auto;
     font-family: Arial, Helvetica, sans-serif;
     transition: .3s;
+    transition: width 3s ease-in-out;
     width: 20%;
     border-radius: 6px;
     cursor: pointer;
@@ -90,13 +91,10 @@ h3 {
     bottom: -24%;
 }
 
-.card-btn:hover {
-    background: rgb(45, 47, 51, 0.3);
-}
-
 .card-btn:active {
     background-color: rgba(255, 255, 255, 0.7);
 }
+
 
 .card h4 {
     font-family: 'orbitron', arial, sans-serif;
