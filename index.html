@@ -29,7 +29,7 @@
 </head>
 <body>
     <main>
-        <header class="navbar-header">
+        <header id="nav" class="navbar-header">
             <div class="container">
                 <div class="logo-container">
                     <a class="logo-header" href="#">
@@ -38,9 +38,9 @@
                 </div>
                 <nav>
                     <ul id="main-nav">
-                        <li><a href="#">Test</a></li>
-                        <li><a href="#">Test</a></li>
-                        <li><a href="#">Test</a></li>
+                        <li><a href="#">about</a></li>
+                        <li><a href="#">screenshots</a></li>
+                        <li><a href="#">github page</a></li>
                     </ul>
                 </nav>
             </div>
@@ -50,18 +50,37 @@
             <img id="header-img" class="selectDisable" src="/Planet/img/planet-logo.png" height="175" width=auto>
             <h1 class="selectDisable">Planet Launcher</h1>
             <h3>An interactive launcher for minecraft pi edition, reborn!</h3>
+        </section>
+        <section id="screenshots">
+            <div class="card">
+                <img class="card-img" src="/Planet/img/screenshot (1).png" alt="Screenshot">
+                <div class="container">
+                    <h4><b>Planet Launcher</b></h4>
+                    <p>test test test</p>
+                </div>
+            </div>
+            <!--<img class="screenshot-img" src="/Planet/img/screenshot (1).png" alt="screenshot of launcher">-->
+        </section>
+        <section>
             <p>
                 <a class="link" href="https://github.com/mcpiscript/Planet" target="_blank">GitHub page</a>
             </p>
-        </section>
-        <section id="screenshots">
-            <img id="screenshot-img" src="/Planet/img/screenshot (1).png" alt="screenshot of launcher">
         </section>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
         particlesJS.load('particles', '/Planet/particle-config.json', function () {
         })
+        var prevScrollpos = window.pageYOffset;
+            window.onscroll = function () {
+                var currentScrollPos = window.pageYOffset;
+                if (prevScrollpos > currentScrollPos) {
+                    document.getElementById("nav").style.opacity = "1";
+                } else {
+                    document.getElementById("nav").style.opacity = "0";
+                }
+                prevScrollpos = currentScrollPos;
+            }
     </script>
 </body>
 </html>
