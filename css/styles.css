@@ -52,7 +52,7 @@ h3 {
     cursor: pointer;
     background: rgb(45, 47, 51, 0.3);
     color: rgb(0, 179, 255);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 16px 0 rgba(0, 179, 255, 0.8);
 }
 
 .card:hover {
@@ -74,12 +74,13 @@ h3 {
     padding: 14px 13px 10px 13px;
     transition: all .3s ease-in-out;
     background: rgba(255, 136, 0, 1);
+    box-shadow: 0 8px 16px 0 rgba(0, 179, 255, 0.5);
     bottom: -45%;
 }
 
 .card-btn:hover {
     background: rgb(255, 183, 101);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 8px 16px 0 rgba(0, 179, 255, 0.5);
 }
 
 .card-btn:active {
