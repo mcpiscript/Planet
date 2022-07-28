@@ -14,7 +14,7 @@ h1 {
     font-family: 'Orbitron', sans-serif;
     font-size: 2em;
     padding: 5px;
-    color: #ffc200;
+    color: #ffa500;
 }
 
 h3 {
@@ -60,21 +60,52 @@ h3 {
     margin: auto;
     font-family: Arial, Helvetica, sans-serif;
     transition: .3s;
-    width: 40%;
+    width: 20%;
     border-radius: 6px;
     cursor: pointer;
     background: rgb(45, 47, 51, 0.3);
     color: rgb(0, 179, 255);
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
 .card:hover {
-    box-shadow: 0 0 5px 3px rgba(255, 255, 255, .4);
     background: rgb(45, 47, 51, 0.7);
+}
+
+.card:hover h4 {
+    color: #ffc200;
 }
 
 .card-img {
     width: 80%;
+}
+
+.card-btn {
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 13px 10px 13px;
+    transition: all .2s ease-in-out;
+    background-color: #fff;
+    bottom: -24%;
+}
+
+.card-btn:hover {
+    background: rgb(45, 47, 51, 0.3);
+}
+
+.card-btn:active {
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.card h4 {
+    font-family: 'orbitron', arial, sans-serif;
+    color: orange;
+}
+
+.card p {
+    font-size: 12px;
+    color: white;
 }
 
 img {
@@ -83,6 +114,16 @@ img {
 
 .container {
     padding: 2px 16px;
+}
+
+.leftBtn {
+    position: absolute;
+    left: 30%;
+}
+
+.rightBtn {
+    position: absolute;
+    right: 30%;
 }
 
 /*-----------------scroll bar style-----------------*/
@@ -137,10 +178,11 @@ img {
 }
 
 .navbar-header {
+    z-index: 999;
     background: rgb(0, 179, 255);
     position: fixed;
     width: 101%;
-    margin-top: -80px;
+    margin-top: -100px;
     margin-left: -10px;
     transition: all .3s;
 }
@@ -209,5 +251,5 @@ nav>ul li a:hover::before {
 
 /*-----------------------nav-----------------------*/
 #main-content {
-    margin-top: 80px;
+    margin-top: 100px;
 }

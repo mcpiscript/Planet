@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" type="image/png" href="./img/favicon.ico"/>
     <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/img.js"></script>
     <title>Planet Launcher</title>
     <style>
         body {
@@ -33,7 +34,7 @@
             <div class="container">
                 <div class="logo-container">
                     <a class="logo-header" href="#">
-                        <img class="logo" alt="logo" src="../Planet/img/planet-logo.png">
+                        <img class="logo" alt="logo" src="./img/planet-logo.png">
                     </a>
                 </div>
                 <nav>
@@ -47,19 +48,20 @@
         </header>
         <div id="particles"></div>
         <section id="main-content">
-            <img id="header-img" class="selectDisable" src="/Planet/img/planet-logo.png" height="175" width=auto>
+            <img id="header-img" class="selectDisable" src="./img/planet-logo.png" height="175" width=auto>
             <h1 class="selectDisable">Planet Launcher</h1>
             <h3>An interactive launcher for minecraft pi edition, reborn!</h3>
         </section>
-        <section id="screenshots">
-            <div class="card">
-                <img class="card-img" src="/Planet/img/screenshot (1).png" alt="Screenshot">
+        <section id="screenshots"><!--&#60; &#62;-->
+            <button class="leftBtn card-btn" onclick="prev()"><img src="./img/left.svg"></button>
+            <div class="card card-1">
+                <img id="card-img" class="card-img" src="./img/screenshot1.png" alt="Screenshot">
                 <div class="container">
                     <h4><b>Planet Launcher</b></h4>
-                    <p>test test test</p>
+                    <p id="card-desc">Planet Launcher</p>
                 </div>
             </div>
-            <!--<img class="screenshot-img" src="/Planet/img/screenshot (1).png" alt="screenshot of launcher">-->
+            <button class="rightBtn card-btn" onclick="next()"><img src="./img/right.svg"></button>
         </section>
         <section>
             <p>
@@ -69,7 +71,7 @@
     </main>
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
-        particlesJS.load('particles', '/Planet/particle-config.json', function () {
+        particlesJS.load('particles', './particle-config.json', function () {
         })
         var prevScrollpos = window.pageYOffset;
             window.onscroll = function () {
