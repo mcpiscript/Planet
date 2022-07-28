@@ -136,6 +136,17 @@
             }
         }
         //console.log(window.innerHeight, window.pageYOffset, document.body.offsetHeight)
+
+        //smooth scrolling 
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
     </script>
 </body>
 </html>
