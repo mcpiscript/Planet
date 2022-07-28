@@ -59,8 +59,7 @@ h3 {
     padding: 35px 10px 10px 10px;
     margin: auto;
     font-family: Arial, Helvetica, sans-serif;
-    transition: .3s;
-    transition: width 3s ease-in-out;
+    transition: width 1s ease-in-out;
     width: 20%;
     border-radius: 6px;
     cursor: pointer;
@@ -86,13 +85,17 @@ h3 {
     border: none;
     border-radius: 10px;
     padding: 10px 13px 10px 13px;
-    transition: all .2s ease-in-out;
-    background-color: #fff;
+    transition: all .3s ease-in-out;
+    background: rgba(255, 255, 255, 0);
     bottom: -24%;
 }
 
+.card-btn:hover {
+    background: rgb(45, 47, 51, 0.3);
+}
+
 .card-btn:active {
-    background-color: rgba(255, 255, 255, 0.7);
+    background: rgb(45, 47, 51, 0.3);
 }
 
 
@@ -248,6 +251,6 @@ nav>ul li a:hover::before {
 }
 
 /*-----------------------nav-----------------------*/
-#main-content {
+#about {
     margin-top: 100px;
 }

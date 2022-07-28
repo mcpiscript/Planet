@@ -39,16 +39,16 @@
                 </div>
                 <nav>
                     <ul id="main-nav">
-                        <li><a href="#">about</a></li>
-                        <li><a href="#">screenshots</a></li>
-                        <li><a href="#">github page</a></li>
+                        <li><a href="#about">about</a></li>
+                        <li><a href="#screenshots">screenshots</a></li>
+                        <li><a href="#github">github page</a></li>
                         <li><a id="stats"></a></li>
                     </ul>
                 </nav>
             </div>
         </header>
         <div id="particles"></div>
-        <section id="main-content">
+        <section id="about">
             <img id="header-img" class="selectDisable" src="./img/planet-logo.png" height="175" width=auto>
             <h1 class="selectDisable">Planet Launcher</h1>
             <h3>An interactive launcher for minecraft pi edition, reborn!</h3>
@@ -64,7 +64,7 @@
             </div>
             <button class="rightBtn card-btn" onclick="next()"><img src="./img/right.svg"></button>
         </section>
-        <section>
+        <section id="github">
             <p>
                 <a class="link" href="https://github.com/mcpiscript/Planet" target="_blank">GitHub page</a>
             </p>
@@ -83,7 +83,6 @@
                     document.getElementById("nav").style.opacity = "0";
                 }*/
                 prevScrollpos = currentScrollPos;
-                console.log(window.pageYOffset)
                 if(window.pageYOffset > 260) {
                     document.getElementsByClassName("card")[0].style.width = "30%";
                 } else {
@@ -135,6 +134,7 @@
                 document.getElementById("cardText").innerText = "5";
             }
         }
+        //console.log(window.innerHeight, window.pageYOffset, document.body.offsetHeight)
     </script>
 </body>
 </html>
