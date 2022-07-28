@@ -104,6 +104,8 @@
         function prev() {
             if (imgNum > 1) {
                 imgNum -= 1;
+            } else if(imgNum = 1) {
+                imgNum = 5;
             }
             temp[1] = imgNum.toString();
             document.getElementById("card-img").src = temp.join("");
@@ -113,6 +115,8 @@
         function next() {
             if (imgNum < 5) {
                 imgNum += 1;
+            } else if(imgNum = 5) {
+                imgNum = 1;
             }
             temp[1] = imgNum.toString();
             document.getElementById("card-img").src = temp.join("");
