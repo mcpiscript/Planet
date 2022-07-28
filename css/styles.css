@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
 
 body {
-    background-color: rgb(177, 177, 177);
+    background-color: rgb(0, 0, 0);
     text-align: center;
-    color: #000;
+    color: #fff;
 }
 
 a {
@@ -12,27 +12,14 @@ a {
 
 h1 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 2em;
+    font-size: 4em;
     padding: 5px;
     color: #ffa500;
 }
 
 h3 {
-    font-family: 'IBM Plex Sans Hebrew', sans-serif;
+    font-family: monospace, 'IBM Plex Sans Hebrew', sans-serif;
     padding: 10px;
-}
-
-.link {
-    font-family: 'IBM Plex Sans Hebrew', sans-serif;
-    font-size: 1.2em;
-    color: rgb(0, 179, 255);
-    cursor: pointer;
-}
-
-.link:hover {
-    color: rgb(112, 224, 255);
-    text-decoration: underline;
-    transition: all .4s ease-in-out;
 }
 
 #header-img {
@@ -84,14 +71,14 @@ h3 {
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    padding: 10px 13px 10px 13px;
+    padding: 14px 13px 10px 13px;
     transition: all .3s ease-in-out;
-    background: rgba(255, 255, 255, 0);
-    bottom: -20%;
+    background: rgba(255, 136, 0, 1);
+    bottom: -45%;
 }
 
 .card-btn:hover {
-    background: rgb(45, 47, 51, 0.3);
+    background: rgb(255, 183, 101);
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4);
 }
 
@@ -102,7 +89,7 @@ h3 {
 
 .card h4 {
     font-family: 'orbitron', arial, sans-serif;
-    color: orange;
+    color: #ffa500;
 }
 
 .card p {
@@ -255,3 +242,31 @@ nav>ul li a:hover::before {
 #about {
     margin-top: 100px;
 }
+#features {
+    margin-top: 100px;
+}
+
+.link {
+    font-family: 'orbitron', 'IBM Plex Sans Hebrew', sans-serif;
+    font-size: 1.2em;
+    color: orange;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.link:hover {
+    color: rgb(112, 224, 255);
+    text-decoration: underline;
+    transition: all .4s ease-in-out;
+}
+#github {
+    background-color: #000;
+    padding: 10px;
+    width: 40%;
+    margin: auto;
+    margin-top: 80px;
+    text-align: center;
+}
+
+
+
