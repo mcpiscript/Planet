@@ -51,7 +51,7 @@ Instead of making you type in every single field, Planet lets you write it one t
 * Texture packs are installed through [`mcpit`](https://github.com/mcpiscript/mcpit)
 
 ## Installation
-i#### Prerequisites
+#### Prerequisites
 * [Minecraft Pi: Reborn](https://jenkins.thebrokenrail.com) AppImage or DEB install
 * PyQt5
 *i Python 3
